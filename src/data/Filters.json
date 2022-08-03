@@ -1,0 +1,89 @@
+{
+    "Pickaxe": {
+        "index": 3,
+        "values": [
+            "Private",
+            "White",
+            "Gray",
+            "Green",
+            "Red"
+        ]
+    },
+    "Head": {
+        "index": 0,
+        "values": [
+            "Elrond Crown",
+            "Viking",
+            "Sheriff",
+            "Candle",
+            "Beret",
+            "Light",
+            "Louis XIV"
+        ]
+    },
+    "Beards": {
+        "index": 1,
+        "values": [
+            "Small Red",
+            "Big Red",
+            "Small Blond",
+            "Big Blond",
+            "Small Brown",
+            "Big Brown"
+        ]
+    },
+    "Eyes": {
+        "index": 2,
+        "values": [
+            "Cyborg",
+            "Lee Sin",
+            "Pirate Patch",
+            "Aviator",
+            "Monocle",
+            "Glasses"
+        ]
+    },
+    "Clothes": {
+        "index": 4,
+        "values": [
+            "Overalls",
+            "Red jacket",
+            "Smith",
+            "Black jacket",
+            "Green Tee-shirt",
+            "White jacket",
+            "Blue Tee Shirt"
+        ]
+    },
+    "Backgrounds": {
+        "index": 5,
+        "values": [
+            "Radioactive",
+            "Sunset",
+            "Lava",
+            "Storm",
+            "Eclipse",
+            "Snow"
+        ]
+    },
+    "Accessory": {
+        "index": 6,
+        "values": [
+            "Gold Bar",
+            "Coal",
+            "Dollars",
+            "Lantern",
+            "Jewelry",
+            "Gravels",
+            "Unique"
+        ]
+    },
+    "Miner": {
+        "index": 7,
+        "values": [
+            "Clean Miner",
+            "Medium Miner",
+            "Dirty Miner"
+        ]
+    }
+}

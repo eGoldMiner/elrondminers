@@ -1,0 +1,94 @@
+{
+    "Helmet": {
+        "Iron Man's Helmet": 0.01,
+        "Goku's Hair": 0.01,
+        "Bouftou's Hair": 0.01,
+        "Elrond Crown": 4.81,
+        "Light": 18.54,
+        "Beret": 17.26,
+        "Louis XIV": 19.63,
+        "Sheriff": 10.33,
+        "Viking": 10.41,
+        "Candle": 18.97
+    },
+    "Beard": {
+        "Iron Man's Helmet": 0.01,
+        "Goku's Beard": 0.01,
+        "T5 Brown": 17.71,
+        "T1 Brown": 18.8,
+        "T6 Red": 15.34,
+        "T3 Blond": 16.1,
+        "T2 Red": 15.21,
+        "T4 Blond": 16.8
+    },
+    "Eyes": {
+        "Iron Man's Helmet": 0.01,
+        "Goku's Eyes": 0.01,
+        "Saitama's Eyes": 0.01,
+        "Monocle": 24.27,
+        "Aviator": 24.39,
+        "Lee Sin": 9.67,
+        "Pirate Patch": 10.43,
+        "Glasses": 25.79,
+        "Cyborg": 5.41
+    },
+    "Pickaxe": {
+        "Thor's Hammer": 0.01,
+        "Power Pole": 0.01,
+        "Shovel": 0.01,
+        "Red": 24.2,
+        "Green": 24.56,
+        "White": 24.54,
+        "Gray": 23.8,
+        "Private": 2.86
+    },
+    "Clothes": {
+        "Hulk's Body": 0.01,
+        "Goku's Clothes": 0.01,
+        "Saitama's Clothes": 0.01,
+        "Green Tee-shirt": 10.43,
+        "Overalls": 4.7,
+        "Red jacket": 19.43,
+        "White jacket": 18.66,
+        "Black jacket": 18.21,
+        "Red shirt": 18.17,
+        "Smith": 10.36
+    },
+    "Background": {
+        "Radioactive": 4.77,
+        "Sunset": 25.13,
+        "Lava": 10.29,
+        "Eclipse": 10.37,
+        "Snow": 24.03,
+        "Storm": 25.41
+    },
+    "Bag": {
+        "Captain America's Shield": 0.01,
+        "Dragon Balls": 0.01,
+        "Bag of leeks": 0.01,
+        "Emerald": 0.01,
+        "Opal": 0.01,
+        "Sapphire": 0.01,
+        "Onyx": 0.01,
+        "Ruby": 0.01,
+        "Tourmaline": 0.01,
+        "Pearl": 0.01,
+        "Diamond": 0.01,
+        "Quartz": 0.01,
+        "Platinum": 0.01,
+        "Dollars": 10.31,
+        "Coal": 25.41,
+        "Gravels": 24.81,
+        "Gold Bar": 4.56,
+        "Lantern": 25.03,
+        "Jewelry": 9.69
+    },
+    "Miner": {
+        "Hulk Miner": 0.01,
+        "Goku Miner": 0.01,
+        "Saitama Miner": 0.01,
+        "Dirty Miner": 33.04,
+        "Clean Miner": 33.13,
+        "Medium Miner": 33.79
+    }
+}
