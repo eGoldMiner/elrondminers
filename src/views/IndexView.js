@@ -73,10 +73,11 @@ export default function (props) {
               </video></div>
             </li>
             <li className="af-class-list-item-2">
-              <div data-poster-url="videos/04-poster-00001.jpg" data-video-urls="videos/04-transcode.mp4,videos/04-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-background-video-2 w-background-video w-background-video-atom"><video id="a9c4fb18-144f-7e4e-1ce8-235faaee2e2e-video" autoPlay loop style={{ backgroundImage: 'url("videos/04-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
-                <source src="videos/04-transcode.mp4" data-wf-ignore="true" />
-                <source src="videos/04-transcode.webm" data-wf-ignore="true" />
-              </video></div>
+              <div data-poster-url="videos/04-poster-00001.jpg" data-video-urls="videos/04-transcode.mp4,videos/04-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-background-video-2 w-background-video w-background-video-atom">
+                <video id="a9c4fb18-144f-7e4e-1ce8-235faaee2e2e-video" autoPlay loop style={{ backgroundImage: 'url("videos/04-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
+                  <source src="videos/04-transcode.mp4" data-wf-ignore="true" />
+                  <source src="videos/04-transcode.webm" data-wf-ignore="true" />
+                </video></div>
             </li>
             <li className="af-class-list-item-2">
               <div data-poster-url="videos/05-poster-00001.jpg" data-video-urls="videos/05-transcode.mp4,videos/05-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-background-video-2 w-background-video w-background-video-atom"><video id="02662e83-9ec4-d419-93bc-90413930face-video" autoPlay loop style={{ backgroundImage: 'url("videos/05-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
@@ -208,7 +209,7 @@ export default function (props) {
                 <img src="images/Fichier-4.png" loading="lazy" data-w-id="ca80e1e9-e244-0475-b786-028f4108876e" srcSet="images/Fichier-4-p-500.png 500w, images/Fichier-4.png 1534w" sizes="180px" alt className="af-class-imagegear1" /><img src="images/Elrond_Logo-300x292.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear" />
 
               </div>
-              <a href="https://docs.elrond.com/validators/overview/" target="_blank" className="af-class-linknode2 w-inline-block" style={{marginLeft: '-48px',marginTop: '131px'}}>
+              <a href="https://docs.elrond.com/validators/overview/" target="_blank" className="af-class-linknode2 w-inline-block" style={{ marginLeft: '-48px', marginTop: '131px' }}>
                 <div className="af-class-divgear af-class-divgear2"><img src="images/Fichier-6.png" loading="lazy" data-w-id="5f0ae14a-6b61-a7e5-4c2b-b35fd4066088" alt className="af-class-imagegear1" /><img src="images/Fichier-7.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear af-class-imageinsidegear2" /></div>
               </a>
 

@@ -3,6 +3,7 @@
   position: fixed;
   top: 0px;
   left: auto;
+  opacity: 0;
   right: 10%;
   bottom: 0%;
   z-index: 990;
@@ -14,7 +15,7 @@
   padding-left: 5px;
   border-radius: 20px;
   background-color: #eaba20;
-  transition: opacity .5s; 
+  transition: margin-top .5s, opacity .5s;
 }
 
 .text-block-5 {
@@ -926,6 +927,7 @@
   outline-style: none;
   outline-width: 3px;
   color: #212121;
+  transition: margin-top .5s;
 }
 
 .af-view .af-class-text-field {
