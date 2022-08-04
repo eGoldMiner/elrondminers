@@ -5,8 +5,11 @@ import {
   SignTransactionsModals,
   NotificationModal
 } from '@elrondnetwork/dapp-core/UI';
-import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
-
+import {
+  DappProvider,
+  DappCoreUIWrapper,
+  DappUI
+} from '@elrondnetwork/dapp-core-components';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import MineExplorerView from './views/MineExplorerView';
 import { ThemeProvider } from '@mui/material';
@@ -15,13 +18,15 @@ import Menu from './components/Menu';
 import Footer from './components/Footer';
 import IndexView from './views/IndexView';
 
+
 const environment = 'devnet';
 
-const App = () => {
+export default function App(props) {
 
   const scripts = [
-    // { loading: fetch("https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62c4a55388e2ee5d2d7cdcbd").then(body => body.text()), isAsync: false },
-    // { loading: fetch("js/scripts.js").then(body => body.text()), isAsync: false },
+    { loading: fetch("https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62c4a55388e2ee5d2d7cdcbd").then(body => body.text()), isAsync: false },
+    { loading: fetch("js/scripts.js").then(body => body.text()), isAsync: false },
+    { loading: fetch("js/faq.js").then(body => body.text()), isAsync: false },
   ]
 
   useEffect(() => {
@@ -31,11 +36,11 @@ const App = () => {
 
     scripts.concat(null).reduce((active, next) => Promise.resolve(active).then((active) => {
       const loading = active.loading.then((script) => {
-        new Function(
-          // with (this) {
-          //   eval(arguments[0])
-          // }
-        ).call(window, script)
+        new Function(`
+          with (this) {
+            eval(arguments[0])
+          }
+      `).call(window, script)
 
         return next
       })
@@ -44,7 +49,7 @@ const App = () => {
     }))
   }, [])
 
-  return (
+  return <>
     <Router>
       <DappProvider
         environment={environment}
@@ -64,7 +69,5 @@ const App = () => {
         </ThemeProvider>
       </DappProvider>
     </Router>
-  );
-};
-
-export default App;
+  </>
+}
