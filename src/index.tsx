@@ -1,10 +1,10 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
+const root = ReactDOM.createRoot(container!);
 
 root.render(
   <React.StrictMode>
@@ -16,8 +16,6 @@ root.render(
           @import url(/css/normalize.css);
           @import url(/css/webflow.css);
           @import url(/css/elrondminers.webflow.css);
-
-
           .button-2:hover {
             color: #fff;
             text-shadow: 0 0 3px #212121;

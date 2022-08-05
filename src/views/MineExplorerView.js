@@ -1,22 +1,22 @@
 import React from 'react';
+import All from '../data/All';
+import Filters from "../data/Filters";
+import Assets from "../data/Assets.json"
 import { useState, useEffect, useRef } from 'react';
-import { Close } from '@mui/icons-material';
 import { Button, FormControl, IconButton, FormControlLabel, Radio, RadioGroup, Select } from "@mui/material"
 import { Typography, MenuItem } from '@mui/material';
-import All from '../data/All.json';
-import Assets from "../data/Assets.json";
-import Filters from "../data/Filters.json";
+import { Close } from '@mui/icons-material';
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
 
-  // const stopMovie = (e) => {
-  //   e.target.pause();
-  // }
+  const stopMovie = (e) => {
+    e.target.pause();
+  }
 
-  // const playMovie = (e) => {
-  //   e.target.play();
-  // }
+  const playMovie = (e) => {
+    e.target.play();
+  }
 
   useEffect(() => {
     videoRef.current?.load();
@@ -24,8 +24,8 @@ const Clip = ({ url, id }) => {
 
   return (
     <video loop playsInline muted ref={videoRef} src={url}
-      // onMouseOver={playMovie}
-      // onMouseOut={stopMovie}
+      onMouseOver={playMovie}
+      onMouseOut={stopMovie}
       poster={'/images/miners/' + id + '.png'}
     >
     </video>
@@ -57,7 +57,7 @@ export default function MineExplorerView() {
   }, [])
 
   useEffect(() => {
-    if(current){
+    if (current) {
       modal.current.classList.add("open")
     } else {
       modal.current.classList.remove("open")
@@ -71,39 +71,40 @@ export default function MineExplorerView() {
   let items = All
   if (Object.keys(filters).length) {
     Object.keys(filters).map(filter => {
-      console.log(filter);
-      if (filter === "Accessory" && filters[filter] === "Unique") {
-        items = items.filter(item => {
-          let unique = [
-            "Platinum",
-            "Diamond",
-            "Ruby",
-            "Emerald",
-            "Sapphire",
-            "Quartz",
-            "Pearl",
-            "Opal",
-            "Tourmaline",
-            "Onyx"
-          ]
-          return unique.includes(item.assets[Filters[filter].index])
-        })
-      } else {
-        let filterValue = filters[filter]
-        if (filter === "Beards") {
-          let beards = {
-            "Small Brown": "T1 Brown",
-            "Small Red": "T2 Red",
-            "Small Blond": "T3 Blond",
-            "Big Blond": "T4 Blond",
-            "Big Brown": "T5 Brown",
-            "Big Red": "T6 Red"
+      if (filters[filter]) {
+        if (filter === "Accessory" && filters[filter] === "Unique") {
+          items = items.filter(item => {
+            let unique = [
+              "Platinum",
+              "Diamond",
+              "Ruby",
+              "Emerald",
+              "Sapphire",
+              "Quartz",
+              "Pearl",
+              "Opal",
+              "Tourmaline",
+              "Onyx"
+            ]
+            return unique.includes(item.assets[Filters[filter].index])
+          })
+        } else {
+          let filterValue = filters[filter]
+          if (filter === "Beards") {
+            let beards = {
+              "Small Brown": "T1 Brown",
+              "Small Red": "T2 Red",
+              "Small Blond": "T3 Blond",
+              "Big Blond": "T4 Blond",
+              "Big Brown": "T5 Brown",
+              "Big Red": "T6 Red"
+            }
+            filterValue = beards[filterValue]
           }
-          filterValue = beards[filterValue]
+          items = items.filter(item => {
+            return item.assets[Filters[filter].index] === filterValue
+          })
         }
-        items = items.filter(item => {
-          return item.assets[Filters[filter].index] === filterValue
-        })
       }
     })
   }
@@ -135,27 +136,44 @@ export default function MineExplorerView() {
             <div className="filter">
               {
                 Object.keys(Filters).map((filter, index) => {
-                  console.log(filter);
                   if (filter === "Pickaxe") return <>
-                    <FormControl className='w-100'>
+                    {/* <FormControl className='w-100'>
                       <RadioGroup
                         className='d-flex flex-row justify-content-center'
                         onChange={(e) => { setFilters({ ...filters, [filter]: e.target.value }) }}
                         value={filters[filter] || null}
                       >
-                        
                         {
                           Filters[filter]['values'].map((item, index) => {
-                            return (
-                              <div key={item} className='d-flex mb-3'>
-                                <FormControlLabel control={<Radio />} value={item} className="m-0" />
-                                <img src={"/images/pickaxe-" + (index + 1) + ".png"} alt="pickaxe-1" height={"40"} />
-                              </div>
-                            )
+                            return <div className='d-flex mb-3'>
+                              <FormControlLabel control={<Radio />} value={item} className="m-0" />
+                              <img src={"/images/pickaxe-" + (index + 1) + ".png"} alt="pickaxe-1" height={"40"} />
+                            </div>
                           })
                         }
                       </RadioGroup>
-                    </FormControl>
+                    </FormControl> */}
+                    <div id="select-pickaxe" className='row'>
+                      {
+                        Filters[filter]['values'].map((item, index) => {
+                          return (
+                            <div key={item} className='col p-1 radio-pickaxe'>
+                              <a
+                                className={filters[filter] === item ? "selected" : ""}
+                                onClick={() => {
+                                  setFilters({ ...filters, [filter]: filters[filter] === item ? null : item })
+                                }}
+                              >
+                                <img
+                                  src={"/images/pickaxe-" + (index + 1) + ".png"}
+                                  alt={"pickaxe" + 1}
+                                />
+                              </a>
+                            </div>
+                          )
+                        })
+                      }
+                    </div>
                   </>
                   return <>
                     <Typography variant="body1">{filter}</Typography>
@@ -183,14 +201,14 @@ export default function MineExplorerView() {
           </div>
         </div>
         <div className='col-lg-9 col-md-8 col-sm-7 px-0'>
-          <div className='row w-100'>
-            <div className='col-lg-12' id="header">
-              <div className='row'>
-                <div className="col-auto">
+          <div id="results-container" className='row w-100'>
+            <div className='col-lg-12 ps-sm-3 pe-sm-5' id="header">
+              <div className='row p-3'>
+                <div className="col-auto p-0">
                   <div id="count">{totalItems}</div>
                   <div id="miners">Miners</div>
                 </div>
-                <div className="col d-flex align-items-center justify-content-end">
+                <div className="col p-0 d-flex align-items-center justify-content-end">
                   <FormControl>
                     <Select
                       value={order}
@@ -205,11 +223,11 @@ export default function MineExplorerView() {
                 </div>
               </div>
             </div>
-            <div className='col-12 ps-sm-3 pe-sm-5 mt-4 pt-1'>
+            <div className='col-12 ps-sm-3 pe-sm-5 mt-4 pt-1' id="miner-list-container">
               <div className='row w-100' ref={itemList} id="miner-list">
                 {
                   items.map((item, index) => {
-                    return <div className='col-12 col-md-4 col-xl-3 p-3' key={index} onClick={() => setCurrent(item.id)}>
+                    return <div className='col-12 col-md-6 col-lg-4 col-xl-3 p-3' key={index} onClick={() => setCurrent(item.id)}>
                       <div className='miner-item h-100'>
                         <div className='rank'><Typography>{item.rank}</Typography></div>
                         <div className='id'><Typography>Miner #{item.id}</Typography></div>
@@ -225,93 +243,91 @@ export default function MineExplorerView() {
       </div>
       <div id="miner-modal" ref={modal}>
         {
-          current ? 
-          <div id="miner-modal-container">
+          current ? <>
+
             <video autoPlay loop playsInline muted src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"}>
             </video>
             <div id="miner-modal-content">
               <div>
                 <img src={"/images/Logo_T4.png"} alt="elrond-miners" />
               </div>
-              <div id="miner-modal-content-right">
-                <div>
-                  <IconButton id='close-button' onClick={() => setCurrent(null)}>
-                    <Close/>
-                  </IconButton>
-                  <Typography variant="h1" component={"p"} align="center">MINER <span>#{currentItem.id}</span></Typography>
-                  <div className='row'>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>Rank 243</Typography>
-                        <Typography><span>/7000</span></Typography>
-                      </div>
+              <div>
+                <IconButton id='close-button' onClick={() => setCurrent(null)}>
+                  <Close />
+                </IconButton>
+                <Typography variant="h1" component={"p"} align="center">MINER <span>#{currentItem.id}</span></Typography>
+                <div className='row'>
+                  <div className='item'>
+                    <img src="/images/icons/crystal.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.rank}</Typography>
+                      <Typography><span>/7000</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[3]}</Typography>
-                        <Typography><span>{Assets['Pickaxe'][currentItem.assets[3]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/pickaxe.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[3]}</Typography>
+                      <Typography><span>{Assets['Pickaxe'][currentItem.assets[3]]}%</span></Typography>
                     </div>
-                    <div className="divider">
-                      <div />
-                      <div />
+                  </div>
+                  <div className="divider">
+                    <div />
+                    <div />
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/helmet.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[0]}</Typography>
+                      <Typography><span>{Assets['Helmet'][currentItem.assets[0]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[0]}</Typography>
-                        <Typography><span>{Assets['Helmet'][currentItem.assets[0]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/eye.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[2]}</Typography>
+                      <Typography><span>{Assets['Eyes'][currentItem.assets[2]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[2]}</Typography>
-                        <Typography><span>{Assets['Eyes'][currentItem.assets[2]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/beards.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[1]}</Typography>
+                      <Typography><span>{Assets['Beard'][currentItem.assets[1]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[1]}</Typography>
-                        <Typography><span>{Assets['Beard'][currentItem.assets[1]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/tshirt.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[4]}</Typography>
+                      <Typography><span>{Assets['Clothes'][currentItem.assets[4]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[4]}</Typography>
-                        <Typography><span>{Assets['Clothes'][currentItem.assets[4]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/bag.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[6]}</Typography>
+                      <Typography><span>{Assets['Bag'][currentItem.assets[6]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[6]}</Typography>
-                        <Typography><span>{Assets['Bag'][currentItem.assets[6]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/photos.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[5]}</Typography>
+                      <Typography><span>{Assets['Background'][currentItem.assets[5]]}%</span></Typography>
                     </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[5]}</Typography>
-                        <Typography><span>{Assets['Background'][currentItem.assets[5]]}%</span></Typography>
-                      </div>
-                    </div>
-                    <div className='item col-6'>
-                      <img src="/images/icons/crystal.png" />
-                      <div>
-                        <Typography variant="h2" component={"p"}>{currentItem.assets[7]}</Typography>
-                        <Typography><span>{Assets['Miner'][currentItem.assets[7]]}%</span></Typography>
-                      </div>
+                  </div>
+                  <div className='item'>
+                    <img src="/images/icons/man.png" />
+                    <div>
+                      <Typography variant="h2" component={"p"}>{currentItem.assets[7]}</Typography>
+                      <Typography><span>{Assets['Miner'][currentItem.assets[7]]}%</span></Typography>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </>
             : <></>
         }
 

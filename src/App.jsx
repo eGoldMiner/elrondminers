@@ -7,29 +7,29 @@ import {
 } from '@elrondnetwork/dapp-core/UI';
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import MineExplorerView from './views/MineExplorerView';
 import { ThemeProvider } from '@mui/material';
-import theme from './styles/theme';
-import Menu from './components/Menu';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/Footer';
+import Menu from './components/Menu';
+import theme from './styles/theme';
 import IndexView from './views/IndexView';
-
+import MineExplorerView from './views/MineExplorerView';
 
 const environment = 'devnet';
 
-const App = () => {
+export default function App(props) {
 
   const scripts = [
-    { loading: fetch("https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62c4a55388e2ee5d2d7cdcbd").then(body => body.text()), isAsync: false },
+    { loading: fetch("js/scripts2.js").then(body => body.text()), isAsync: false },
     { loading: fetch("js/scripts.js").then(body => body.text()), isAsync: false },
-    { loading: fetch("js/faq.js").then(body => body.text()), isAsync: false },
   ]
+
 
   useEffect(() => {
     const htmlEl = document.querySelector('html')
     htmlEl.dataset['wfPage'] = '62c4a55388e2eeb60b7cdcc0'
     htmlEl.dataset['wfSite'] = '62c4a55388e2ee5d2d7cdcbd'
+
 
     scripts.concat(null).reduce((active, next) => Promise.resolve(active).then((active) => {
       const loading = active.loading.then((script) => {
@@ -67,6 +67,4 @@ const App = () => {
       </DappProvider>
     </Router>
   </>
-};
-
-export default App;
+}

@@ -10,6 +10,12 @@ a {
   text-decoration: none !important;
 }
 
+body {
+  overflow: auto !important;
+  padding-right: 0 !important;
+  overflow-x: hidden;
+}
+
 /* MUI */
 legend {
   width: auto !important;
@@ -27,6 +33,10 @@ legend {
 
 /* MUI END */
 /* */
+#menu {
+  max-width: calc(100vw - 5vw);
+}
+
 .elm-button {
   margin-left: 15px;
   border-radius: 40px;
@@ -92,6 +102,131 @@ legend {
   }
 }
 
+.af-view .af-class-divlineroadmap1 {
+  position: initial;
+  height: 100%;
+}
+
+.af-class-divdecoroadmap {
+  width: auto;
+  min-width: 50px;
+  max-width: 50px;
+}
+
+#select-pickaxe {
+  background-color: #415e74;
+  border-radius: 1000px;
+  padding: 0px !important;
+}
+
+#select-pickaxe img {
+  padding: 10px;
+  max-height: 50px;
+  cursor: pointer;
+}
+
+#select-pickaxe .selected {
+  background-color: #eaba20;
+  border-radius: 1000px;
+}
+
+#select-pickaxe a {
+  max-width: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#gear-1 {
+  -webkit-transform: none !important;
+          transform: none !important;
+  -webkit-animation: rotation1 10s infinite linear;
+          animation: rotation1 10s infinite linear;
+}
+
+#explorer #results-container {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+}
+
+@-webkit-keyframes rotation1 {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-359deg);
+            transform: rotate(-359deg);
+  }
+}
+
+@keyframes rotation1 {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-359deg);
+            transform: rotate(-359deg);
+  }
+}
+
+#gear-2 {
+  -webkit-transform: none !important;
+          transform: none !important;
+  -webkit-animation: rotation2 10s infinite linear;
+          animation: rotation2 10s infinite linear;
+}
+
+@-webkit-keyframes rotation2 {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation2 {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+#footer-img {
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  #footer-link {
+    padding: 30px 0;
+    grid-row-gap: 0px;
+  }
+  #footer-link > div {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center;
+  }
+}
+
 /* */
 #explorer {
   overflow-x: hidden;
@@ -146,12 +281,12 @@ legend {
 }
 
 #explorer #header {
-  width: 100%;
+  width: 90%;
   min-height: 100px;
   border-color: #eaba20;
   border-style: solid;
   border-width: 3px;
-  border-radius: 30px 0 0 30px;
+  border-radius: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -160,6 +295,7 @@ legend {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 2%;
+  margin-right: 42px !important;
 }
 
 #explorer #header #count {
@@ -205,12 +341,7 @@ legend {
   position: fixed;
   height: 100%;
   width: 100%;
-  background: green;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
   top: 0;
-  left: 0;
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
   z-index: 1000;
@@ -218,26 +349,17 @@ legend {
 }
 
 #explorer #miner-modal.open {
-  display: flex;
-}
-
-#explorer #miner-modal #miner-modal-container {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: start;
-  position: relative;
-  width: 1000px;
-  height: 600px;
+  display: block;
 }
 
 #explorer #miner-modal video {
   position: absolute;
-  width: 350px;
-  height: 350px;
-  overflow: hidden;
+  width: 300px;
+  height: 300px;
+  top: 20%;
+  left: 20%;
   border: 5px solid #eaba20;
-  border-radius: 16px;
+  border-radius: 0;
   z-index: 1001;
   -webkit-box-shadow: -4px -4px 15px -2px #415e74, 4px 4px 15px -2px #eaba20;
           box-shadow: -4px -4px 15px -2px #415e74, 4px 4px 15px -2px #eaba20;
@@ -245,18 +367,17 @@ legend {
 
 #explorer #miner-modal #miner-modal-content {
   background-color: #212121;
-  right: 0px;
-  bottom:0px;
-  width: 900px;
-  height: 500px;
+  width: 50%;
+  top: calc(20% + 100px);
+  left: calc(20% + 100px);
   position: absolute;
   border-radius: 0 50px 0 50px;
-  -webkit-box-shadow: 3px 3px 6px 3px #415e74;
-          box-shadow: 3px 3px 6px 3px #415e74;
+  -webkit-box-shadow: 0 0 7px 6px #415e74;
+          box-shadow: 0 0 7px 6px #415e74;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  opacity: 0.95;
+  max-height: calc(100% - calc(20% + 100px));
 }
 
 #explorer #miner-modal #miner-modal-content #close-button {
@@ -286,15 +407,13 @@ legend {
 
 #explorer #miner-modal #miner-modal-content > div:first-child img {
   margin-top: 200px;
-  margin-left: 20px;
-  /* max-height: calc(40vh - 280px); */
-  height: auto;
-  max-width: 120px;
+  max-height: calc(100% - 200px);
+  max-width: 180px;
 }
 
 #explorer #miner-modal #miner-modal-content > div:last-child {
   padding: 20px 30px;
-  width: calc(100% - 200px);
+  width: 100%;
 }
 
 #explorer #miner-modal #miner-modal-content > div:last-child .MuiTypography-h1 {
@@ -314,7 +433,18 @@ legend {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 10px 0;
+  padding: 10px 5px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  width: 50%;
+}
+
+@media (max-width: 900px) {
+  #explorer #miner-modal #miner-modal-content > div:last-child .item {
+    padding: 20px 5px;
+    width: 100%;
+  }
 }
 
 #explorer #miner-modal #miner-modal-content > div:last-child .item img {
@@ -326,6 +456,44 @@ legend {
           box-shadow: 0 0 6px 3px #eaba20;
   border: 3px solid #eaba20;
   padding: 2px;
+}
+
+@media (max-width: 1300px) {
+  #explorer #miner-modal video {
+    width: 200px;
+    height: 200px;
+    left: calc(50% - 100px);
+    top: 3%;
+  }
+  #explorer #miner-modal #miner-modal-content {
+    width: 70%;
+    top: calc(3% + 140px);
+    max-height: calc(100% - calc(3% + 160px) - 3vh);
+    left: 15%;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #explorer #miner-modal #miner-modal-content::-webkit-scrollbar {
+    display: none;
+  }
+  #explorer #miner-modal #miner-modal-content > div:first-child {
+    display: none;
+  }
+  #explorer #miner-modal #miner-modal-content > div:last-child {
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 1300px) and (max-width: 1000px) {
+  #explorer #miner-modal video {
+    width: 160px;
+    height: 160px;
+    left: calc(50% - 80px);
+  }
+  #explorer #miner-modal #miner-modal-content {
+    top: calc(3% + 100px);
+  }
 }
 
 .divider {

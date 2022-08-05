@@ -14,6 +14,12 @@ a {
     text-decoration: none !important;
 }
 
+body {
+    overflow: auto !important;
+    padding-right: 0 !important;
+    overflow-x: hidden;
+}
+
 /* MUI */
 legend {
     width: auto !important;
@@ -35,6 +41,10 @@ legend {
 /* MUI END */
 
 /* */
+
+#menu {
+    max-width: calc(100vw - 5vw);
+}
 
 .elm-button {
     margin-left: 15px;
@@ -101,6 +111,89 @@ legend {
                     }
                 }
             }
+        }
+    }
+}
+
+.af-view .af-class-divlineroadmap1 {
+    position: initial;
+    height: 100%;
+}
+
+.af-class-divdecoroadmap {
+    width: auto;
+    min-width: 50px;
+    max-width: 50px;
+}
+
+#select-pickaxe {
+    img {
+        padding: 6px;
+        max-height: 40px;
+    }
+
+    .selected {
+        background-color: $BACKGROUND;
+        border-radius: 1000px;
+    }
+
+    a {
+        max-width: 40px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    background-color: #303030;
+    border-radius: 1000px;
+}
+
+#gear-1 {
+    @keyframes rotation1 {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(-359deg);
+        }
+    }
+
+    transform: none !important;
+    animation: rotation1 10s infinite linear;
+}
+
+#gear-2 {
+    @keyframes rotation2 {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+    transform: none !important;
+    animation: rotation2 10s infinite linear;
+}
+
+#footer-img {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+@media (max-width: 500px) {
+    #footer-link {
+        padding: 30px 0;
+        grid-row-gap: 0px;
+
+        &>div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
         }
     }
 }
@@ -238,6 +331,7 @@ legend {
             border-radius: 0 50px 0 50px;
             box-shadow: 0 0 7px 6px #415e74;
             display: flex;
+            max-height: calc(100% - calc(20% + 100px));
 
             #close-button {
                 position: absolute;
@@ -259,14 +353,14 @@ legend {
 
                 img {
                     margin-top: 200px;
-                    max-height: calc(40vh - 280px);
-                    max-width: 200px;
+                    max-height: calc(100% - 200px);
+                    max-width: 180px;
                 }
             }
 
             &>div:last-child {
                 padding: 20px 30px;
-                width: calc(100% - 200px);
+                width: 100%;
 
                 .MuiTypography-h1 {
                     font-size: 40px;
@@ -281,7 +375,14 @@ legend {
                 .item {
                     display: flex;
                     align-items: center;
-                    padding: 10px 0;
+                    padding: 10px 5px;
+                    flex: 0 0 auto;
+                    width: 50%;
+
+                    @media (max-width: 900px) {
+                        padding: 20px 5px;
+                        width: 100%;
+                    }
 
                     img {
                         height: 40px;
@@ -293,6 +394,49 @@ legend {
                         padding: 2px;
                     }
 
+                }
+            }
+        }
+
+        @media (max-width: 1300px) {
+            video {
+                width: 200px;
+                height: 200px;
+                left: calc(50% - 100px);
+                top: 3%;
+            }
+
+            #miner-modal-content {
+                width: 70%;
+                top: calc(3% + 140px);
+                max-height: calc(100% - calc(3% + 160px) - 3vh);
+                left: 15%;
+                overflow: scroll;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                &>div:first-child {
+                    display: none;
+                }
+
+                &>div:last-child {
+                    margin-top: 60px;
+                }
+            }
+
+            @media (max-width: 1000px) {
+                video {
+                    width: 160px;
+                    height: 160px;
+                    left: calc(50% - 80px);
+                }
+
+                #miner-modal-content {
+                    top: calc(3% + 100px);
                 }
             }
         }

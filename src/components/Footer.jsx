@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function (props) {
+export default function () {
     return <>
         <div className="af-class-separator">
             <div className="af-class-divseparatorleft" />

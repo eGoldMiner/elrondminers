@@ -285,6 +285,22 @@
 }
 
 
+.backgroundvideocard {
+  position: absolute;
+  width: 300px;
+  height: 350px;
+  border-radius: 15px;
+  outline-color: #eaba20;
+  outline-style: solid;
+  outline-width: 3px;
+}
+
+.background-video-4 {
+  z-index: 99;
+  width: 350px;
+  height: 350px;
+}
+
 
 
 
@@ -2679,6 +2695,7 @@
   height: 300px;
 
 }
+
 .af-view .af-class-background-video-2>video {
   border-radius: 35px;
 }
@@ -5340,4 +5357,3 @@
   -ms-grid-row-span: 1;
   grid-row-end: span 1;
 }
-

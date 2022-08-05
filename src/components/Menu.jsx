@@ -13,7 +13,6 @@ export default function Menu() {
     const imageQrCodeMaiar = useRef();
 
     const [openMenuConnect, setOpenMenuConnect] = useState(false);
-    const [menuMaiar, setMenuMaiar] = useState(false);
 
     function clickConnectButton() {
         setOpenMenuConnect(!openMenuConnect)
@@ -33,33 +32,30 @@ export default function Menu() {
         returnButtonConnect.current.style.display = "none";
     }
 
-    var lastScrollTop = 0;
-    window.addEventListener("scroll", function () {
-        var st = window.pageYOffset || document.documentElement.scrollTop;
-        if (st > lastScrollTop) {
-            //SCROLL DOWN
-            this.document.getElementById("connectContainer").setAttribute("opacity", "0");
-            setOpenMenuConnect(false);
-            if (st > lastScrollTop + 200) {
-                this.document.getElementById("connectContainer").setAttribute("style", "margin-top:80px");
-                this.document.getElementById("af-class-navigation").setAttribute("style", "margin-top:0px; height:70px");
-                lastScrollTop = st <= 0 ? 0 : st;
-            }
-        }
-        if (st < lastScrollTop) {
-            //SCROLL UP
-            this.document.getElementById("connectContainer").setAttribute("opacity", "0");
-            setOpenMenuConnect(false);
-            if (st < lastScrollTop - 200) {
-                this.document.getElementById("connectContainer").setAttribute("style", "margin-top:110px");
-                this.document.getElementById("af-class-navigation").setAttribute("style", "margin-top:20px; height:80px");
-                lastScrollTop = st <= 0 ? 0 : st;
-            }
-        }
-    
-        console.log("lastScrollTop = " + lastScrollTop);
-        console.log("st = " + st);
-    }, false);
+    // var lastScrollTop = 0;
+    // window.addEventListener("scroll", function () {
+    //     var st = window.pageYOffset || document.documentElement.scrollTop;
+    //     if (st > lastScrollTop) {
+    //         //SCROLL DOWN
+    //         this.document.getElementById("connectContainer").setAttribute("opacity", "0");
+    //         setOpenMenuConnect(false);
+    //         if (st > lastScrollTop + 200) {
+    //             this.document.getElementById("connectContainer").setAttribute("style", "margin-top:80px");
+    //             this.document.getElementById("af-class-navigation").setAttribute("style", "margin-top:0px; height:70px");
+    //             lastScrollTop = st <= 0 ? 0 : st;
+    //         }
+    //     }
+    //     if (st < lastScrollTop) {
+    //         //SCROLL UP
+    //         this.document.getElementById("connectContainer").setAttribute("opacity", "0");
+    //         setOpenMenuConnect(false);
+    //         if (st < lastScrollTop - 200) {
+    //             this.document.getElementById("connectContainer").setAttribute("style", "margin-top:110px");
+    //             this.document.getElementById("af-class-navigation").setAttribute("style", "margin-top:20px; height:80px");
+    //             lastScrollTop = st <= 0 ? 0 : st;
+    //         }
+    //     }
+    // }, false);
 
 
     return <>

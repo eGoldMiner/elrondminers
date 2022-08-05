@@ -1,12 +1,13 @@
 /* eslint-disable */
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 
 
 let Controller
 
 export default function (props) {
+  const timeline = useRef()
 
   const showFaq = async (e) => {
     let height = e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-body-3")[0].clientHeight + 20;
@@ -15,9 +16,21 @@ export default function (props) {
         e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = i + "px";
         await new Promise(resolve => setTimeout(resolve, 1 / height));
       }
+    } else {
+      for (let i = height; i >= 0; i--) {
+        e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = i + "px";
+        await new Promise(resolve => setTimeout(resolve, 1 / height));
+      }
     }
   }
+
+  const setTimelineHeight = () => {
+    timeline.current.getElementsByClassName("af-class-divlineroadmap1")[0].style.height = "calc(100% - 40px - " + (timeline.current.getElementsByClassName("af-class-divroadmapstep")[4]).clientHeight + "px)";
+  }
   useEffect(() => {
+    window.addEventListener("resize", setTimelineHeight)
+    window.addEventListener("load", setTimelineHeight)
+
     Array.from(document.getElementsByClassName("af-class-faq-wrap")).forEach((el) => {
       el.addEventListener("click", showFaq);
     })
@@ -206,13 +219,13 @@ export default function (props) {
           <div className="col-md-auto col-12 d-flex justify-content-center">
             <a href="https://docs.elrond.com/validators/overview/" target="_blank" className="af-class-linknode1 w-inline-block">
               <div className="af-class-divgear">
-                <img src="images/Fichier-4.png" loading="lazy" data-w-id="ca80e1e9-e244-0475-b786-028f4108876e" srcSet="images/Fichier-4-p-500.png 500w, images/Fichier-4.png 1534w" sizes="180px" alt className="af-class-imagegear1" /><img src="images/Elrond_Logo-300x292.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear" />
-
+                <img src="images/Fichier-4.png" id="gear-1" loading="lazy" data-w-id="ca80e1e9-e244-0475-b786-028f4108876e" srcSet="images/Fichier-4-p-500.png 500w, images/Fichier-4.png 1534w" sizes="180px" alt className="af-class-imagegear1" />
+                <img src="images/Elrond_Logo-300x292.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear" />
               </div>
-              <a href="https://docs.elrond.com/validators/overview/" target="_blank" className="af-class-linknode2 w-inline-block" style={{ marginLeft: '-48px', marginTop: '131px' }}>
-                <div className="af-class-divgear af-class-divgear2"><img src="images/Fichier-6.png" loading="lazy" data-w-id="5f0ae14a-6b61-a7e5-4c2b-b35fd4066088" alt className="af-class-imagegear1" /><img src="images/Fichier-7.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear af-class-imageinsidegear2" /></div>
-              </a>
-
+              <div className="af-class-divgear af-class-divgear2" style={{ marginLeft: "-48px", marginTop: "131px" }}>
+                <img src="images/Fichier-6.png" id="gear-2" loading="lazy" data-w-id="5f0ae14a-6b61-a7e5-4c2b-b35fd4066088" alt className="af-class-imagegear1" />
+                <img src="images/Fichier-7.png" loading="lazy" alt className="af-class-imagegear1 af-class-imageinsidegear af-class-imageinsidegear2" />
+              </div>
             </a>
           </div>
           <div className="col-md col-12 mx-auto ">
@@ -269,41 +282,41 @@ export default function (props) {
       <div className="af-class-div-block-21">
         <h1 className="af-class-heading-4">ROADMAP</h1><img src="images/Banniere-1.gif" loading="lazy" alt className="af-class-image-11" />
       </div>
-      <div className="af-class-sectionroadmap af-class-wf-section">
+      <div className="af-class-sectionroadmap af-class-wf-section" ref={timeline}>
         <div className="af-class-divdecoroadmap">
           <div className="af-class-divlineroadmap1" />
         </div>
         <div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapinprogress" />
+            <div className="af-class-divcircleroadmapinprogress col-auto col-auto"/>
             <div>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Q1</span> 2022<br /><span className="af-class-text-span-8">Preparation of the pickaxes</span></h1>
               <p className="af-class-paragraph-6">- Disclosure social networks and the website<br />- Reveal of the first 3D animated NFTs<br />- Selection of Miner Pioneer who will participate to private sale<br />- Launch of the first private sale (100 NFTs available)<br />- Giveaways and gifts for members<br />- Collaboration with other collections</p>
             </div>
           </div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapinprogress" />
+            <div className="af-class-divcircleroadmapinprogress col-auto col-auto" />
             <div>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Q2</span> 2022<br /><span className="af-class-text-span-8">Work of the miners</span></h1>
               <p className="af-class-paragraph-6">- Launch of the second private sale (100 NFTs available)<br />- Launch of the first public sale (1000 NFTs)<br />- Giveaways of real gold every week<br />- Community based decisions<br />- Launch of the second public sale (2500 NFTs)<br />- Development of an interactive tool to retrieve your rewards<br />- Launch of the last public sale (3300 NFTs)<br />- Deployment of our validator node (sPoS)<br />- Start of the rewards distribution</p>
             </div>
           </div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapnot" />
-            <div>
+            <div className="af-class-divcircleroadmapnot col-auto" />
+            <div className='col'>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Q3</span> 2022<br /><span className="af-class-text-span-8">Improvment of working conditions</span></h1>
               <p className="af-class-paragraph-6">- Giveaway of real gold every week<br />- Release of a teaser for the new Elrond Miners game</p>
             </div>
           </div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapnot" />
+            <div className="af-class-divcircleroadmapnot col-auto" />
             <div>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Q4</span> 2022<br /><span className="af-class-text-span-8">Passage to the Bronze Age</span></h1>
               <p className="af-class-paragraph-6">- New system to enhance your miner's efficiency</p>
             </div>
           </div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapnot" />
+            <div className="af-class-divcircleroadmapnot col-auto" />
             <div>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Year</span> 2023<br /><span className="af-class-text-span-8">Passage to the Iron Age</span></h1>
               <p className="af-class-paragraph-6">- Release of the Elrond Miners game<br />- Launch of new collections that you decide</p>
@@ -319,14 +332,18 @@ export default function (props) {
       <div className="af-class-sectionteam af-class-wf-section">
         <div id="Team" className="af-class-divcards">
           <div className="af-class-divcardcontainer">
-            <div className="af-class-divcard" />
+            <div data-poster-url="videos/MarvelGreyBackground-poster-00001.jpg" data-video-urls="videos/MarvelGreyBackground-transcode.mp4,videos/MarvelGreyBackground-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="backgroundvideocard w-background-video w-background-video-atom">
+              <video id="f8065a58-ddd5-e1fe-1c56-c20efa37a84f-video" autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+                <source src="videos/MarvelGreyBackground-transcode.mp4" data-wf-ignore="true" />
+                <source src="videos/MarvelGreyBackground-transcode.webm" data-wf-ignore="true" />
+              </video>
+            </div>
             <div className="af-class-div-block-24">
               <h1 className="af-class-headingteamname">Irving<br /></h1>
               <h1 className="af-class-headingteamrole">Co-founder Miner</h1>
             </div>
           </div>
           <div className="af-class-divcardcontainer">
-            <div className="af-class-divcard" />
             <div className="af-class-div-block-24">
               <h1 className="af-class-headingteamname">Kartabble<br /></h1>
               <h1 className="af-class-headingteamrole">Co-founder Miner</h1>
