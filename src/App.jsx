@@ -5,11 +5,8 @@ import {
   SignTransactionsModals,
   NotificationModal
 } from '@elrondnetwork/dapp-core/UI';
-import {
-  DappProvider,
-  DappCoreUIWrapper,
-  DappUI
-} from '@elrondnetwork/dapp-core-components';
+import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
+
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import MineExplorerView from './views/MineExplorerView';
 import { ThemeProvider } from '@mui/material';
@@ -21,7 +18,7 @@ import IndexView from './views/IndexView';
 
 const environment = 'devnet';
 
-export default function App(props) {
+const App = () => {
 
   const scripts = [
     { loading: fetch("https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62c4a55388e2ee5d2d7cdcbd").then(body => body.text()), isAsync: false },
@@ -70,4 +67,6 @@ export default function App(props) {
       </DappProvider>
     </Router>
   </>
-}
+};
+
+export default App;
