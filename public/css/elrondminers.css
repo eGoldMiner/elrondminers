@@ -1,20 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alatsi&family=Palanquin+Dark:wght@400;500&display=swap");
+
 .row,
 .row > * {
   margin: 0 !important;
   padding: 0;
 }
 
-a {
-  text-decoration: none !important;
-}
-
-body {
-  overflow: auto !important;
-  padding-right: 0 !important;
-  overflow-x: hidden;
-}
 
 /* MUI */
 legend {
@@ -137,8 +129,8 @@ legend {
 }
 
 #gear-1 {
-  -webkit-transform: none !important;
-          transform: none !important;
+  -webkit-transform: none;
+          transform: none;
   -webkit-animation: rotation1 10s infinite linear;
           animation: rotation1 10s infinite linear;
 }
@@ -172,10 +164,11 @@ legend {
 }
 
 #gear-2 {
-  -webkit-transform: none !important;
-          transform: none !important;
+  -webkit-transform: none;
+          transform: none;
   -webkit-animation: rotation2 10s infinite linear;
           animation: rotation2 10s infinite linear;
+  
 }
 
 @-webkit-keyframes rotation2 {

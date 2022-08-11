@@ -70,22 +70,6 @@
 .af-view template {
   display: none;
 }
-/* Links
-   ========================================================================== */
-/**
- * Remove the gray background color from active links in IE 10.
- */
-.af-view a {
-  background-color: transparent;
-}
-/**
- * Improve readability of focused elements when they are also in an
- * active/hover state.
- */
-.af-view a:active,
-.af-view a:hover {
-  outline: 0;
-}
 /* Text-level semantics
    ========================================================================== */
 /**
