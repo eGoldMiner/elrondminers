@@ -7,6 +7,7 @@ import { Button, FormControl, IconButton, FormControlLabel, Radio, RadioGroup, S
 import { Typography, MenuItem } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
+
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
 
@@ -31,14 +32,17 @@ const Clip = ({ url, id }) => {
     </video>
   );
 }
+
+
 export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({})
   const [order, setOrder] = useState("highest")
-  const [current, setCurrent] = useState(null)
+  const [current, setCurrent] = useState(109) ///////REMETTRE A NULL
   const filtersMenu = useRef(null)
   const itemList = useRef()
   const modal = useRef()
+
 
   const loadMore = () => {
     if (window.scrollY + window.innerHeight >= (itemList.current.offsetTop + itemList.current.offsetHeight) - 200) {
@@ -117,6 +121,7 @@ export default function MineExplorerView() {
     items.sort((a, b) => a.rank - b.rank)
   }
   items = items.slice(0, currentPage * 24)
+
 
   return <>
     <div id="explorer">
@@ -229,8 +234,9 @@ export default function MineExplorerView() {
                   items.map((item, index) => {
                     return <div className='col-12 col-md-6 col-lg-4 col-xl-3 p-3' key={index} onClick={() => setCurrent(item.id)}>
                       <div className='miner-item h-100'>
-                        <div className='rank'><Typography>{item.rank}</Typography></div>
-                        <div className='id'><Typography>Miner #{item.id}</Typography></div>
+                        <div className='rank'><Typography variant="p">Rank {item.rank}</Typography></div>
+                        <div className='id'><Typography variant="p">Miner #{item.id}</Typography></div>
+                        <div></div>
                         <Clip url={item.videoLink} id={item.id} />
                       </div>
                     </div>
@@ -241,11 +247,11 @@ export default function MineExplorerView() {
           </div>
         </div>
       </div>
-      <div id="miner-modal" ref={modal}>
+      {/* <div id="miner-modal" ref={modal}>
         {
           current ? <>
 
-            <video autoPlay loop playsInline muted src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"}>
+            <video className='videoOpenMiner' autoPlay loop playsInline muted src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"}>
             </video>
             <div id="miner-modal-content">
               <div>
@@ -331,6 +337,127 @@ export default function MineExplorerView() {
             : <></>
         }
 
+      </div> */}
+
+      <div ref={modal}>
+        {
+          current ? <>
+            <div className="divcardcontainer-wrapper">
+              <div className="divcardexplorer">
+                <div className="div-block-35">
+                  <div className="div-block-36">
+                    <h1 className="headingExplorerMiner"><span className="text-span-10">MINER</span> #{currentItem.id}</h1>
+                    <div className="div-block-41">
+                      <div className="divblockrank">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/crystal.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">Rank {currentItem.rank}<br /></div>
+                          <div className="text-block-4">/5000</div>
+                        </div>
+                      </div>
+                      <div className="divblockpickaxe">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/pickaxe.png" loading="lazy" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[3]}<br /></div>
+                          <div className="text-block-4">{Assets['Pickaxe'][currentItem.assets[3]]}%</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="separator separatorinside">
+                      <div className="divseparatorleftinside"></div>
+                      <div className="divseparatorrightinside"></div>
+                    </div>
+                    <div className="div-block-40">
+                      <div className="divblockhead">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/helmet.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[0]}<br /></div>
+                          <div className="text-block-4">{Assets['Helmet'][currentItem.assets[0]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockeyes">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/eye.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[2]}<br /></div>
+                          <div className="text-block-4">{Assets['Eyes'][currentItem.assets[2]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockbeard">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/beards.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[1]}<br /></div>
+                          <div className="text-block-4">{Assets['Beard'][currentItem.assets[1]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockclothes">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/tshirt.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[4]}<br /></div>
+                          <div className="text-block-4">{Assets['Clothes'][currentItem.assets[4]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockbag">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/bag.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[6]}<br /></div>
+                          <div className="text-block-4">{Assets['Bag'][currentItem.assets[6]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockbackground">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/photos.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[5]}<br /></div>
+                          <div className="text-block-4">{Assets['Background'][currentItem.assets[5]]}%</div>
+                        </div>
+                      </div>
+                      <div className="divblockminer">
+                        <div className="divblockcategoryimg">
+                          <img src="images/icons/man.png" loading="lazy" sizes="33px" alt="" className="image-15" />
+                        </div>
+                        <div className="div-block-39">
+                          <div className="text-block-3">{currentItem.assets[7]}<br /></div>
+                          <div className="text-block-4">{Assets['Miner'][currentItem.assets[7]]}%</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="divcardexplorervideo">
+                  <div data-poster-url="videos/3538-poster-00001.jpg" data-video-urls="videos/3538-transcode.mp4,videos/3538-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="background-video-4 w-background-video w-background-video-atom">
+                    <video autoPlay loop="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
+                      <source src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"} data-wf-ignore="true" />
+                      <source src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"} data-wf-ignore="true" />
+                    </video></div>
+                </div>
+                <div className="divcardexplorerbtnquit" onClick={() => setCurrent(null)}></div>
+                <div className="div-block-42">
+                  <img src="images/Fichier-7.png" loading="lazy" alt="" />
+                </div>
+                <div className="div-block-43">
+                  <img src="images/v2.png" loading="lazy" srcSet="images/v2-p-500.png 500w, images/v2-p-800.png 800w, images/v2-p-1080.png 1080w, images/v2-p-1600.png 1600w, images/v2-p-2000.png 2000w, images/v2-p-2600.png 2600w, images/v2-p-3200.png 3200w, images/v2.png 5967w" sizes="200px" alt="" className="image-16" />
+                </div>
+              </div>
+              <div className="divclosecardwrapper" onClick={() => setCurrent(null)}></div>
+            </div>
+          </>
+            : <></>
+        }
       </div>
     </div>
   </>

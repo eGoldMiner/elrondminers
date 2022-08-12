@@ -1,4 +1,3 @@
-import pioches_000 from "./pioches_00000.png";
 import pioches_001 from "./pioches_00001.png";
 import pioches_002 from "./pioches_00002.png";
 import pioches_003 from "./pioches_00003.png";
@@ -148,9 +147,9 @@ import pioches_146 from "./pioches_00146.png";
 import pioches_147 from "./pioches_00147.png";
 import pioches_148 from "./pioches_00148.png";
 import pioches_149 from "./pioches_00149.png";
+import pioches_150 from "./pioches_00150.png";
 
 export const ImagesPioches = [
-    pioches_000,
     pioches_001,
     pioches_002,
     pioches_003,
@@ -299,5 +298,6 @@ export const ImagesPioches = [
     pioches_146,
     pioches_147,
     pioches_148,
-    pioches_149
+    pioches_149,
+    pioches_150
 ]

@@ -17,11 +17,11 @@ export default function (props) {
                         <a href="#Home" className="af-class-linkfooter">Home</a>
                         <a href="#About" className="af-class-linkfooter">About</a>
                         <a href="#Team" className="af-class-linkfooter">Team</a>
-                        <a href="#" className="af-class-linkfooter">Faq</a>
+                        <a href="#Faq" className="af-class-linkfooter">Faq</a>
                     </div>
                     <div className="af-class-div-block-33">
                         <a href="#" className="af-class-linkfooter">Play Now</a>
-                        <a href="#" className="af-class-linkfooter">Explore the Mine</a>
+                        <a href="/explore" target="_blank" className="af-class-linkfooter">Explore the Mine</a>
                     </div>
                 </div>
                 <div className="af-class-div-block-28 col-md-3 col-12">

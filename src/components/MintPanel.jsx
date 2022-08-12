@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export default function MintPanel({windowState, setWindowState}) {
-    const priceOneNft = 0.7;
+    const priceOneNft = 1;
     const addressApi = "https://api.elrond.com/collections/EMINERS-5b421f/nfts/count";
     const [minted, setMinted] = useState("");
     const [numberMint, setNumberMint] = useState(1);
@@ -48,7 +48,16 @@ export default function MintPanel({windowState, setWindowState}) {
             <div className="divclosebtnconnect"onClick={() => setWindowState(false)}></div>
             <div className="div-block-54">
                 <h1 className="heading-8">HIRING</h1>
+                <img src="images/pickaxe-reverse.png" className="img-pickaxe-mint"/>
                 <div className="text-block-13">MINERS</div>
+                <img src="images/pickaxe.png" className="img-pickaxe-mint img-pickaxe-mint-2"/>
+                <div id="flip">
+                    <div><div></div></div>
+                    <div><div></div></div>
+                    <div><div></div></div>
+                    <div><div></div></div>
+                    <div><div></div></div>
+                </div>
             </div>
             <div className="div-block-55">
                 <div className="text-block-14">Miners already recruited :</div>

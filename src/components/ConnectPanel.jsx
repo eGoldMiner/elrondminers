@@ -29,11 +29,16 @@ export default function ConnectPanel({ windowState, setWindowState }) {
         returnButtonConnect.current.style.display = "none";
     }
 
+    function disconnect() {
+        initConnectMenu();
+        setUserConnected(false);
+    }
+
     return (
         <div className="divconnectpanel"
             id="connectPanel"
-            style={{ opacity: windowState ? '1' : '0', visibility: windowState ? 'visible' : 'hidden', height: userConnected ? '360px' : '430px' }}>
-            <div className="divconnectcontainer" id="connectContainer" style={{ visibility: userConnected ? 'hidden' : 'visible' }}>
+            style={{ opacity: windowState ? '1' : '0', visibility: windowState ? 'visible' : 'hidden', height: userConnected ? '360px' : '430px'}}>
+            <div className="divconnectcontainer" id="connectContainer" style={{ display: userConnected ? 'none' : 'initial'}}>
                 <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>
                 <div className="divreturnbtnconnect" ref={returnButtonConnect} onClick={initConnectMenu}></div>
                 <div>
@@ -56,12 +61,12 @@ export default function ConnectPanel({ windowState, setWindowState }) {
                 </div>
                 <div ref={informationsConnect}>
                     <div className="divhowtoconnect">
-                        <a href="https://help.maiar.com/en/articles/5161195-what-is-the-maiar-login" target="" className="link-block-5 w-inline-block">
+                        <a href="https://help.maiar.com/en/articles/5161195-what-is-the-maiar-login" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">
                             <div className="text-block-9">How to connect ?</div>
                         </a>
                     </div>
                     <div className="divcreatewallet">
-                        <a href="https://wallet.elrond.com/create" target="" className="link-block-5 w-inline-block">
+                        <a href="https://wallet.elrond.com/create" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">
                             <div className="text-block-9">Create an Elrond Wallet</div>
                         </a>
                     </div>
@@ -69,7 +74,7 @@ export default function ConnectPanel({ windowState, setWindowState }) {
                         <img src="images/Fichier-7.png" loading="lazy" alt="" className="image-17" /></div>
                 </div>
             </div>
-            <div className="divconnectcontainer divconnectcontainer-copy" style={{ visibility: userConnected ? 'visible' : 'hidden' }}>
+            <div className="divconnectcontainer divconnectcontainer-copy" style={{ display: userConnected ? 'initial' : 'none' }}>
                 <div className="divclosebtnconnect"></div>
                 <div>
                     <div className="text-block-7">Account</div>
@@ -100,7 +105,7 @@ export default function ConnectPanel({ windowState, setWindowState }) {
                     <a className="button-connect-elrond w-button">Mint Miners</a>
                     <img src="images/cart.png" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>
-                <div className="divbtnaccouninformation">
+                <div className="divbtnaccouninformation" onClick={disconnect}>
                     <a className="button-connect-elrond w-button">Disconnect</a>
                     <img src="images/log-out-svgrepo-com.svg" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>

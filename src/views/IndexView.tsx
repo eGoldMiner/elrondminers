@@ -13,6 +13,7 @@ export default function () {
   ///////////////////////////RELIER A LA DAPP
   const [userConnected, setUserConnected] = useState(false);
 
+
   const showFaq = async (e: any) => {
     let height = e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].clientHeight;
     let heightContainer = e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-body-3")[0].clientHeight + 20;
@@ -30,21 +31,48 @@ export default function () {
     }
   };
 
-  const animImgGold = async () => {
-    let count = 0
-    while (true) {
-      if (count >= ImagesCoffre.length) {
-        count = 0;
-      }
-      let img = document.getElementById("img-goldbar") as HTMLImageElement;
-      if (img != null) {
-        img.src = ImagesCoffre[count];
-      }
-      count++;
-      await new Promise(resolve => setTimeout(resolve, 25));
-    }
-  }
+  /*
+      let count_goldbar = 0;
+      let count_lantern = 0;
   
+  
+        if (count_goldbar >= ImagesCoffre.length) {
+          count_goldbar = 0;
+        }
+        if (count_lantern >= ImagesLantern.length) {
+          count_lantern = 0;
+        }
+
+      let img_Coffre = document.getElementById("img-goldbar") as HTMLImageElement;
+      let img_Lantern = document.getElementById("img-lantern") as HTMLImageElement;
+
+        
+      if (img_Coffre != null) {
+        img_Coffre.src = ImagesCoffre[count_goldbar];
+      }
+      if (img_Lantern != null) {
+        img_Lantern.src = ImagesLantern[count_lantern];
+      }
+
+      count_goldbar++;
+      count_lantern++;
+        */
+
+  // const animImgGold = async () => {
+  //   let count_pickaxe = 0;
+  //   while (true) {
+  //     if (count_pickaxe >= ImagesPioches.length) {
+  //       count_pickaxe = 0;
+  //     }
+  //     let img_Pickaxe = document.getElementById("img-pickaxe") as HTMLImageElement;
+  //     if (img_Pickaxe != null) {
+  //       img_Pickaxe.src = ImagesPioches[count_pickaxe];
+  //     }
+  //     count_pickaxe++;
+  //     await new Promise(resolve => setTimeout(resolve, 30));
+  //   }
+  // }
+
 
   useEffect(() => {
     Array.from(document.getElementsByClassName("af-class-faq-wrap")).forEach((el) => {
@@ -58,31 +86,31 @@ export default function () {
   }, []);
 
   useEffect(() => {
-    animImgGold();
+    // animImgGold();
   }, []);
 
 
   function clickMint() {
-    if (!userConnected)
-    {
-      setWindowStateMint(true);
+    if (!userConnected) {
     } else {
-      
+      setWindowStateMint(true);
     }
   }
 
 
   return (
     <>
-      <script src="anime.min.js"></script>
-      <div id="Home" className="af-class-sectionvideo af-class-wf-section"><img src="images/Prevu_Camera_1_001.PNG" loading="lazy" srcSet="images/Prevu_Camera_1_001-p-500.png 500w, images/Prevu_Camera_1_001-p-800.png 800w, images/Prevu_Camera_1_001-p-1080.png 1080w, images/Prevu_Camera_1_001-p-1600.png 1600w, images/Prevu_Camera_1_001.PNG 1920w" sizes="100vw" alt="" className="af-class-image-12" />
-        <div data-poster-url="videos/web02-poster-00001.jpg" data-video-urls="videos/web02-transcode.mp4,videos/web02-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-videopresentation w-background-video w-background-video-atom"><video id="d15d2bb7-be33-e451-8157-f51f61ed416b-video" autoPlay loop style={{ backgroundImage: 'url("videos/web02-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
-          <source src="videos/web02-transcode.mp4" data-wf-ignore="true" />
-          <source src="videos/web02-transcode.webm" data-wf-ignore="true" />
-        </video></div>
-      </div>
-
       <MintPanel windowState={windowStateMint} setWindowState={setWindowStateMint}></MintPanel>
+
+      <script src="anime.min.js"></script>
+      <div id="Home" className="af-class-sectionvideo af-class-wf-section">
+        <img src="images/Prevu_Camera_1_001.PNG" loading="lazy" srcSet="images/Prevu_Camera_1_001-p-500.png 500w, images/Prevu_Camera_1_001-p-800.png 800w, images/Prevu_Camera_1_001-p-1080.png 1080w, images/Prevu_Camera_1_001-p-1600.png 1600w, images/Prevu_Camera_1_001.PNG 1920w" sizes="100vw" alt="" className="af-class-image-12" />
+        <div className="af-class-videopresentation w-background-video">
+          <video autoPlay loop muted playsInline>
+            <source src="videos/3Mineurs.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
       <div className="af-class-divpresentation">
         <h1 className="af-class-headingpresentation">The NFT<br />who offers you <span className="af-class-text-span">real goldbar</span> !</h1>
         <div className="af-class-div-block-34">
@@ -248,7 +276,9 @@ export default function () {
           </p>
           <img src="images/Elrond_Logo-300x292.png" loading="lazy" width={31} alt="" className="af-class-imageelrond" />
         </div>
-        <div className="divimageminer"><img src="images/Prevu_Camera_1_001.PNG" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" srcSet="images/Prevu_Camera_1_001-p-500.png 500w, images/Prevu_Camera_1_001-p-800.png 800w, images/Prevu_Camera_1_001-p-1080.png 1080w, images/Prevu_Camera_1_001-p-1600.png 1600w, images/Prevu_Camera_1_001.PNG 1920w" alt="" className="af-class-imageabout" /></div>
+        <div className="divimageminer">
+          <img id="img-pickaxe" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" alt="" className="af-class-imageabout" />
+        </div>
       </div>
       <div className="af-class-separator">
         <div className="af-class-divseparatorleft" />
@@ -289,7 +319,8 @@ export default function () {
             <p className="af-class-paragraphexplain af-class-paragraphearngold">We are the first collection to distribute real gold to holders. <br />Each week, we draw 5 winners among the holders. <br />These lucky miners will win either gold or silver bar. <br /><br />A miner's goal is to bring gold. Your miner, your gold. <br /><br />Elrond Miners give you electronic gold (EGLD) and real gold.<br />‍</p>
           </div>
           <div className="af-class-divimagegold">
-            <img id="img-goldbar" src="" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" /></div>
+            <img id="img-goldbar" src="" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
+          </div>
         </div>
       </div>
       <div className="af-class-separator">
@@ -315,7 +346,9 @@ export default function () {
         <h1 className="af-class-headingsection af-class-centertitle">Elrond Mine <span className="af-class-text-span-3">video game</span></h1>
         <div className="af-class-wf-section">
           <div className="af-class-divimagegame">
-            <div className="af-class-divimagehelmet"><img src="images/Fichier-4_1.png" loading="lazy" srcSet="images/Fichier-4_1-p-500.png 500w, images/Fichier-4_1-p-800.png 800w, images/Fichier-4_1.png 2760w" sizes="180px" alt="" className="af-class-image-6" /><img src="images/Fichier-3.png" loading="lazy" data-w-id="e5bd0ff8-575a-7a05-aead-e8a5a7fce1bd" alt="" className="af-class-image-7" /></div>
+            <div className="af-class-divimagehelmet">
+              <img id="img-lantern" loading="lazy" sizes="180px" alt="" className="af-class-image-6" />
+            </div>
           </div>
           <div className="af-class-divtextgame">
             <p className="af-class-paragraphexplain">
@@ -427,7 +460,7 @@ export default function () {
         </div>
       </div>
       <div className="af-class-sectionfaq af-class-wf-section" id="faq">
-        <div className="w-layout-grid af-class-faq-grid-4">
+        <div id="Faq" className="w-layout-grid af-class-faq-grid-4">
           <div className="af-class-faq-wrap">
             <div data-w-id="20de4dac-73bc-a15e-c464-46b3f13ecd3d" className="af-class-faq-question-2">
               <img src="images/Fichier-7.png" loading="lazy" width={40} alt="" className="af-class-faq-icon" />

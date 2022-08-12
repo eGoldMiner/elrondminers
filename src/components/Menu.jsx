@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRef, useState } from "react";
 import { Menu as BurgerMenu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
@@ -7,7 +7,6 @@ import ConnectPanel from './ConnectPanel';
 export default function Menu() {
     const [windowStateConnect, setWindowStateConnect] = useState(false);
     const menuNav = useRef(null)
-
 
     var lastScrollTop = 0;
     window.addEventListener("scroll", function () {
@@ -48,7 +47,7 @@ export default function Menu() {
                             <span className="af-class-text-span-2">🕹️</span>
                             <span className="af-class-textspantext"> Play now</span>
                         </a>
-                        <a href="./explore" className="af-class-button-2 w-button menu-button">
+                        <a href="/explore" target="_blank" className="af-class-button-2 w-button menu-button">
                             <span className="af-class-text-span-2">⛏️</span>
                             <span className="af-class-textspantext"> Explore the Mine</span>
                         </a>

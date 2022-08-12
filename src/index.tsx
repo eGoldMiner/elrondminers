@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(container!);
 root.render(
   <React.StrictMode>
     <span>
+      {/* @import url(/css/normalize.css); */}
       <style dangerouslySetInnerHTML={{
         __html: `
           @import url(/css/normalize.css);
@@ -21,7 +22,7 @@ root.render(
 
       <span className="af-view">
         <div className="af-class-body">
-          <App/>
+          <App />
         </div>
       </span>
     </span>
