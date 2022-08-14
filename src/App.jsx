@@ -1,10 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
-import {
-    TransactionsToastList,
-    SignTransactionsModals,
-    NotificationModal
-} from '@elrondnetwork/dapp-core/UI';
+
+import * as DappUI from "@elrondnetwork/dapp-core/UI";
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { ThemeProvider } from '@mui/material';
@@ -15,7 +12,10 @@ import theme from './styles/theme';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
 
-const environment = 'devnet';
+const environment = 'mainnet';
+const { TransactionsToastList, SignTransactionsModals, NotificationModal } =
+  DappUI;
+export const App = props => {
 
 export default function App(props) {
     // const scripts = [
@@ -45,25 +45,29 @@ export default function App(props) {
     //     }))
     // }, [])
 
-    return <>
-        <Router>
-            <DappProvider
-                environment={environment}
-                customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000 }}
-            >
-                <TransactionsToastList />
-                <NotificationModal />
-                <SignTransactionsModals className='custom-class-for-modals' />
-                <ThemeProvider theme={theme}>
-                    <Menu />
-                    <Routes>
-                        <Route exact path="/" element={<IndexView />} />
-                        <Route exact path="/explore" element={<MineExplorerView />} />
-                        {/* <Route path='*' element={<PageNotFound />} /> */}
-                    </Routes>
-                    <Footer />
-                </ThemeProvider>
-            </DappProvider>
-        </Router>
+  return (
+    <>
+    <Router>
+      <DappProvider
+        environment={environment}
+        customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000 }}
+      >
+        <TransactionsToastList />
+        <NotificationModal />
+        <SignTransactionsModals className='custom-class-for-modals' />
+        <ThemeProvider theme={theme}>
+          <Menu />
+          <Routes>
+            <Route exact path="/" element={<IndexView />} />
+            <Route exact path="/explore" element={<MineExplorerView />} />
+            {/* <Route path='*' element={<PageNotFound />} /> */}
+          </Routes>
+          <Footer />
+        </ThemeProvider>
+      </DappProvider>
+    </Router>
     </>
+  );
 }
+
+export default App;

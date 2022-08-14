@@ -1,25 +1,69 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useWalletConnectLogin } from '@elrondnetwork/dapp-core/hooks/login';
+import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
+import QRCode from 'qrcode';
 
-export default function ConnectPanel({ windowState, setWindowState }) {
-
-    /////////////////////////RELIER A LA DAPP
-    const [userConnected, setUserConnected] = useState(false);
+const ConnectPanel = ({ windowState, setWindowState })=> {
 
     const buttonMaiarAppConnect = useRef();
     const buttonMaiarExtConnect = useRef();
     const buttonWebWalConnect = useRef();
     const informationsConnect = useRef();
     const returnButtonConnect = useRef();
-    const imageQrCodeMaiar = useRef();
+
+        const logoutRoute = '/';
+        const callbackRoute = '/';
+        const token = '';
+
+        const { address, account } = useGetAccountInfo();
+
+        const [qrCodeSvg, setQrCodeSvg] = useState('');
+        const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
+
+        const [
+             initLoginWithWalletConnect,
+             { error },
+             { uriDeepLink, walletConnectUri }
+         ] = useWalletConnectLogin({
+             logoutRoute,
+             callbackRoute,
+             token
+             });
+
+
+         const generateQRCode = async () => {
+             if (!walletConnectUri) {
+                 return;
+             }
+             console.log(walletConnectUri);
+             const svg = await QRCode.toString(walletConnectUri, {
+                 type: 'svg'
+             });
+
+             setQrCodeSvg(svg);
+         };
+
+         const { isLoggedIn } = useGetLoginInfo();
+
+         React.useEffect(() => {
+           if (isLoggedIn) {
+             console.log("oui")
+           }
+         }, [isLoggedIn]);
+
+
+        //setUserConnected(true);
+
+        useEffect(() => {
+            initLoginWithWalletConnect(true);
+        }, []);
 
     function clickMaiarApp() {
+        generateQRCode();
         buttonMaiarExtConnect.current.style.display = "none";
         buttonWebWalConnect.current.style.display = "none";
         informationsConnect.current.style.display = "none";
         returnButtonConnect.current.style.display = "block";
-
-        //EN ATTENDANT
-        setUserConnected(true);
     }
 
     function initConnectMenu() {
@@ -59,6 +103,20 @@ export default function ConnectPanel({ windowState, setWindowState }) {
                         <img src="images/internet-1.png" loading="lazy" srcSet="images/internet-1-p-500.png 500w, images/internet-1.png 512w" sizes="28px" alt="" className="imagemaiarextension" />
                     </div>
                 </div>
+                <div className="m-3 w-48 h-48" dangerouslySetInnerHTML={{__html: qrCodeSvg}}/>
+                {isMobileDevice ?
+                (
+                    <>
+                      <p>Open Maiar Login</p>
+                      <a
+                        href={uriDeepLink}
+                        rel='noopener noreferrer nofollow'
+                        target='_blank'
+                      >
+                      </a>
+                    </>
+                ):(<></>)}
+
                 <div ref={informationsConnect}>
                     <div className="divhowtoconnect">
                         <a href="https://help.maiar.com/en/articles/5161195-what-is-the-maiar-login" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">
@@ -85,14 +143,14 @@ export default function ConnectPanel({ windowState, setWindowState }) {
                         <img src="images/wallet-svgrepo-com.svg" loading="lazy" alt="" className="image-20" />
                         <div className="text-block-15">Address : </div>
                     </div>
-                    <div className="text-block-16">erd17zx ... wgy0l</div>
+                    <div className="text-block-16">{address.substring(0,5)}...{address.substring(address.length -5)}</div>
                 </div>
                 <div className="div-block-58">
                     <div className="div-block-59">
                         <img src="images/elrond-egld-egld-logo.svg" loading="lazy" alt="" className="image-20" />
                         <div className="text-block-15">Balance</div>
                     </div>
-                    <div className="text-block-16">17,4562</div>
+                    <div className="text-block-16">{(account.balance / Math.pow(10,18)).toFixed(2)}</div>
                 </div>
                 <div className="div-block-58">
                     <div className="div-block-59">
@@ -113,3 +171,4 @@ export default function ConnectPanel({ windowState, setWindowState }) {
         </div>
     )
 }
+export default ConnectPanel;

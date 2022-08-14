@@ -6,8 +6,9 @@ import reportWebVitals from './reportWebVitals';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!);
 
+
 root.render(
-  <React.StrictMode>
+  <>
     <span>
       {/* @import url(/css/normalize.css); */}
       <style dangerouslySetInnerHTML={{
@@ -26,7 +27,7 @@ root.render(
         </div>
       </span>
     </span>
-  </React.StrictMode>
+    </>
 );
 
 // If you want to start measuring performance in your app, pass a function
