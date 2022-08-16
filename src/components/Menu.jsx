@@ -36,7 +36,7 @@ export default function Menu() {
         <ConnectPanel windowState={windowStateConnect} setWindowState={setWindowStateConnect}></ConnectPanel>
         <div data-animation="over-right" id="af-class-navigation" className="af-class-navigation w-nav" data-easing2="linear" data-easing="ease-in-out-back" data-collapse="medium" data-w-id="4990a16e-0ffe-6b5d-24e6-cb04cd55b9ef" role="banner" data-duration={300} data-doc-height={1}>
             <div className="af-class-navigation-items">
-                <a href="/" aria-current="page" className="af-class-logo-link w-nav-brand w--current"><img sizes="(max-width: 479px) 63vw, (max-width: 991px) 165px, 12vw" width={165} srcSet="images/v2-p-500.png 500w, images/v2-p-800.png 800w, images/v2-p-1080.png 1080w, images/v2-p-1600.png 1600w, images/v2-p-2000.png 2000w, images/v2-p-2600.png 2600w, images/v2-p-3200.png 3200w, images/v2.png 5967w" src="images/v2.png" alt className="af-class-logo-image" /></a>
+                <a href="/" aria-current="page" className="af-class-logo-link w-nav-brand w--current"><img sizes="(max-width: 479px) 63vw, (max-width: 991px) 165px, 12vw" width={165} srcSet="images/v2-p-500.png 500w, images/v2-p-800.png 800w, images/v2-p-1080.png 1080w, images/v2-p-1600.png 1600w, images/v2-p-2000.png 2000w, images/v2-p-2600.png 2600w, images/v2-p-3200.png 3200w, images/v2.png 5967w" src="images/v2.png" className="af-class-logo-image" /></a>
                 <div className="af-class-navigation-wrap d-md-block" ref={menuNav}>
                     <nav role="navigation" className="af-class-navigation-items af-class-navigationlist w-nav-menu">
                         <a href="/#Home" className="af-class-navigation-item w-nav-link">HOME</a>

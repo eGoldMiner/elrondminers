@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function MintPanel({windowState, setWindowState}) {
+export default function MintPanel({ windowState, setWindowState }) {
     const priceOneNft = 1;
     const addressApi = "https://api.elrond.com/collections/EMINERS-5b421f/nfts/count";
     const [minted, setMinted] = useState("");
@@ -45,12 +45,12 @@ export default function MintPanel({windowState, setWindowState}) {
     return <>
         <div className="divmintcontainer"
             style={{ opacity: windowState ? '1' : '0', visibility: windowState ? 'visible' : 'hidden', transform: windowState ? 'translate(0%)' : 'translate(200%)' }}>
-            <div className="divclosebtnconnect"onClick={() => setWindowState(false)}></div>
+            <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>
             <div className="div-block-54">
                 <h1 className="heading-8">HIRING</h1>
-                <img src="images/pickaxe-reverse.png" className="img-pickaxe-mint"/>
+                <img src="images/pickaxe-reverse.png" className="img-pickaxe-mint" />
                 <div className="text-block-13">MINERS</div>
-                <img src="images/pickaxe.png" className="img-pickaxe-mint img-pickaxe-mint-2"/>
+                <img src="images/pickaxe.png" className="img-pickaxe-mint img-pickaxe-mint-2" />
                 <div id="flip">
                     <div><div></div></div>
                     <div><div></div></div>
