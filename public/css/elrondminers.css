@@ -125,7 +125,6 @@ legend {
 #select-pickaxe .selected {
   background-color: #eaba20;
   border-radius: 1000px;
-  background: green;
 }
 
 #select-pickaxe a {
@@ -144,6 +143,7 @@ legend {
 #explorer #results-container {
   display: flex !important;
   flex-direction: row;
+  align-items: start;
   justify-content: center;
 }
 
@@ -286,11 +286,10 @@ legend {
 }
 
 #explorer #header {
-  width: 90%;
-  min-height: 100px;
-  border-color: #eaba20;
-  border-style: solid;
-  border-width: 3px;
+  position: sticky;
+  width: 80%;
+  margin: auto;
+  background: #415e74;
   border-radius: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -299,8 +298,7 @@ legend {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  padding: 2%;
-  margin-right: 42px !important;
+  padding: 10px 40px;
 }
 
 #explorer #header #count {

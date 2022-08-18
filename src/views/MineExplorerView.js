@@ -38,15 +38,17 @@ export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1)
   const [filters, setFilters] = useState({})
   const [order, setOrder] = useState("highest")
-  const [current, setCurrent] = useState(109) ///////REMETTRE A NULL
+  const [current, setCurrent] = useState(null) ///////REMETTRE A NULL
   const filtersMenu = useRef(null)
   const itemList = useRef()
   const modal = useRef()
 
 
   const loadMore = () => {
-    if (window.scrollY + window.innerHeight >= (itemList.current.offsetTop + itemList.current.offsetHeight) - 200) {
-      setCurrentPage(currentPage + 1)
+    if (itemList.current.offsetTop != null) {
+      if (window.scrollY + window.innerHeight >= (itemList.current.offsetTop + itemList.current.offsetHeight) - 200) {
+        setCurrentPage(currentPage + 1)
+      }
     }
   }
   useEffect(() => {
@@ -135,98 +137,96 @@ export default function MineExplorerView() {
           }}
         >Filters</Button>
       </div>
-      <div className='row mt-3'>
-        <div className='col-lg-3 col-md-4 col-sm-5 px-5 mb-3' id="filters" ref={filtersMenu}>
-          <div>
-            <div className="filter">
-              {
-                Object.keys(Filters).map((filter, index) => {
-                  if (filter === "Pickaxe") return <>
-                    {/* <FormControl className='w-100'>
-                      <RadioGroup
-                        className='d-flex flex-row justify-content-center'
-                        onChange={(e) => { setFilters({ ...filters, [filter]: e.target.value }) }}
-                        value={filters[filter] || null}
-                      >
-                        {
-                          Filters[filter]['values'].map((item, index) => {
-                            return <div className='d-flex mb-3'>
-                              <FormControlLabel control={<Radio />} value={item} className="m-0" />
-                              <img src={"/images/pickaxe-" + (index + 1) + ".png"} alt="pickaxe-1" height={"40"} />
-                            </div>
-                          })
-                        }
-                      </RadioGroup>
-                    </FormControl> */}
-                    <div id="select-pickaxe" className='row'>
+      <div className="div-block-65" ref={filtersMenu}>
+
+        <a onClick={() => setFilters({})} className="button-7 w-button">CLEAR</a>
+        <div className="text-block-17">FILTERS</div>
+        <div className="div-block-66">
+          {
+            Object.keys(Filters).map((filter, index) => {
+              if (filter === "Pickaxe")
+                return <>
+                  <div className="form-block-3 w-form">
+                    <form id="wf-form-Search-ID" name="wf-form-Search-ID" data-name="Search ID" method="get"><input type="text" className="text-field-2 w-input" maxLength="256" name="Search-ID" data-name="Search ID" placeholder="Search ID" id="Search-ID" /></form>
+                    <div className="w-form-done"></div>
+                    <div className="w-form-fail"></div>
+                  </div>
+                  <div>
+                    <div className="div-block-61">
                       {
                         Filters[filter]['values'].map((item, index) => {
                           return (
-                            <div key={item} className='col p-1 radio-pickaxe'>
-                              <a
-                                className={filters[filter] === item ? "selected" : ""}
-                                onClick={() => {
-                                  setFilters({ ...filters, [filter]: filters[filter] === item ? null : item })
-                                }}
-                              >
-                                <img
-                                  src={"/images/pickaxe-" + (index + 1) + ".png"}
-                                  alt={"pickaxe" + 1}
-                                />
-                              </a>
+                            <div
+                              key={item}
+                              className={filters[filter] === item ? "selected div-block-64" : "div-block-64"}
+                              onClick={() => {
+                                setFilters({ ...filters, [filter]: filters[filter] === item ? null : item })
+                              }}>
+                              <img src={"images/pickaxe-" + (index + 1) + ".png"} loading="lazy" alt={"pickaxe" + 1} className="image-22" />
                             </div>
                           )
                         })
                       }
                     </div>
-                  </>
-                  return <>
-                    <Typography variant="body1">{filter}</Typography>
-                    <Select className='w-100'
+                  </div>
+                </>
+              return <>
+                <div className="form-block-2 w-form">
+                  <div className="div-block-69">
+                    <div className="text-block-17-copy-copy">{filter}</div>
+                    <select id="field-2" name="field-2" data-name="Field 2" className="select-field w-select"
                       onChange={(e) => {
                         setFilters({ ...filters, [filter]: e.target.value })
                       }}
-                      value={filters[filter] || null}
-                    >
+                      value={filters[filter] || null}>
+                      <option value="" selected>All</option>
                       {
                         Filters[filter]['values'].map((item, index) => {
                           return (
-                            <MenuItem key={item} value={item}>{item}</MenuItem>
+                            <option key={item} value={item}>{item}</option>
                           )
                         })
                       }
-                    </Select>
-                  </>
-                })
-              }
-              <div className='text-center mt-3'>
-                <Button onClick={() => setFilters({})} size="small" variant='contained'>Clear filters</Button>
-              </div>
-            </div>
-          </div>
+                    </select>
+                  </div>
+                </div>
+              </>
+            }
+            )
+          }
+        </div>
+      </div>
+
+      <div className='row mt-3'>
+        <div className='col-lg-3 col-md-4 col-sm-5 px-5 mb-3' id="filters" ref={filtersMenu}>
         </div>
         <div className='col-lg-9 col-md-8 col-sm-7 px-0'>
           <div id="results-container" className='row w-100'>
-            <div className='col-lg-12 ps-sm-3 pe-sm-5' id="header">
+            <div id="header">
+              {/* className='col-lg-12 ps-sm-3 pe-sm-5' */}
               <div className='row p-3'>
                 <div className="col-auto p-0">
                   <div id="count">{totalItems}</div>
                   <div id="miners">Miners</div>
                 </div>
                 <div className="col p-0 d-flex align-items-center justify-content-end">
-                  <FormControl>
-                    <Select
+                  <div className="div-block-69">
+                    <select id="field-2" name="field-2" data-name="Field 2" className="select-field select-field-2 w-select"
                       value={order}
                       onChange={(e) => {
                         setOrder(e.target.value)
-                      }}
-                    >
-                      <MenuItem value={'lowest'}>Lowest rank</MenuItem>
-                      <MenuItem value={'highest'}>Highest rank</MenuItem>
-                    </Select>
-                  </FormControl>
+                      }}>
+                      <option value={'lowest'}>Lowest rank</option>
+                      <option value={'highest'}>Highest rank</option>
+                    </select>
+                  </div>
                 </div>
               </div>
+            </div>
+            <div className="af-class-separator af-class-separator-explorer">
+              <div className="af-class-divseparatorleft" />
+              <div className="af-class-divseparatorcenter" />
+              <div className="af-class-divseparatorright" />
             </div>
             <div className='col-12 ps-sm-3 pe-sm-5 mt-4 pt-1' id="miner-list-container">
               <div className='row w-100' ref={itemList} id="miner-list">
@@ -439,18 +439,14 @@ export default function MineExplorerView() {
                   </div>
                 </div>
                 <div className="divcardexplorervideo">
-                  <div data-poster-url="videos/3538-poster-00001.jpg" data-video-urls="videos/3538-transcode.mp4,videos/3538-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="background-video-4 w-background-video w-background-video-atom">
-                    <video autoPlay loop="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-                      <source src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"} data-wf-ignore="true" />
-                      <source src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"} data-wf-ignore="true" />
+                  <div className="background-video-4 w-background-video w-background-video-atom">
+                    <video autoPlay loop muted playsInline>
+                      <source src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"} />
                     </video></div>
                 </div>
                 <div className="divcardexplorerbtnquit" onClick={() => setCurrent(null)}></div>
                 <div className="div-block-42">
-                  <img src="images/Fichier-7.png" loading="lazy" alt="" />
-                </div>
-                <div className="div-block-43">
-                  <img src="images/v2.png" loading="lazy" srcSet="images/v2-p-500.png 500w, images/v2-p-800.png 800w, images/v2-p-1080.png 1080w, images/v2-p-1600.png 1600w, images/v2-p-2000.png 2000w, images/v2-p-2600.png 2600w, images/v2-p-3200.png 3200w, images/v2.png 5967w" sizes="200px" alt="" className="image-16" />
+                  <img src="images/Logo_T4.png" loading="lazy" alt="" />
                 </div>
               </div>
               <div className="divclosecardwrapper" onClick={() => setCurrent(null)}></div>
