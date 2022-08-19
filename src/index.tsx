@@ -18,6 +18,7 @@ root.render(
           @import url(/css/elrondminers.css);
           @import url(/css/custom_bootstrap.css);
           @import url(/css/elrondminers.webflow.css);
+          @import url(/css/background.css);
         ` }} />
 
 

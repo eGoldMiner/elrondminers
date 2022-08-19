@@ -11,6 +11,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     const informationsConnect = useRef();
     const returnButtonConnect = useRef();
     const qrCodeImg = useRef();
+    const qrCodeContainer = useRef();
 
     const logoutRoute = '/';
     const callbackRoute = '/';
@@ -19,7 +20,8 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     const { address, account } = useGetAccountInfo();
 
     const [qrCodeSvg, setQrCodeSvg] = useState('');
-    const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
+    // const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
+    const isMobileDevice = true;
     const onLoginRedirect = false;
 
     const [
@@ -63,6 +65,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     }, [isLoggedIn]);
 
     React.useEffect(() => {
+        initConnectMenu();
         initLoginWithWalletConnect(true);
     }, []);
 
@@ -74,6 +77,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
         buttonWebWalConnect.current.style.display = "none";
         informationsConnect.current.style.display = "none";
         returnButtonConnect.current.style.display = "block";
+        qrCodeContainer.current.style.display = "flex";
         qrCodeImg.current.style.display = "block";
     }
 
@@ -90,8 +94,8 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
         buttonWebWalConnect.current.style.display = "flex";
         informationsConnect.current.style.display = "block";
         returnButtonConnect.current.style.display = "none";
+        qrCodeContainer.current.style.display = "none";
         qrCodeImg.current.style.display = "none";
-
     }
 
     function disconnect() {
@@ -124,20 +128,25 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
                         <img src="images/internet-1.png" loading="lazy" srcSet="images/internet-1-p-500.png 500w, images/internet-1.png 512w" sizes="28px" alt="" className="imagemaiarextension" />
                     </div>
                 </div>
-                <div className="m-3 w-48 h-48" ref={qrCodeImg} dangerouslySetInnerHTML={{ __html: qrCodeSvg }} />
-                {isMobileDevice ?
-                    (
-                        <>
-                            <p>Open Maiar Login</p>
-                            <a
-                                href={uriDeepLink}
-                                rel='noopener noreferrer nofollow'
-                                target='_blank'
-                            >
-                            </a>
-                        </>
-                    ) : (<></>)}
+                <div className="qrcode-container" ref={qrCodeContainer}>
+                    <div className="qrcode" ref={qrCodeImg} dangerouslySetInnerHTML={{ __html: qrCodeSvg }} />
+                    {isMobileDevice ?
+                        (
+                            <>
+                                <a className="divmaiarappconnect divmaiarmobileconnect" href={uriDeepLink} rel='noopener noreferrer nofollow' target='_blank'>
+                                    <a className="button-connect-elrond w-button">Open Maiar Login</a>
+                                </a>
 
+                                {/* <p>Open Maiar Login</p>
+                                <a
+                                    href={uriDeepLink}
+                                    rel='noopener noreferrer nofollow'
+                                    target='_blank'
+                                >
+                                </a> */}
+                            </>
+                        ) : (<></>)}
+                </div>
                 <div ref={informationsConnect}>
                     <div className="divhowtoconnect">
                         <a href="https://help.maiar.com/en/articles/5161195-what-is-the-maiar-login" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">

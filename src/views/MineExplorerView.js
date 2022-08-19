@@ -146,11 +146,9 @@ export default function MineExplorerView() {
             Object.keys(Filters).map((filter, index) => {
               if (filter === "Pickaxe")
                 return <>
-                  <div className="form-block-3 w-form">
-                    <form id="wf-form-Search-ID" name="wf-form-Search-ID" data-name="Search ID" method="get"><input type="text" className="text-field-2 w-input" maxLength="256" name="Search-ID" data-name="Search ID" placeholder="Search ID" id="Search-ID" /></form>
-                    <div className="w-form-done"></div>
-                    <div className="w-form-fail"></div>
-                  </div>
+                  {/* <div className="form-block-3 w-form">
+                    <input type="text" className="text-field-2 w-input" maxLength="256" name="Search-ID" data-name="Search ID" placeholder="Search ID" id="Search-ID" />
+                  </div> */}
                   <div>
                     <div className="div-block-61">
                       {

@@ -11,6 +11,7 @@ import Menu from './components/Menu';
 import theme from './styles/theme';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
+import Background from 'views/Background';
 
 const environment = 'mainnet';
 const { TransactionsToastList, SignTransactionsModals, NotificationModal } =
@@ -54,6 +55,7 @@ const App = () => {
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <ThemeProvider theme={theme}>
+            <Background />
             <Menu />
             <Routes>
               <Route exact path="/" element={<IndexView />} />
