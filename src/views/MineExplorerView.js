@@ -1,11 +1,9 @@
 import React from 'react';
-import All from '../data/All';
-import Filters from "../data/Filters";
-import Assets from "../data/Assets.json"
 import { useState, useEffect, useRef } from 'react';
-import { Button, FormControl, IconButton, FormControlLabel, Radio, RadioGroup, Select } from "@mui/material"
-import { Typography, MenuItem } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Button, Typography } from "@mui/material"
+import All from '../data/All';
+import Assets from "../data/Assets.json"
+import Filters from "../data/Filters";
 
 
 const Clip = ({ url, id }) => {
@@ -143,7 +141,7 @@ export default function MineExplorerView() {
         <div className="text-block-17">FILTERS</div>
         <div className="div-block-66">
           {
-            Object.keys(Filters).map((filter, index) => {
+            Object.keys(Filters).map((filter) => {
               if (filter === "Pickaxe")
                 return <>
                   {/* <div className="form-block-3 w-form">
@@ -179,7 +177,7 @@ export default function MineExplorerView() {
                       value={filters[filter] || null}>
                       <option value="" selected>All</option>
                       {
-                        Filters[filter]['values'].map((item, index) => {
+                        Filters[filter]['values'].map((item) => {
                           return (
                             <option key={item} value={item}>{item}</option>
                           )

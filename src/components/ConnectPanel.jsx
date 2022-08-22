@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
 import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
 import QRCode from 'qrcode';
@@ -17,7 +17,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     const callbackRoute = '/';
     const token = '';
 
-    const { address, account } = useGetAccountInfo();
+    const { account } = useGetAccountInfo();
 
     const [qrCodeSvg, setQrCodeSvg] = useState('');
     // const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';

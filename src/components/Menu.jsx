@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRef, useState } from "react";
 import { Menu as BurgerMenu } from "@mui/icons-material";
 import { IconButton } from "@mui/material";

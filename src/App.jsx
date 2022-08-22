@@ -1,17 +1,16 @@
 import React from 'react';
-//import { useEffect } from 'react';
 
 import * as DappUI from "@elrondnetwork/dapp-core/UI";
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { ThemeProvider } from '@mui/material';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import Background from 'views/Background';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import theme from './styles/theme';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
-import Background from 'views/Background';
 
 const environment = 'mainnet';
 const { TransactionsToastList, SignTransactionsModals, NotificationModal } =

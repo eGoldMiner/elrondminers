@@ -6,6 +6,7 @@ import { ImagesLantern } from '../data/images/Lanterne';
 import SequencePlayer from 'react-sequence-player';
 import MintPanel from 'components/MintPanel';
 
+
 export default function () {
   const timeline = createRef<HTMLDivElement>();
   const [windowStateMint, setWindowStateMint] = useState(false);
@@ -58,20 +59,35 @@ export default function () {
       count_lantern++;
         */
 
-  // const animImgGold = async () => {
-  //   let count_pickaxe = 0;
-  //   while (true) {
-  //     if (count_pickaxe >= ImagesPioches.length) {
-  //       count_pickaxe = 0;
-  //     }
-  //     let img_Pickaxe = document.getElementById("img-pickaxe") as HTMLImageElement;
-  //     if (img_Pickaxe != null) {
-  //       img_Pickaxe.src = ImagesPioches[count_pickaxe];
-  //     }
-  //     count_pickaxe++;
-  //     await new Promise(resolve => setTimeout(resolve, 30));
-  //   }
-  // }
+  const animImgLantern = async () => {
+    let count = 0;
+    while (true) {
+      if (count >= ImagesLantern.length) {
+        count = 0;
+      }
+      let img_Lantern = document.getElementById("img-lantern") as HTMLImageElement;
+      if (img_Lantern != null) {
+        img_Lantern.src = ImagesLantern[count];
+      }
+      count++;
+      await new Promise(resolve => setTimeout(resolve, 60));
+    }
+  }
+
+  const animImgPickaxe = async () => {
+    let count = 0;
+    while (true) {
+      if (count >= ImagesPioches.length) {
+        count = 0;
+      }
+      let img_Pickaxe = document.getElementById("img-pickaxe") as HTMLImageElement;
+      if (img_Pickaxe != null) {
+        img_Pickaxe.src = ImagesPioches[count];
+      }
+      count++;
+      await new Promise(resolve => setTimeout(resolve, 30));
+    }
+  }
 
 
   useEffect(() => {
@@ -86,7 +102,8 @@ export default function () {
   }, []);
 
   useEffect(() => {
-    // animImgGold();
+    // animImgLantern();
+    animImgPickaxe();
   }, []);
 
 
@@ -319,7 +336,7 @@ export default function () {
             <p className="af-class-paragraphexplain af-class-paragraphearngold">We are the first collection to distribute real gold to holders. <br />Each week, we draw 5 winners among the holders. <br />These lucky miners will win either gold or silver bar. <br /><br />A miner's goal is to bring gold. Your miner, your gold. <br /><br />Elrond Miners give you electronic gold (EGLD) and real gold.<br />‍</p>
           </div>
           <div className="af-class-divimagegold">
-            <img id="img-goldbar" src="" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
+            <img id="img-goldbar" src="images/Coffre_a00000.png" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
           </div>
         </div>
       </div>
@@ -347,7 +364,7 @@ export default function () {
         <div className="af-class-wf-section">
           <div className="af-class-divimagegame">
             <div className="af-class-divimagehelmet">
-              <img id="img-lantern" loading="lazy" sizes="180px" alt="" className="af-class-image-6" />
+              <img id="img-lantern" src="images/Lantertne_00000.png" loading="lazy" sizes="180px" alt="" className="af-class-image-6" />
             </div>
           </div>
           <div className="af-class-divtextgame">
