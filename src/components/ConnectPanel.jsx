@@ -46,6 +46,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     });
 
     const generateQRCode = async () => {
+        
         if (!walletConnectUri) {
             return;
         }
@@ -66,7 +67,9 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
 
     React.useEffect(() => {
            initConnectMenu();
+           initLoginWithWalletConnect();
        }, []);
+
     function clickMaiarApp() {
         generateQRCode();
         buttonMaiarExtConnect.current.style.display = "none";
