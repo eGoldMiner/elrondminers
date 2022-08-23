@@ -11,14 +11,12 @@ export default function MintPanel({ windowState, setWindowState }) {
         const data = await fetch(addressApi);
         const json = await data.json();
         setMinted(json);
-        console.log("Minted : " + minted);
     }
 
 
     useEffect(() => {
         let price = Math.round(priceOneNft * numberMint * 100) / 100;
         setPriceTotal(price);
-        console.log("Updated")
     }, [numberMint]);
 
     useEffect(() => {

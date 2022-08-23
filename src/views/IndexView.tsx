@@ -32,47 +32,6 @@ export default function () {
     }
   };
 
-  /*
-      let count_goldbar = 0;
-      let count_lantern = 0;
-  
-  
-        if (count_goldbar >= ImagesCoffre.length) {
-          count_goldbar = 0;
-        }
-        if (count_lantern >= ImagesLantern.length) {
-          count_lantern = 0;
-        }
-
-      let img_Coffre = document.getElementById("img-goldbar") as HTMLImageElement;
-      let img_Lantern = document.getElementById("img-lantern") as HTMLImageElement;
-
-        
-      if (img_Coffre != null) {
-        img_Coffre.src = ImagesCoffre[count_goldbar];
-      }
-      if (img_Lantern != null) {
-        img_Lantern.src = ImagesLantern[count_lantern];
-      }
-
-      count_goldbar++;
-      count_lantern++;
-        */
-
-  const animImgLantern = async () => {
-    let count = 0;
-    while (true) {
-      if (count >= ImagesLantern.length) {
-        count = 0;
-      }
-      let img_Lantern = document.getElementById("img-lantern") as HTMLImageElement;
-      if (img_Lantern != null) {
-        img_Lantern.src = ImagesLantern[count];
-      }
-      count++;
-      await new Promise(resolve => setTimeout(resolve, 60));
-    }
-  }
 
   const animImgPickaxe = async () => {
     let count = 0;
@@ -107,6 +66,47 @@ export default function () {
   }, []);
 
 
+  const offsetRatio = 1;
+
+  document.addEventListener('scroll', function (e) {
+    const containerCart = document.getElementById("img-carts");
+    const cart1 = document.getElementById("cart-1");
+    const cart3 = document.getElementById("cart-3");
+    if (containerCart != null && cart1 != null && cart3 != null) {
+      let innerHeight2 = window.innerHeight * offsetRatio;
+      let scroll2 = window.scrollY + ((window.innerHeight * offsetRatio) / 2);
+      let centerContainerY = containerCart.offsetTop - scroll2 + (containerCart.offsetHeight / 2);
+      let percentage = centerContainerY / innerHeight2;
+      percentage = percentage < 0 ? 0 : percentage > 100 ? 100 : percentage;
+
+      let innerWidth = window.innerWidth;
+      let offsetWidthCart1 = (innerWidth / 2) + cart1.clientWidth;
+      let offsetWidthCart3 = (innerWidth / 2) + cart3.clientWidth;
+
+      cart1.style.transform = 'translateX(' + (percentage * -offsetWidthCart1) + 'px)';
+      cart3.style.transform = 'translateX(' + (percentage * offsetWidthCart3) + 'px)';
+    }
+
+    const containerNft = document.getElementById("carouselNft");
+    const carouselNft1 = document.getElementById("carouselNft1");
+    const carouselNft2 = document.getElementById("carouselNft2");
+    if (containerNft != null && carouselNft1 != null && carouselNft2 != null) {
+      let innerHeight2 = window.innerHeight * offsetRatio;
+      let scroll2 = window.scrollY;
+      let centerContainerY = containerNft.offsetTop - scroll2 + (containerNft.offsetHeight / 1);
+      let percentage = centerContainerY / innerHeight2;
+      percentage = percentage < 0 ? 0 : percentage > 100 ? 100 : percentage;
+
+      let innerWidth = window.innerWidth;
+      let offsetWidthCarousel1 = (innerWidth / 2) - (containerNft.clientWidth / 1.5);
+      let offsetWidthCarousel2 = (innerWidth / 2) - (containerNft.clientWidth / 1.5);
+
+      carouselNft1.style.transform = 'translateX(' + (percentage * -offsetWidthCarousel1) + 'px)';
+      carouselNft2.style.transform = 'translateX(' + (percentage * offsetWidthCarousel2) + 'px)';
+    }
+  });
+
+
   function clickMint() {
     if (!userConnected) {
     } else {
@@ -137,7 +137,7 @@ export default function () {
         <p className="af-class-paragraphepresentation">We are a strong team of 5,000 miners living in the Elrond Mine.<br />Our goal is to mine gold and <span className="af-class-text-span-4">reward you</span> !</p>
         <a className="af-class-buttonmint1 af-class-buttonmint w-button elm-button" onClick={() => setWindowStateMint(true)}>MINT&nbsp;LIVE</a>
       </div>
-      <div className="af-class-sectioncart af-class-wf-section">
+      <div id="img-carts" className="af-class-sectioncart af-class-wf-section">
         <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" srcSet="images/Fichier-4_2-p-500.png 500w, images/Fichier-4_2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
         <img id="cart-2" src="images/Fichier-2.png" loading="lazy" srcSet="images/Fichier-2-p-500.png 500w, images/Fichier-2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
         <img id="cart-3" src="images/Fichier-3_1.png" loading="lazy" srcSet="images/Fichier-3_1-p-500.png 500w, images/Fichier-3_1.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
@@ -147,8 +147,8 @@ export default function () {
         <div className="af-class-divseparatorcenter" />
         <div className="af-class-divseparatorright" />
       </div>
-      <div className="af-class-sectionnftcarousel af-class-wf-section">
-        <div className="af-class-divnft1">
+      <div className="af-class-sectionnftcarousel af-class-wf-section" id="carouselNft">
+        <div className="af-class-divnft1" id="carouselNft1">
           <ul role="list" className="af-class-list w-list-unstyled">
             <li className="af-class-list-item-2">
               <div data-poster-url="videos/01-poster-00001.jpg" data-video-urls="videos/01-transcode.mp4,videos/01-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-background-video-2 w-background-video w-background-video-atom"><video id="1580ed56-282d-3159-421b-d6231bd2e80a-video" autoPlay loop style={{ backgroundImage: 'url("videos/01-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
@@ -214,7 +214,7 @@ export default function () {
             </li>
           </ul>
         </div>
-        <div className="af-class-divnft2">
+        <div className="af-class-divnft2" id="carouselNft2">
           <ul role="list" className="af-class-list w-list-unstyled">
             <li className="af-class-list-item-2">
               <div data-poster-url="videos/11-poster-00001.jpg" data-video-urls="videos/11-transcode.mp4,videos/11-transcode.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" className="af-class-background-video-2 w-background-video w-background-video-atom"><video id="4acd5b47-de80-8693-cc27-044db9c4c07b-video" autoPlay loop style={{ backgroundImage: 'url("videos/11-poster-00001.jpg")' }} muted playsInline data-wf-ignore="true" data-object-fit="cover">
