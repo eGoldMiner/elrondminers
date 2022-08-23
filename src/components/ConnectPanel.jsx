@@ -1,4 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import * as logoutServices from "@elrondnetwork/dapp-core/utils/logout"
 import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
 import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
 import QRCode from 'qrcode';
@@ -20,8 +21,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     const { account } = useGetAccountInfo();
 
     const [qrCodeSvg, setQrCodeSvg] = useState('');
-    // const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
-    const isMobileDevice = true;
+    const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
     const onLoginRedirect = false;
 
     const [
@@ -65,12 +65,8 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     }, [isLoggedIn]);
 
     React.useEffect(() => {
-        initConnectMenu();
-        initLoginWithWalletConnect(true);
-    }, []);
-
-    //setisLoggedIn(true);
-
+           initConnectMenu();
+       }, []);
     function clickMaiarApp() {
         generateQRCode();
         buttonMaiarExtConnect.current.style.display = "none";
@@ -100,6 +96,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
 
     function disconnect() {
         initConnectMenu();
+        logoutServices.logout('');
         //setisLoggedIn(false);
     }
 
