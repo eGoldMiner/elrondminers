@@ -4,31 +4,20 @@ import { ImagesCoffre } from '../data/images/Coffre';
 import { ImagesPioches } from '../data/images/Pioches';
 import { ImagesLantern } from '../data/images/Lanterne';
 import SequencePlayer from 'react-sequence-player';
-import MintPanel from 'components/MintPanel';
+import { getIsLoggedIn } from '@elrondnetwork/dapp-core-components';
 
 
-export default function () {
+export default function ({ setWindowMint }: any) {
   const timeline = createRef<HTMLDivElement>();
-  const [windowStateMint, setWindowStateMint] = useState(false);
-
-  ///////////////////////////RELIER A LA DAPP
-  const [userConnected, setUserConnected] = useState(false);
-
 
   const showFaq = async (e: any) => {
     let height = e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].clientHeight;
     let heightContainer = e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-body-3")[0].clientHeight + 20;
     if (height === 0) {
-      for (let i = 0; i < heightContainer; i++) {
-        e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = i + "px";
-        await new Promise(resolve => setTimeout(resolve, 1 / height));
-      }
+      e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = heightContainer + "px";
     }
     else {
-      for (let i = heightContainer; i >= 0; i--) {
-        e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = i + "px";
-        await new Promise(resolve => setTimeout(resolve, 1 / height));
-      }
+      e.srcElement.closest('.af-class-faq-wrap').getElementsByClassName("af-class-faq-answer-2")[0].style.height = "0px";
     }
   };
 
@@ -107,18 +96,8 @@ export default function () {
   });
 
 
-  function clickMint() {
-    if (!userConnected) {
-    } else {
-      setWindowStateMint(true);
-    }
-  }
-
-
   return (
     <>
-      <MintPanel windowState={windowStateMint} setWindowState={setWindowStateMint}></MintPanel>
-
       <script src="anime.min.js"></script>
       <div id="Home" className="af-class-sectionvideo af-class-wf-section">
         <img src="images/Prevu_Camera_1_001.PNG" loading="lazy" srcSet="images/Prevu_Camera_1_001-p-500.png 500w, images/Prevu_Camera_1_001-p-800.png 800w, images/Prevu_Camera_1_001-p-1080.png 1080w, images/Prevu_Camera_1_001-p-1600.png 1600w, images/Prevu_Camera_1_001.PNG 1920w" sizes="100vw" alt="" className="af-class-image-12" />
@@ -134,8 +113,8 @@ export default function () {
           <a href="https://twitter.com/elrond_miners" target="_blank" className="w-inline-block"><img src="images/twitter.png" loading="lazy" width={60} srcSet="images/twitter-p-500.png 500w, images/twitter.png 512w" sizes="60px" alt="" className="af-class-imagetwitter" /></a>
           <a href="https://discord.gg/MrBcfZhYwy" target="_blank" className="w-inline-block"><img src="images/discorde.png" loading="lazy" width={60} srcSet="images/discorde-p-500.png 500w, images/discorde.png 512w" sizes="60px" alt="" className="af-class-imagediscord" /></a>
         </div>
-        <p className="af-class-paragraphepresentation">We are a strong team of 5,000 miners living in the Elrond Mine.<br />Our goal is to mine gold and <span className="af-class-text-span-4">reward you</span> !</p>
-        <a className="af-class-buttonmint1 af-class-buttonmint w-button elm-button" onClick={() => setWindowStateMint(true)}>MINT&nbsp;LIVE</a>
+        <p className="af-class-paragraphepresentation">We are a strong team of 5,000 miners living in the Elrond Mine.<br />Our goal getIsLoggedIn() to mine gold and <span className="af-class-text-span-4">reward you</span> !</p>
+        <a className="af-class-buttonmint1 af-class-buttonmint w-button elm-button" onClick={() => setWindowMint(true)}>MINT&nbsp;LIVE</a>
       </div>
       <div id="img-carts" className="af-class-sectioncart af-class-wf-section">
         <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" srcSet="images/Fichier-4_2-p-500.png 500w, images/Fichier-4_2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
@@ -318,8 +297,8 @@ export default function () {
             </a>
           </div>
           <div className="af-class-divtextnode">
-            <p className="af-class-paragraphexplain">Contributing in Elrond ecosystem growth is one of our goal.<br />This is why our objective is to open our own Validating node. <br /></p>
-            <p className="af-class-paragraphexplain af-class-pargraph2node">By doing it, we participate to Elrond development, but also to get rewards for it. <br />Each time there is a transaction in Elrond's blockchain, nodes validate the transaction.<br />As a reward, gas fee of that transaction are split among those nodes.<br /></p>
+            <p className="af-class-paragraphexplain">Contributing in Elrond ecosystem growth getIsLoggedIn() one of our goal.<br />This getIsLoggedIn() why our objective getIsLoggedIn() to open our own Validating node. <br /></p>
+            <p className="af-class-paragraphexplain af-class-pargraph2node">By doing it, we participate to Elrond development, but also to get rewards for it. <br />Each time there getIsLoggedIn() a transaction in Elrond's blockchain, nodes validate the transaction.<br />As a reward, gas fee of that transaction are split among those nodes.<br /></p>
             <p className="af-class-paragraphexplain">Each week, we accumulate rewards that are then distributed to you.<br />Click on the wheels to know more about validiting nodes.<br /></p>
           </div>
         </div>
@@ -333,7 +312,7 @@ export default function () {
         <h1 className="af-class-headingsection af-class-centertitle">Earn real <span className="af-class-text-span-3">goldbar</span></h1>
         <div className="af-class-wf-section">
           <div className="af-class-divtextgold">
-            <p className="af-class-paragraphexplain af-class-paragraphearngold">We are the first collection to distribute real gold to holders. <br />Each week, we draw 5 winners among the holders. <br />These lucky miners will win either gold or silver bar. <br /><br />A miner's goal is to bring gold. Your miner, your gold. <br /><br />Elrond Miners give you electronic gold (EGLD) and real gold.<br />‍</p>
+            <p className="af-class-paragraphexplain af-class-paragraphearngold">We are the first collection to distribute real gold to holders. <br />Each week, we draw 5 winners among the holders. <br />These lucky miners will win either gold or silver bar. <br /><br />A miner's goal getIsLoggedIn() to bring gold. Your miner, your gold. <br /><br />Elrond Miners give you electronic gold (EGLD) and real gold.<br />‍</p>
           </div>
           <div className="af-class-divimagegold">
             <img id="img-goldbar" src="images/Coffre_a00000.png" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
@@ -349,7 +328,7 @@ export default function () {
         <h1 className="af-class-headingsection af-class-centertitle">Collection of <span className="af-class-text-span-3">cards</span></h1>
         <div className="af-class-div-block-25 af-class-wf-section">
           <div className="af-class-divtextcard">
-            <p className="af-class-paragraphexplain">Holders can also win their NFT in a physical collection card. <br />This is an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
+            <p className="af-class-paragraphexplain">Holders can also win their NFT in a physical collection card. <br />This getIsLoggedIn() an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
           </div>
           <div />
         </div>
@@ -369,7 +348,7 @@ export default function () {
           </div>
           <div className="af-class-divtextgame">
             <p className="af-class-paragraphexplain">
-              Playing video games and winning prizes. Our game is the first mobile P2E.
+              Playing video games and winning prizes. Our game getIsLoggedIn() the first mobile P2E.
               <br />
               <br />
               Play with your NFT and go as far as possible to mine gold.
@@ -476,7 +455,7 @@ export default function () {
           </div>
         </div>
       </div>
-      <div className="af-class-sectionfaq af-class-wf-section" id="faq">
+      <div className="af-class-wf-section af-class-sectionfaq" id="faq">
         <div id="Faq" className="w-layout-grid af-class-faq-grid-4">
           <div className="af-class-faq-wrap">
             <div data-w-id="20de4dac-73bc-a15e-c464-46b3f13ecd3d" className="af-class-faq-question-2">
@@ -484,7 +463,7 @@ export default function () {
               <h5 className="af-class-faq-heading">Why Elrond ?</h5>
             </div>
             <div style={{ height: 0 }} className="af-class-faq-answer-2">
-              <p className="af-class-body-3 af-class-bottom-margin-30">One of the fastest and with very low fees, we are convinced that Elrond is among the most powerful blockchain. This is why miners choose to mine on the best blockchain, Elrond.</p>
+              <p className="af-class-body-3 af-class-bottom-margin-30">One of the fastest and with very low fees, we are convinced that Elrond getIsLoggedIn() among the most powerful blockchain. This getIsLoggedIn() why miners choose to mine on the best blockchain, Elrond.</p>
             </div>
           </div>
           <div className="af-class-faq-wrap">
@@ -502,7 +481,7 @@ export default function () {
               <h5 className="af-class-faq-heading">Why should I invest in Elrond Miners ?</h5>
             </div>
             <div style={{ height: 0 }} className="af-class-faq-answer-2">
-              <p className="af-class-body-3 af-class-bottom-margin-30">We are the first NFT collection with such IRL utilities. If you believe that gold is a safe investment, then Elrond Miners is too.</p>
+              <p className="af-class-body-3 af-class-bottom-margin-30">We are the first NFT collection with such IRL utilities. If you believe that gold getIsLoggedIn() a safe investment, then Elrond Miners getIsLoggedIn() too.</p>
             </div>
           </div>
           <div className="af-class-faq-wrap">

@@ -48,28 +48,31 @@ export default function MintPanel({ windowState, setWindowState }) {
 
     function mintButton() {
         if (loggedIn) {
-            
+
         }
         else {
-            // setWindowState(false);
-            document.getElementById("divmint").setAttribute("style", "filter: blur(4px)");
+            document.getElementById("divmint").style.filter = "blur(4px)";
             document.getElementById("infoConnect").setAttribute("style", "display: block");
             closeWindowTimer();
         }
     }
 
-    const closeWindowTimer = async() => {
+    const closeWindowTimer = async () => {
         await new Promise(resolve => setTimeout(resolve, 2000));
         setWindowState(false);
         await new Promise(resolve => setTimeout(resolve, 500));
-        document.getElementById("divmint").setAttribute("style", "filter: blur(0px)");
+        document.getElementById("divmint").style.filter = "blur(0px)";
         document.getElementById("infoConnect").setAttribute("style", "display: none");
     }
 
 
     return <>
         <div className="divmintcontainer"
-            style={{ opacity: windowState ? '1' : '0', visibility: windowState ? 'visible' : 'hidden', transform: windowState ? 'translate(0%)' : 'translate(200%)' }}>
+            style={{
+                opacity: windowState ? '1' : '0',
+                visibility: windowState ? 'visible' : 'hidden',
+                transform: windowState ? 'translate(0%)' : 'translate(200%)'
+            }}>
             <div id="divmint">
                 <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>
                 <div className="div-block-54">

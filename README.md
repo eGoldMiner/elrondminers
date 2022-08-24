@@ -1,3 +1,44 @@
+AV = A Valider
+OK = OK
+
+TODO :
+
+Prioritaire :
+- TOUTE LA PARTIE RESPONSIVE
+- fonction mint
+AV - gestion déconnexion (logout) - bouton disconnect + déconnxion applicaiton
+AV - quand on clique sur mint, si non connectée, ouvrir menu conenct wallet
+- page soon avec le jeu
+- intégration du jeu unity
+OK - animation des chariots et des nfts lors du scroll
+AV - ajouter les éléments décos, pioches, lanterne, coffre (manque une illustration pour la card)
+- améliorer design page explorer
+- loading screen Home avec animation svg du logo
+- loading videos explorer pendant que chaque img nft se charge
+- couleurs des options dans sélection des assets (au lieu de gris)
+- panel filtres en sticky et non en fixed (ça mange sur le footer)
+AV - page not found (modifier en une redirection lors d'une "fausse" addresse)
+- Erreur dans texte collection of cards, dans video game aussi
+- corriger la partie filtre qui est en fixed (voir pour la mettre en sticky)
+- page registration discord
+
+Bonus :
+- animation du menu avec soulignement des menus pret à cliquer
+- meubler encore plus avec du texte
+- video presentation projets (style motion)
+- animation d'un reveal nft
+- banderole avec pickaxe dans la gallerie ?
+- Effet quand survole texte du miner dans gallerie : https://codepen.io/markmead/pen/wvwjePG
+- Lien vers Whitepaper Elrond et autres (voir sur https://gnogen.io/elrond)
+- revoir l'icone web avec couleurs voyantes
+
+Hors code :
+- enregistrer projet sur egld community
+- s'enregistrer sur le plus de plateformes possibles (crypto.com, ...) pour mettre une section "ils parlent de nous"
+- faire des partenariats et créer une section
+
+
+
 # @elrondnetwork/dapp-template
 The __Elrond dApp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.

@@ -1,47 +1,28 @@
 import React from 'react';
+import { useState } from 'react';
 
 import * as DappUI from "@elrondnetwork/dapp-core/UI";
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { ThemeProvider } from '@mui/material';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import Background from 'views/Background';
+import { Navigate } from 'react-router-dom';
+import Background from 'views/Background.tsx';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import theme from './styles/theme';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
+import MintPanel from 'components/MintPanel';
+import ConnectPanel from 'components/ConnectPanel';
 
 const environment = 'mainnet';
-const { TransactionsToastList, SignTransactionsModals, NotificationModal } =
-  DappUI;
+const { TransactionsToastList, SignTransactionsModals, NotificationModal } = DappUI;
+
+
 const App = () => {
-  // const scripts = [
-  //     { loading: fetch("https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=62c4a55388e2ee5d2d7cdcbd").then(body => body.text()), isAsync: false },
-  //     { loading: fetch("js/scripts.js").then(body => body.text()), isAsync: false },
-
-  // ]
-
-  // useEffect(() => {
-  //     const htmlEl = document.querySelector('html')
-  //     htmlEl.dataset['wfPage'] = '62c4a55388e2eeb60b7cdcc0'
-  //     htmlEl.dataset['wfSite'] = '62c4a55388e2ee5d2d7cdcbd'
-
-  //     scripts.concat(null).reduce((active, next) => Promise.resolve(active).then((active) => {
-  //         const loading = active.loading.then((script) => {
-  //             /*jslint evil: true */
-  //             new Function(`
-  //               with (this) {
-  //                 eval(arguments[0])
-  //               }
-  //             `).call(window, script)
-
-  //             return next
-  //         })
-
-  //         return active.isAsync ? next : loading
-  //     }))
-  // }, [])
+  const [windowStateConnect, setWindowStateConnect] = useState(false);
+  const [windowStateMint, setWindowStateMint] = useState(false);
 
   return (
     <>
@@ -55,11 +36,21 @@ const App = () => {
           <SignTransactionsModals className='custom-class-for-modals' />
           <ThemeProvider theme={theme}>
             <Background />
-            <Menu />
+            <Menu setWindowConnect={setWindowStateConnect} />
+            <ConnectPanel windowState={windowStateConnect}
+              setWindowState={setWindowStateConnect}
+            />
+            <MintPanel windowState={windowStateMint}
+              setWindowState={setWindowStateMint}
+            />
             <Routes>
-              <Route exact path="/" element={<IndexView />} />
+              <Route exact path="/" element={<IndexView setWindowMint={setWindowStateMint} />} />
               <Route exact path="/explore" element={<MineExplorerView />} />
-              {/* <Route path='*' element={<PageNotFound />} /> */}
+              <Route path="*"
+                element={
+                  <Navigate to="/" />
+                }>
+              </Route>
             </Routes>
             <Footer />
           </ThemeProvider>

@@ -6,19 +6,14 @@ import QRCode from 'qrcode';
 
 const ConnectPanel = ({ windowState, setWindowState }) => {
 
-    const buttonMaiarAppConnect = useRef();
-    const buttonMaiarExtConnect = useRef();
-    const buttonWebWalConnect = useRef();
-    const informationsConnect = useRef();
-    const returnButtonConnect = useRef();
-    const qrCodeImg = useRef();
-    const qrCodeContainer = useRef();
+    const [openMaiarApp, setOpenMaiarApp] = useState(false);
 
     const logoutRoute = '/';
     const callbackRoute = '/';
     const token = '';
 
     const { account } = useGetAccountInfo();
+    const [nbMiners, setNbMiners] = useState("");
 
     const [qrCodeSvg, setQrCodeSvg] = useState('');
     const isMobileDevice = platform?.os?.family === 'iOS' || platform?.os?.family === 'Android';
@@ -46,7 +41,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     });
 
     const generateQRCode = async () => {
-        
+
         if (!walletConnectUri) {
             return;
         }
@@ -61,24 +56,26 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
 
     React.useEffect(() => {
         if (isLoggedIn) {
-            console.log("oui")
+            console.log("connected with : " + account.address);
+            getNbMiners(account.address);
+        } else {
+            setOpenMaiarApp(false);
+            initLoginWithWalletConnect(false);
         }
     }, [isLoggedIn]);
 
     React.useEffect(() => {
-        initConnectMenu();
+        setOpenMaiarApp(false);
         initLoginWithWalletConnect(true);
-       }, []);
+    }, []);
 
-    async function clickMaiarApp() {
+    React.useEffect(() => {
         generateQRCode();
-        buttonMaiarExtConnect.current.style.display = "none";
-        buttonWebWalConnect.current.style.display = "none";
-        informationsConnect.current.style.display = "none";
-        returnButtonConnect.current.style.display = "block";
-        qrCodeContainer.current.style.display = "flex";
-        qrCodeImg.current.style.display = "block";
-    }
+    }, [openMaiarApp]);
+
+    React.useEffect(() => {
+        setOpenMaiarApp(false);
+    }, [windowState])
 
     function clickWebWallet() {
         onInitiateLogin();
@@ -88,67 +85,92 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
         onInitiateLoginExtension();
     }
 
-    function initConnectMenu() {
-        buttonMaiarExtConnect.current.style.display = "flex";
-        buttonWebWalConnect.current.style.display = "flex";
-        informationsConnect.current.style.display = "block";
-        returnButtonConnect.current.style.display = "none";
-        qrCodeContainer.current.style.display = "none";
-        qrCodeImg.current.style.display = "none";
-        initLoginWithWalletConnect(false);
+    async function getNbMiners(address) {
+        let apiUrl = "https://api.elrond.com/accounts/" + address + "/nfts/count?collections=EMINERS-5b421f";
+        const data = await fetch(apiUrl);
+
+        if (data.status == "404") {
+            console.log("Cannot succes to refresh number miners");
+            setNbMiners("");
+            return;
+        }
+        const json = await data.json();
+        setNbMiners(json);
     }
 
-    function disconnect() {
-        initConnectMenu();
-        logoutServices.logout('');
-        //setisLoggedIn(false);
-    }
 
     return (
         <div className="divconnectpanel"
             id="connectPanel"
-            style={{ opacity: windowState ? '1' : '0', visibility: windowState ? 'visible' : 'hidden', height: isLoggedIn ? '360px' : '430px' }}>
-            <div className="divconnectcontainer" id="connectContainer" style={{ display: isLoggedIn ? 'none' : 'initial' }}>
+            style={{
+                opacity: windowState ? '1' : '0',
+                visibility: windowState ? 'visible' : 'hidden',
+                transform: windowState ? 'translate(0%)' : 'translate(200%)',
+                height: isLoggedIn ? '360px' : '430px'
+            }}>
+            <div className="divconnectcontainer" id="connectContainer"
+                style={{
+                    display: isLoggedIn ? 'none' : 'initial'
+                }}>
                 <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>
-                <div className="divreturnbtnconnect" ref={returnButtonConnect} onClick={initConnectMenu}></div>
+                <div className="divreturnbtnconnect"
+                    onClick={() => setOpenMaiarApp(false)}
+                    style={{
+                        display: isLoggedIn ? 'none' : openMaiarApp ? 'block' : 'none'
+                    }} />
                 <div>
                     <div className="text-block-7">Connect wallet</div>
                     <div className="text-block-6">Please select your login method :</div>
                 </div>
                 <div className="divbuttonsconnect">
-                    <div className="divmaiarappconnect" ref={buttonMaiarAppConnect} onClick={clickMaiarApp}>
+                    <div className="divmaiarappconnect" onClick={() => setOpenMaiarApp(true)}>
                         <a className="button-connect-elrond w-button">Maiar App</a>
                         <img src="images/smartphone-1.png" loading="lazy" srcSet="images/smartphone-1-p-500.png 500w, images/smartphone-1.png 512w" sizes="35px" alt="" className="imagemaiarapp" />
                     </div>
-                    <div className="divmaiarextensionconnect" ref={buttonMaiarExtConnect} onClick={clickExtension}>
+                    <div className="divmaiarextensionconnect"
+                        onClick={clickExtension}
+                        style={{
+                            display: openMaiarApp ? 'none' : 'flex'
+                        }}>
                         <a className="button-connect-elrond w-button">Maiar Extension</a>
                         <img src="images/puzzle-1.png" loading="lazy" srcSet="images/puzzle-1-p-500.png 500w, images/puzzle-1.png 512w" sizes="28px" alt="" className="imagemaiarextension" />
                     </div>
-                    <div className="divwebwalletconnect" ref={buttonWebWalConnect} onClick={clickWebWallet}>
+                    <div className="divwebwalletconnect"
+                        onClick={clickWebWallet}
+                        style={{
+                            display: openMaiarApp ? 'none' : 'flex'
+                        }}>
                         <a className="button-connect-elrond w-button">Web Wallet</a>
                         <img src="images/internet-1.png" loading="lazy" srcSet="images/internet-1-p-500.png 500w, images/internet-1.png 512w" sizes="28px" alt="" className="imagemaiarextension" />
                     </div>
                 </div>
-                <div className="qrcode-container" ref={qrCodeContainer}>
-                    <div className="qrcode" ref={qrCodeImg} dangerouslySetInnerHTML={{ __html: qrCodeSvg }} />
+                <div className="qrcode-container"
+                    style={{
+                        display: openMaiarApp ? 'flex' : 'none'
+                    }}>
+                    <div className="qrcode"
+                        dangerouslySetInnerHTML={{ __html: qrCodeSvg }}
+                        style={{
+                            display: openMaiarApp ? 'block' : 'none'
+                        }} />
                     {isMobileDevice ?
                         (
                             <>
                                 <a className="divmaiarappconnect divmaiarmobileconnect" href={uriDeepLink} rel='noopener noreferrer nofollow' target='_blank'>
                                     <a className="button-connect-elrond w-button">Open Maiar Login</a>
                                 </a>
-
-                                {/* <p>Open Maiar Login</p>
-                                <a
-                                    href={uriDeepLink}
-                                    rel='noopener noreferrer nofollow'
-                                    target='_blank'
-                                >
-                                </a> */}
                             </>
-                        ) : (<></>)}
+                        ) : (
+                            <>
+                                <div className="infoscanqrcode">
+                                    Scan QR Code with Maiar application
+                                </div>
+                            </>
+                        )}
                 </div>
-                <div ref={informationsConnect}>
+                <div style={{
+                    display: openMaiarApp ? 'none' : 'block'
+                }}>
                     <div className="divhowtoconnect">
                         <a href="https://help.maiar.com/en/articles/5161195-what-is-the-maiar-login" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">
                             <div className="text-block-9">How to connect ?</div>
@@ -188,13 +210,13 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
                         <img src="images/pickaxeIcon.png" loading="lazy" sizes="(max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" srcSet="images/pickaxeIcon.png 500w" alt="" className="image-20" />
                         <div className="text-block-15">Number of miners :</div>
                     </div>
-                    <div className="text-block-16">18</div>
+                    <div className="text-block-16">{nbMiners}</div>
                 </div>
                 <div className="divbtnaccouninformation">
                     <a className="button-connect-elrond w-button">Mint Miners</a>
                     <img src="images/cart.png" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>
-                <div className="divbtnaccouninformation" onClick={disconnect}>
+                <div className="divbtnaccouninformation" onClick={() => logoutServices.logout('')}>
                     <a className="button-connect-elrond w-button">Disconnect</a>
                     <img src="images/log-out-svgrepo-com.svg" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>
