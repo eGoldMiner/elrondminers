@@ -199,7 +199,6 @@ export default function MineExplorerView() {
         <div className='col-lg-9 col-md-8 col-sm-7 px-0'>
           <div id="results-container" className='row w-100'>
             <div id="header">
-              {/* className='col-lg-12 ps-sm-3 pe-sm-5' */}
               <div className='row p-3'>
                 <div className="col-auto p-0">
                   <div id="count">{totalItems}</div>
@@ -243,98 +242,6 @@ export default function MineExplorerView() {
           </div>
         </div>
       </div>
-      {/* <div id="miner-modal" ref={modal}>
-        {
-          current ? <>
-
-            <video className='videoOpenMiner' autoPlay loop playsInline muted src={"https://ipfs.io/ipfs/bafybeia7lyiz5fxsr3w4tgr3e5zw32upjgevkf6wvplkyhzfnaetldlxue/" + currentItem.id + ".mp4"}>
-            </video>
-            <div id="miner-modal-content">
-              <div>
-                <img src={"/images/Logo_T4.png"} alt="elrond-miners" />
-              </div>
-              <div>
-                <IconButton id='close-button' onClick={() => setCurrent(null)}>
-                  <Close />
-                </IconButton>
-                <Typography variant="h1" component={"p"} align="center">MINER <span>#{currentItem.id}</span></Typography>
-                <div className='row'>
-                  <div className='item'>
-                    <img src="/images/icons/crystal.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.rank}</Typography>
-                      <Typography><span>/7000</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/pickaxe.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[3]}</Typography>
-                      <Typography><span>{Assets['Pickaxe'][currentItem.assets[3]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className="divider">
-                    <div />
-                    <div />
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/helmet.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[0]}</Typography>
-                      <Typography><span>{Assets['Helmet'][currentItem.assets[0]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/eye.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[2]}</Typography>
-                      <Typography><span>{Assets['Eyes'][currentItem.assets[2]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/beards.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[1]}</Typography>
-                      <Typography><span>{Assets['Beard'][currentItem.assets[1]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/tshirt.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[4]}</Typography>
-                      <Typography><span>{Assets['Clothes'][currentItem.assets[4]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/bag.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[6]}</Typography>
-                      <Typography><span>{Assets['Bag'][currentItem.assets[6]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/photos.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[5]}</Typography>
-                      <Typography><span>{Assets['Background'][currentItem.assets[5]]}%</span></Typography>
-                    </div>
-                  </div>
-                  <div className='item'>
-                    <img src="/images/icons/man.png" />
-                    <div>
-                      <Typography variant="h2" component={"p"}>{currentItem.assets[7]}</Typography>
-                      <Typography><span>{Assets['Miner'][currentItem.assets[7]]}%</span></Typography>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-            : <></>
-        }
-
-      </div> */}
-
       <div ref={modal}>
         {
           current ? <>

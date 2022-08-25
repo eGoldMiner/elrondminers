@@ -117,7 +117,7 @@ export default function ({ setWindowMint }: any) {
         <a className="af-class-buttonmint1 af-class-buttonmint w-button elm-button" onClick={() => setWindowMint(true)}>MINT&nbsp;LIVE</a>
       </div>
       <div id="img-carts" className="af-class-sectioncart af-class-wf-section">
-        <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" srcSet="images/Fichier-4_2-p-500.png 500w, images/Fichier-4_2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
+        <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" srcSet="images/Fichier-4_2-p-500.png 500w, images/Fichier-4_2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-div-blocks" />
         <img id="cart-2" src="images/Fichier-2.png" loading="lazy" srcSet="images/Fichier-2-p-500.png 500w, images/Fichier-2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
         <img id="cart-3" src="images/Fichier-3_1.png" loading="lazy" srcSet="images/Fichier-3_1-p-500.png 500w, images/Fichier-3_1.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-carts" />
       </div>
