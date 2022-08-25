@@ -4,13 +4,11 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container!);
-
+const root = ReactDOM.createRoot(container as Element);
 
 root.render(
   <>
     <span>
-      {/* @import url(/css/normalize.css); */}
       <style dangerouslySetInnerHTML={{
         __html: `
           @import url(/css/normalize.css);
@@ -18,7 +16,6 @@ root.render(
           @import url(/css/elrondminers.css);
           @import url(/css/custom_bootstrap.css);
           @import url(/css/elrondminers.webflow.css);
-          @import url(/css/background.css);
         ` }} />
 
 
@@ -28,10 +25,11 @@ root.render(
         </div>
       </span>
     </span>
-    </>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals(console.log);
 reportWebVitals();

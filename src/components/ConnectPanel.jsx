@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
-import * as logoutServices from "@elrondnetwork/dapp-core/utils/logout"
+import React, { useState } from "react";
 import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
 import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
+import * as logoutServices from "@elrondnetwork/dapp-core/utils/logout"
 import QRCode from 'qrcode';
 
 const ConnectPanel = ({ windowState, setWindowState }) => {

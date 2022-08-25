@@ -1,4 +1,5 @@
 AV = A Valider
+AC = A Completer
 OK = OK
 
 TODO :
@@ -6,6 +7,8 @@ TODO :
 Prioritaire :
 - TOUTE LA PARTIE RESPONSIVE
 - fonction mint
+- call API number of miners marche pas correctement
+AC - tri css
 AV - gestion déconnexion (logout) - bouton disconnect + déconnxion applicaiton
 AV - quand on clique sur mint, si non connectée, ouvrir menu conenct wallet
 - page soon avec le jeu
@@ -16,13 +19,13 @@ AV - ajouter les éléments décos, pioches, lanterne, coffre (manque une illust
 - loading screen Home avec animation svg du logo
 - loading videos explorer pendant que chaque img nft se charge
 - couleurs des options dans sélection des assets (au lieu de gris)
-- panel filtres en sticky et non en fixed (ça mange sur le footer)
+- corriger la partie filtre qui est en fixed (voir pour la mettre en sticky, ça mange sur le footer)
 AV - page not found (modifier en une redirection lors d'une "fausse" addresse)
-- Erreur dans texte collection of cards, dans video game aussi
-- corriger la partie filtre qui est en fixed (voir pour la mettre en sticky)
+- Erreur dans texte collection of cards, dans video game aussi et autres
 - page registration discord
 
 Bonus :
+- mettre plusieurs langues (fr, en, ...) avec la la méthode : https://codesandbox.io/s/react-multi-language-website-v9uv4
 - animation du menu avec soulignement des menus pret à cliquer
 - meubler encore plus avec du texte
 - video presentation projets (style motion)

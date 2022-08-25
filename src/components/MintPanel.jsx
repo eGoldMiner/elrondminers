@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
+import { useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
 
 export default function MintPanel({ windowState, setWindowState }) {
     const priceOneNft = 1;
