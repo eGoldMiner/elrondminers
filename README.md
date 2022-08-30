@@ -6,6 +6,7 @@ TODO :
 
 Prioritaire :
 - TOUTE LA PARTIE RESPONSIVE
+- ajouter catégorie My NFTs(x), avec un bandeau mint
 - fonction mint
 - call API number of miners marche pas correctement
 AC - tri css

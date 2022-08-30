@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState, createRef } from 'react';
 import { ImagesCoffre } from '../data/images/Coffre';
 import { ImagesPioches } from '../data/images/Pioches';
+import { ImagesCard } from '../data/images/Card';
 import { ImagesLantern } from '../data/images/Lanterne';
 import SequencePlayer from 'react-sequence-player';
 import { getIsLoggedIn } from '@elrondnetwork/dapp-core-components';
@@ -36,6 +37,20 @@ export default function ({ setWindowMint }: any) {
       await new Promise(resolve => setTimeout(resolve, 30));
     }
   }
+  const animImgCard = async () => {
+    let count = 0;
+    while (true) {
+      if (count >= ImagesCard.length) {
+        count = 0;
+      }
+      let img_Card = document.getElementById("img-card") as HTMLImageElement;
+      if (img_Card != null) {
+        img_Card.src = ImagesCard[count];
+      }
+      count++;
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
+  }
 
 
   useEffect(() => {
@@ -52,6 +67,7 @@ export default function ({ setWindowMint }: any) {
   useEffect(() => {
     // animImgLantern();
     animImgPickaxe();
+    animImgCard();
   }, []);
 
 
@@ -62,6 +78,32 @@ export default function ({ setWindowMint }: any) {
     const cart1 = document.getElementById("cart-1");
     const cart3 = document.getElementById("cart-3");
     if (containerCart != null && cart1 != null && cart3 != null) {
+      // //h0
+      // let h0 = containerCart.offsetTop;
+      // //h1
+      // let h1 = containerCart.clientHeight;
+      // //hS
+      // let hS = window.scrollY;
+      // //hH
+      // let hH = window.innerHeight;
+      // //hS1
+      // let hS1 = h0 - hH;
+      // //hS2
+      // let hS2 = h0 + h1;
+      // //percentage
+      // let percentage = ((hS - hS1) / (hS2 - hS1));
+      // percentage = percentage < 0 ? 0 : percentage > 1 ? 1 : percentage;
+
+      // containerCart.style.background = 'green';
+      // console.log(containerCart.clientWidth);
+      // let translatemax = ((containerCart.clientWidth) / 3);
+      // console.log("translate max : " + translatemax);
+      // let translatemin = 0;
+      // console.log("translate min : " + translatemin);
+      // let curse = translatemax - translatemin;
+
+      // cart1.style.transform = 'translateX(' + ((percentage * curse) - translatemax) + 'px)';
+      // cart3.style.transform = 'translateX(' + (-((percentage * curse) - translatemax)) + 'px)';
       let innerHeight2 = window.innerHeight * offsetRatio;
       let scroll2 = window.scrollY + ((window.innerHeight * offsetRatio) / 2);
       let centerContainerY = containerCart.offsetTop - scroll2 + (containerCart.offsetHeight / 2);
@@ -80,28 +122,38 @@ export default function ({ setWindowMint }: any) {
     const carouselNft1 = document.getElementById("carouselNft1");
     const carouselNft2 = document.getElementById("carouselNft2");
     if (containerNft != null && carouselNft1 != null && carouselNft2 != null) {
-      let innerHeight2 = window.innerHeight * offsetRatio;
-      let scroll2 = window.scrollY;
-      let centerContainerY = containerNft.offsetTop - scroll2 + (containerNft.offsetHeight / 1);
-      let percentage = centerContainerY / innerHeight2;
-      percentage = percentage < 0 ? 0 : percentage > 100 ? 100 : percentage;
+      //h0
+      let h0 = containerNft.offsetTop;
+      //h1
+      let h1 = containerNft.clientHeight;
+      //hS
+      let hS = window.scrollY;
+      //hH
+      let hH = window.innerHeight;
+      //hS1
+      let hS1 = h0 - hH;
+      //hS2
+      let hS2 = h0 + h1;
+      //percentage
+      let percentage = ((hS - hS1) / (hS2 - hS1));
+      percentage = percentage < 0 ? 0 : percentage > 1 ? 1 : percentage;
 
       let innerWidth = window.innerWidth;
-      let offsetWidthCarousel1 = (innerWidth / 2) - (containerNft.clientWidth / 1.5);
-      let offsetWidthCarousel2 = (innerWidth / 2) - (containerNft.clientWidth / 1.5);
+      let translatemax = ((carouselNft1.clientWidth - innerWidth) / 2);
+      let translatemin = -((carouselNft1.clientWidth - innerWidth) / 2);
+      let curse = translatemax - translatemin;
 
-      carouselNft1.style.transform = 'translateX(' + (percentage * -offsetWidthCarousel1) + 'px)';
-      carouselNft2.style.transform = 'translateX(' + (percentage * offsetWidthCarousel2) + 'px)';
+      carouselNft1.style.transform = 'translateX(' + ((percentage * curse) - translatemax) + 'px)';
+      carouselNft2.style.transform = 'translateX(' + (-((percentage * curse) - translatemax)) + 'px)';
     }
   });
 
 
   return (
     <>
-      <script src="anime.min.js"></script>
       <div id="Home" className="af-class-sectionvideo af-class-wf-section">
         <img src="images/Prevu_Camera_1_001.PNG" loading="lazy" srcSet="images/Prevu_Camera_1_001-p-500.png 500w, images/Prevu_Camera_1_001-p-800.png 800w, images/Prevu_Camera_1_001-p-1080.png 1080w, images/Prevu_Camera_1_001-p-1600.png 1600w, images/Prevu_Camera_1_001.PNG 1920w" sizes="100vw" alt="" className="af-class-image-12" />
-        <div className="af-class-videopresentation w-background-video">
+        <div className="af-class-videopresentation">
           <video autoPlay loop muted playsInline>
             <source src="videos/3Mineurs.mp4" type="video/mp4" />
           </video>
@@ -110,11 +162,15 @@ export default function ({ setWindowMint }: any) {
       <div className="af-class-divpresentation">
         <h1 className="af-class-headingpresentation">The NFT<br />who offers you <span className="af-class-text-span">real goldbar</span> !</h1>
         <div className="af-class-div-block-34">
-          <a href="https://twitter.com/elrond_miners" target="_blank" className="w-inline-block"><img src="images/twitter.png" loading="lazy" width={60} srcSet="images/twitter-p-500.png 500w, images/twitter.png 512w" sizes="60px" alt="" className="af-class-imagetwitter" /></a>
-          <a href="https://discord.gg/MrBcfZhYwy" target="_blank" className="w-inline-block"><img src="images/discorde.png" loading="lazy" width={60} srcSet="images/discorde-p-500.png 500w, images/discorde.png 512w" sizes="60px" alt="" className="af-class-imagediscord" /></a>
+          <a href="https://twitter.com/elrond_miners" target="_blank" className="w-inline-block">
+            <img src="images/twitter.png" loading="lazy" alt="" className="img-social" />
+            </a>
+          <a href="https://discord.gg/MrBcfZhYwy" target="_blank" className="w-inline-block">
+            <img src="images/discorde.png" loading="lazy" alt="" className="img-social" />
+            </a>
         </div>
-        <p className="af-class-paragraphepresentation">We are a strong team of 5,000 miners living in the Elrond Mine.<br />Our goal getIsLoggedIn() to mine gold and <span className="af-class-text-span-4">reward you</span> !</p>
-        <a className="af-class-buttonmint1 af-class-buttonmint w-button elm-button" onClick={() => setWindowMint(true)}>MINT&nbsp;LIVE</a>
+        <p className="af-class-paragraphepresentation">We are a strong team of 5,000 miners living in the Elrond Mine.<br />Our goal is to mine gold and <span className="af-class-text-span-4">reward you</span> !</p>
+        <a className="af-class-buttonmint" onClick={() => setWindowMint(true)}>MINT&nbsp;LIVE</a>
       </div>
       <div id="img-carts" className="af-class-sectioncart af-class-wf-section">
         <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" srcSet="images/Fichier-4_2-p-500.png 500w, images/Fichier-4_2.png 1382w" sizes="(max-width: 991px) 200px, 320px" alt="" className="af-class-div-blocks" />
@@ -257,7 +313,7 @@ export default function ({ setWindowMint }: any) {
             </li>
           </ul>
         </div>
-        <a href="/explore" target="_blank" className="af-class-buttonexplore1 af-class-buttonexplore w-button">Explore NFT&nbsp;collection</a>
+        <a href="/explore" target="_blank" className="af-class-buttonexplore">Explore NFT&nbsp;collection</a>
       </div>
       <div className="af-class-separator">
         <div className="af-class-divseparatorleft" />
@@ -327,6 +383,9 @@ export default function ({ setWindowMint }: any) {
       <div className="af-class-sectioncard">
         <h1 className="af-class-headingsection af-class-centertitle">Collection of <span className="af-class-text-span-3">cards</span></h1>
         <div className="af-class-div-block-25 af-class-wf-section">
+          <div className="af-class-divimagecard">
+            <img id="img-card" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
+          </div>
           <div className="af-class-divtextcard">
             <p className="af-class-paragraphexplain">Holders can also win their NFT in a physical collection card. <br />This getIsLoggedIn() an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
           </div>
@@ -341,11 +400,6 @@ export default function ({ setWindowMint }: any) {
       <div>
         <h1 className="af-class-headingsection af-class-centertitle">Elrond Mine <span className="af-class-text-span-3">video game</span></h1>
         <div className="af-class-wf-section">
-          <div className="af-class-divimagegame">
-            <div className="af-class-divimagehelmet">
-              <img id="img-lantern" src="images/Lantertne_00000.png" loading="lazy" sizes="180px" alt="" className="af-class-image-6" />
-            </div>
-          </div>
           <div className="af-class-divtextgame">
             <p className="af-class-paragraphexplain">
               Playing video games and winning prizes. Our game getIsLoggedIn() the first mobile P2E.
@@ -361,6 +415,9 @@ export default function ({ setWindowMint }: any) {
               <br />
               <br />
               Join our Alpha and win prizes already !</p>
+          </div>
+          <div className="af-class-divimagegame">
+            <img id="img-lantern" src="images/Lantertne_00000.png" loading="lazy" sizes="180px" alt="" className="af-class-image-6" />
           </div>
         </div>
       </div>

@@ -32,7 +32,7 @@ const App = () => {
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <Background />
-          <Menu setWindowConnect={setWindowStateConnect} />
+          <Menu setWindowConnect={setWindowStateConnect}/>
           <ConnectPanel windowState={windowStateConnect} setWindowState={setWindowStateConnect} />
           <MintPanel windowState={windowStateMint} setWindowState={setWindowStateMint} />
           <Routes>
