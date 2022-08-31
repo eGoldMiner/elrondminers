@@ -868,9 +868,9 @@
 .divmintcontainer {
   position: fixed;
   display: block;
-  left: auto;
+  right: auto;
   top: auto;
-  right: 50px;
+  left: 50px;
   bottom: 50px;
   z-index: 99999;
   width: 300px;
@@ -879,7 +879,7 @@
   background-color: #eaba20;
   border: solid #415e74 2px;
   box-shadow: 0 0 7px 7px #415e74;
-  transform: translate(200%);
+  transform: translate(-200%);
   opacity: 0;
   transition: transform 0.5s ease-out, opacity 0.5s ease-out, visibility 0.5s;
 }
@@ -1776,6 +1776,17 @@
   font-size: 25px;
 } */
 
+.af-view .video-background {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  width: 100%;
+  /* width: 100%;
+  height: 900px;
+  top: -120px; */
+}
+
 .af-view .af-class-videopresentation {
   position: absolute;
   top: 0px;
@@ -1808,14 +1819,17 @@
 }
 
 .af-view .af-class-videopresentation video {
-  position: relative;
+  position: absolute;
+  top: 0px;
   width: 100%;
+  height: 900px;
   margin: auto;
   bottom: 120px;
   margin-bottom: 0px;
 }
 
 .af-view .af-class-divpresentation {
+  /* background: green; */
   position: relative;
   left: 0%;
   top: 0%;
@@ -1826,13 +1840,15 @@
   display: -ms-flexbox;
   display: flex;
   width: 80%;
-  height: auto;
-  margin: 200px auto auto;
+  height: 56vw;
+  margin: auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  padding-top: 70px;
+  justify-content: center;
   grid-column-gap: 50px;
   grid-row-gap: 50px;
 }
@@ -1885,7 +1901,7 @@
 }
 
 .af-view .af-class-text-span-2 {
-  font-family: "Noto Emoji", sans-serif;
+  font-family: "Noto Emoji";
   font-size: 15px;
   font-weight: 700;
 }
@@ -1965,6 +1981,7 @@
   align-items: center;
   row-gap: 0px;
   column-gap: 0px;
+  overflow:hidden;
 }
 
 .af-view .af-class-divabout {
@@ -2103,7 +2120,7 @@
   display: flex;
   overflow: hidden;
   height: auto;
-  margin-top: 280px;
+  margin-top: 150px;
   margin-bottom: 0px;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -2339,6 +2356,7 @@
   background-color: #eaba20;
   font-family: Alatsi, sans-serif;
   color: #415e74;
+  cursor: pointer;
 }
 
 .af-view .af-class-buttonmint:hover {
@@ -2412,7 +2430,7 @@
   display: -ms-flexbox;
   display: flex;
   width: 70%;
-  margin-left: 50px;
+  margin-left: 0px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -3081,6 +3099,10 @@ Laptop4: 1920 x 1080
     width: 300px;
   }
 
+  .af-view .af-class-carts {
+    width: 450px;
+  }
+
   .af-view .af-class-buttonexplore {
     font-size: 30px;
   }
@@ -3097,9 +3119,15 @@ Laptop4: 1920 x 1080
     grid-column-gap: 50px;
     grid-row-gap: 50px;
   }
+
   .af-view .af-class-videopresentation video {
     bottom: 0px;
   }
+
+  .af-view .af-class-sectioncart {
+    margin-top: 80px;
+  }
+
   .af-view .af-class-divimagenode {
     top: 40%;
   }
@@ -3110,20 +3138,75 @@ Laptop4: 1920 x 1080
   .af-view .af-class-wf-section {
     padding: 0px 80px;
   }
+
+  .af-view .af-class-videopresentation video {
+    width: 120%;
+    margin-right: 0;
+    right: 0;
+    left: auto;
+  }
+
   .af-view .af-class-divimagenode {
     left: 20%;
     top: 30%;
   }
 }
 
-/* 768 < x <= 1024 */
+/* 900 < x <= 1024 */
 @media screen and (max-width: 1024px) {
-  .af-view .af-class-wf-section {
-    padding: 0px 60px;
+  .af-view .af-class-divpresentation {
+    grid-column-gap: 3vw;
+    grid-row-gap: 3vw;
   }
+}
+
+/* 768 < x <= 900 */
+@media screen and (max-width: 900px) {
+  .af-view .af-class-wf-section {
+    padding: 0px 30px;
+  }
+
+  .af-view .video-background {
+    width: 120%;
+    left: auto;
+    right: 0%;
+  }
+
+  .af-view .af-class-divpresentation {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-content: end;
+    height: 65vw;
+  }
+
   .af-view .af-class-divimagenode {
     left: 20%;
     top: 35%;
+  }
+
+  .af-view .af-class-paragraphexplain {
+    margin: a
+  }
+
+  .af-view .af-class-div-block-25 {
+    grid-column-gap: 0px;
+  }
+
+  .af-view .af-class-divgamesection {
+    justify-content: left;
+  }
+
+  .af-view .af-class-divtextgame {
+    width: 75%;
+    margin-left: 0;
+  }
+
+  .af-view .af-class-divimagegame img {
+    position: absolute;
+    right: -200px;
+    bottom: -100px;
+    top: auto;
+    overflow:hidden;
   }
 }
 

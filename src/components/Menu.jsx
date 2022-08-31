@@ -50,7 +50,7 @@ export default function Menu({ setWindowConnect }) {
                             <span className="af-class-text-span-2">&#9935;</span>
                             <span className="af-class-textspantext"> Explore the Mine</span>
                         </a>
-                        <a className="af-class-button-2 w-button menu-button" onClick={() => setWindowConnect(true)}>
+                        <a id="btn-connect-wallet" className="af-class-button-2 w-button menu-button" onClick={() => setWindowConnect(true)}>
                             <span className="af-class-text-span-2">&#9889;</span>
                             <span className="af-class-textspantext"> Connect Wallet</span>
                         </a>

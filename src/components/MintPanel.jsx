@@ -1,38 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
+import { getIsLoggedIn } from "@elrondnetwork/dapp-core-components";
 
 export default function MintPanel({ windowState, setWindowState }) {
     const priceOneNft = 1;
-    const addressApi = "https://api.elrond.com/collections/EMINERS-5b421f/nfts/count";
-    const [minted, setMinted] = useState("");
+    let addressApi = "https://api.elrond.com/collections/EMINERS-5b421f/nfts/count";
+    const [minted, setMinted] = useState("...");
     const [numberMint, setNumberMint] = useState(1);
     const [priceTotal, setPriceTotal] = useState(0.700);
-
-    const fetchDataMinted = async () => {
-        try {
-            const data = await fetch(addressApi);
-            const json = await data.json();
-            setMinted(json);
-        }
-        catch {
-            console.log("Cannot succes to refresh minted NFTs")
-        }
-    }
-
-    const { loggedIn } = useGetLoginInfo();
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
         setPriceTotal(price);
     }, [numberMint]);
 
-    useEffect(() => {
-        fetchDataMinted();
-        setInterval(() => {
-            fetchDataMinted().catch(console.error);
-        }, 5000);
-    }, []);
+    function callApiMinted() {
+        fetch(addressApi).then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Cannot success to refresh minted  NFTs");
+        })
+        .then((responseJson) => {
+            setMinted(responseJson);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 
+    useEffect(() => {
+        callApiMinted();
+        setInterval(() => {
+            callApiMinted();
+        }, 8000);
+    }, []);
 
     function addMint() {
         if (numberMint < 5) {
@@ -47,8 +49,8 @@ export default function MintPanel({ windowState, setWindowState }) {
     }
 
     function mintButton() {
-        if (loggedIn) {
-
+        if (getIsLoggedIn()) {
+            console.log("Pret a mint");
         }
         else {
             document.getElementById("divmint").style.filter = "blur(4px)";
@@ -71,7 +73,7 @@ export default function MintPanel({ windowState, setWindowState }) {
             style={{
                 opacity: windowState ? '1' : '0',
                 visibility: windowState ? 'visible' : 'hidden',
-                transform: windowState ? 'translate(0%)' : 'translate(200%)'
+                transform: windowState ? 'translate(0%)' : 'translate(-200%)'
             }}>
             <div id="divmint">
                 <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>

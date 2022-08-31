@@ -57,10 +57,18 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
     React.useEffect(() => {
         if (isLoggedIn) {
             console.log("connected with : " + account.address);
-            getNbMiners(account.address);
+            callApiMyMiners(account.address);
+            document.getElementById("btn-connect-wallet").innerHTML =
+                "<span className='af-class-text-span-2'>" + 
+                "&#9889;" + 
+                "</span><span className='af-class-textspantext'> My Wallet</span>";
         } else {
             setOpenMaiarApp(false);
             initLoginWithWalletConnect(false);
+            document.getElementById("btn-connect-wallet").innerHTML =
+                "<span className='af-class-text-span-2' style='font-family: Noto Emoji; font-size: 15px; font-weight: 700;'>" +
+                "&#9889;" +
+                "</span><span className='af-class-textspantext'> Connect Wallet</span>";
         }
     }, [isLoggedIn]);
 
@@ -85,19 +93,21 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
         onInitiateLoginExtension();
     }
 
-    async function getNbMiners(address) {
-        let apiUrl = "https://api.elrond.com/accounts/" + address + "/nfts/count?collections=EMINERS-5b421f";
-        const data = await fetch(apiUrl);
-
-        if (data.status == "404") {
-            console.log("Cannot succes to refresh number miners");
-            setNbMiners("");
-            return;
-        }
-        const json = await data.json();
-        setNbMiners(json);
+    function callApiMyMiners(address) {
+        const apiUrl = "https://api.elrond.com/accounts/" + address + "/nfts/count?collections=EMINERS-5b421f";
+        fetch(apiUrl).then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Cannot success to refresh minted NFTs");
+        })
+        .then((responseJson) => {
+            setNbMiners(responseJson);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
-
 
     return (
         <div className="divconnectpanel"
@@ -186,7 +196,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
                 </div>
             </div>
             <div className="divconnectcontainer divconnectcontainer-copy" style={{ display: isLoggedIn ? 'initial' : 'none' }}>
-                <div className="divclosebtnconnect"></div>
+                <div className="divclosebtnconnect" onClick={() => setWindowState(false)}></div>
                 <div>
                     <div className="text-block-7">Account</div>
                     <div className="text-block-6">Information</div>
