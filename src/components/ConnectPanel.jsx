@@ -59,8 +59,8 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
             console.log("connected with : " + account.address);
             callApiMyMiners(account.address);
             document.getElementById("btn-connect-wallet").innerHTML =
-                "<span className='af-class-text-span-2'>" + 
-                "&#9889;" + 
+                "<span className='af-class-text-span-2'>" +
+                "&#9889;" +
                 "</span><span className='af-class-textspantext'> My Wallet</span>";
         } else {
             setOpenMaiarApp(false);

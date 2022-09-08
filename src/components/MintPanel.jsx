@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
-import { getIsLoggedIn } from "@elrondnetwork/dapp-core-components";
+import { useGetLoginInfo, useGetAccountInfo } from "@elrondnetwork/dapp-core/hooks/account";
+import * as transactionServices from "@elrondnetwork/dapp-core/hooks/"
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils/account';
+import { getTransactions } from '../apiRequests/'
+import { contractAddress } from 'config';
+//import { StateType } from "./StateType";
+
 
 export default function MintPanel({ windowState, setWindowState }) {
     const priceOneNft = 1;
@@ -8,6 +15,8 @@ export default function MintPanel({ windowState, setWindowState }) {
     const [minted, setMinted] = useState("...");
     const [numberMint, setNumberMint] = useState(1);
     const [priceTotal, setPriceTotal] = useState(0.700);
+    const [transactionSessionId, setTransactionSessionId] = React.useState(null);
+    const account = transactionServices.useGetAccountInfo();
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
@@ -21,12 +30,12 @@ export default function MintPanel({ windowState, setWindowState }) {
             }
             throw new Error("Cannot success to refresh minted  NFTs");
         })
-        .then((responseJson) => {
-            setMinted(responseJson);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then((responseJson) => {
+                setMinted(responseJson);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     useEffect(() => {
@@ -48,16 +57,86 @@ export default function MintPanel({ windowState, setWindowState }) {
         }
     }
 
-    function mintButton() {
+    const mintButton = async () => {
         if (getIsLoggedIn()) {
-            console.log("Pret a mint");
+            const mintTransaction = {
+                value: '800000000000000000',
+                data: 'mint@01',
+                receiver: contractAddress
+            };
+            await refreshAccount();
+
+            const { sessionId /*, error*/ } = await sendTransactions({
+                transactions: mintTransaction,
+                transactionsDisplayInfo: {
+                    processingMessage: 'Processing Mint transaction',
+                    errorMessage: 'An error has occured during Mint',
+                    successMessage: 'Mint transaction successful'
+                }
+            });
+            if (sessionId != null) {
+                setTransactionSessionId(sessionId);
+            }
         }
         else {
             document.getElementById("divmint").style.filter = "blur(4px)";
             document.getElementById("infoConnect").setAttribute("style", "display: block");
             closeWindowTimer();
         }
-    }
+    };
+
+    const {
+        network: { apiAddress }
+    } = transactionServices.useGetNetworkConfig();
+    const { success, fail, hasActiveTransactions } =
+        transactionServices.useGetActiveTransactionsStatus();
+
+    const [state, setState] = React.useState({
+        transactions: [],
+        transactionsFetched: undefined
+    });
+
+    const fetchData = () => {
+        if (success || fail || !hasActiveTransactions) {
+            getTransactions({
+                apiAddress,
+                address: account.address,
+                timeout: 3000,
+                contractAddress
+            }).then(({ data, success: transactionsFetched }) => {
+                refreshAccount();
+                setState({
+                    transactions: data,
+                    transactionsFetched
+                });
+            });
+        }
+    };
+
+    React.useEffect(fetchData, [hasActiveTransactions]);
+
+    const { transactions } = state;
+
+    const transactionStatus = transactionServices.useTrackTransactionStatus({
+        transactionId: transactionSessionId,
+        onSuccess: () => {
+            console.log('success');
+            getTransactions({
+                apiAddress,
+                address: account.address,
+                timeout: 3000,
+                contractAddress
+            }).then(({ data, success: transactionsFetched }) => {
+                refreshAccount();
+                window.location.href =
+                    routeNames.reveal + '?txHash=' + data[0]['txHash'];
+            });
+        },
+        onFail: () => console.log('fail'),
+        onCancelled: () => console.log('canceled'),
+        onCompleted: () => console.log('completed')
+    });
+
 
     const closeWindowTimer = async () => {
         await new Promise(resolve => setTimeout(resolve, 2000));
