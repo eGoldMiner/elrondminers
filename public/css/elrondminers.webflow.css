@@ -1554,6 +1554,7 @@
   grid-template-rows: auto auto;
   grid-row-gap: 16px;
   grid-column-gap: 16px;
+  padding: 6px;
 }
 
 .af-view {
@@ -1775,6 +1776,9 @@
   font-family: "Palanquin Dark", sans-serif;
   font-size: 25px;
 } */
+.af-view .af-class-sectionvideo {
+  overflow: visible !important;
+}
 
 .af-view .video-background {
   position: absolute;
@@ -1785,47 +1789,6 @@
   /* width: 100%;
   height: 900px;
   top: -120px; */
-}
-
-.af-view .af-class-videopresentation {
-  position: absolute;
-  top: 0px;
-  /* display: none; */
-  height: 900px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  -ms-grid-row-align: center;
-  align-self: center;
-  overflow: hidden;
-}
-
-.af-view .af-class-videopresentation video {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-  height: 900px;
-  margin: auto;
-  bottom: 120px;
-  margin-bottom: 0px;
 }
 
 .af-view .af-class-divpresentation {
@@ -1981,7 +1944,7 @@
   align-items: center;
   row-gap: 0px;
   column-gap: 0px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .af-view .af-class-divabout {
@@ -2213,6 +2176,17 @@
   border-radius: 35px;
 }
 
+.af-view .af-class-sectionabout {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+}
+
 .af-view .af-class-sectionnode {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -2225,8 +2199,9 @@
 }
 
 .af-view .af-class-divimagenode {
-  display: inline;
-  position: absolute;
+  display: block;
+  position: relative;
+  height: 100%;
   width: auto;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -2241,14 +2216,12 @@
   -webkit-align-items: right;
   -ms-flex-align: right;
   align-items: right;
-  transform: translate(-50%, -50%);
-  left: 25%;
-  bottom: 0;
+  justify-content: flex-start;
+  margin-top: 0;
 }
 
 .af-view .af-class-divtextnode {
   width: 70%;
-  margin-left: 30%;
   align-items: left;
 }
 
@@ -2391,7 +2364,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  /* width: 210px; */
+  width: 35%;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -2403,8 +2376,10 @@
 }
 
 .af-view .af-class-divimagegame img {
-  width: 700px;
-  height: 450px;
+  width: 180%;
+  height: 180%;
+  position: absolute;
+  top: -30%;
 }
 
 .af-view .af-class-divimagecard {
@@ -2608,6 +2583,7 @@
   grid-column-gap: 50px;
   grid-row-gap: 50px;
   overflow: hidden;
+  padding: 6px;
 }
 
 .af-view .af-class-divcard {
@@ -2969,6 +2945,52 @@
 }
 
 @media screen and (max-width: 991px) {
+  .menu-button>span:last-child {
+    max-width: 10rem;
+  }
+
+  .af-view .af-class-navigation-items {
+    position: relative;
+  }
+
+  .af-view .af-class-navigation-items .af-class-navigation-wrap {
+    position: absolute;
+    top: 60px;
+    width: 200px;
+    right: -81px;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.6s;
+    transition: max-height 0.6s;
+  }
+
+  .af-view .af-class-navigation-items .af-class-navigation-wrap.open {
+    max-height: 700px;
+  }
+
+  .af-view .af-class-navigation-items .af-class-navigation-wrap nav {
+    border-radius: 0 0 50px 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-bottom: 10px;
+    width: 100%;
+  }
+
+  .af-view .af-class-navigation-items .af-class-navigation-wrap nav a {
+    padding: 0px;
+    margin: 10px;
+  }
+
+  .af-view .af-class-navigation-items .af-class-navigation-wrap nav a.menu-button {
+    padding: 9px 15px;
+  }
+
+
   .af-view .af-class-navigation-items {
     -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
@@ -2985,6 +3007,7 @@
   .af-view .af-class-navigation {
     height: 80px;
     padding: 0px 30px;
+    border-radius: 60px 60px 0px 60px;
   }
 
   .af-view .af-class-navigation-item {
@@ -3148,7 +3171,29 @@ Laptop4: 1920 x 1080
 
   .af-view .af-class-divimagenode {
     left: 20%;
-    top: 30%;
+    top: 35%;
+  }
+
+  .af-view .af-class-paragraphexplain.af-class-pargraph2node {
+    margin-left: 0px;
+  }
+
+  .af-view .af-class-divcardcontainer {
+    width: 250px;
+    height: 292px;
+  }
+
+  .backgroundvideocard {
+    width: 250px;
+    height: 292px;
+  }
+
+  .af-view .af-class-headingteamname {
+    font-size: 28px;
+  }
+
+  .af-view .af-class-headingteamrole {
+    font-size: 20px;
   }
 }
 
@@ -3158,12 +3203,35 @@ Laptop4: 1920 x 1080
     grid-column-gap: 3vw;
     grid-row-gap: 3vw;
   }
+
+  .af-view .af-class-sectionfaq {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+
+  .af-view .af-class-divcardcontainer {
+    width: 210px;
+    height: 245px;
+  }
+
+  .backgroundvideocard {
+    width: 210px;
+    height: 245px;
+  }
+
+  .af-view .af-class-headingteamname {
+    font-size: 24px;
+  }
+
+  .af-view .af-class-headingteamrole {
+    font-size: 16px;
+  }
 }
 
 /* 768 < x <= 900 */
 @media screen and (max-width: 900px) {
   .af-view .af-class-wf-section {
-    padding: 0px 30px;
+    padding: 0px 50px;
   }
 
   .af-view .video-background {
@@ -3184,10 +3252,6 @@ Laptop4: 1920 x 1080
     top: 35%;
   }
 
-  .af-view .af-class-paragraphexplain {
-    margin: a
-  }
-
   .af-view .af-class-div-block-25 {
     grid-column-gap: 0px;
   }
@@ -3202,13 +3266,140 @@ Laptop4: 1920 x 1080
   }
 
   .af-view .af-class-divimagegame img {
+    width: 150%;
+    height: 150%;
     position: absolute;
-    right: -200px;
-    bottom: -100px;
-    top: auto;
-    overflow:hidden;
+    top: -15%;
+  }
+
+  .af-view .div-footer {
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    row-gap: 15px;
+  }
+  
+  .af-view .div-footer p {
+    text-align: center;
+  }
+
+  .af-view .af-class-text-block-2 {
+    margin-top: 30px;
   }
 }
 
-/* 768 < x <= 1024 */
-@media screen and (max-width: 1024px) {}
+@media screen and (max-width: 768px) {
+  .af-view .af-class-wf-section-explain {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: space-around;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: space-around;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    row-gap: 0px;
+    column-gap: 0px;
+    overflow: hidden;
+  }
+
+  .af-view .af-class-headingsection {
+    margin-bottom: 20px;
+  }
+
+  .af-view .af-class-divtextnode,
+  .af-view .af-class-divtextcard {
+    width: 100%;
+  }
+
+  .af-view .af-class-divtextgold,
+  .af-view .af-class-divtextgold p {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .af-view .af-class-divtextgame,
+  .af-view .af-class-divtextgame p {
+    width: 100%;
+  }
+
+  .af-view .af-class-divimagegold img {
+    width: 316px;
+    height: 200px;
+  }
+
+  .af-view .divimageminer {
+    width: 40%;
+  }
+
+  .af-view .af-class-divimagecard {
+    margin-bottom: 30px;
+  }
+
+  .af-view .af-class-divimagenode {
+    left: 0%;
+    margin-bottom: 20px;
+  }
+
+  .af-view .af-class-imagegear1 {
+    position: absolute;
+  }
+
+  .af-view .af-class-imagegear1.af-class-imageinsidegear {
+    position: relative;
+    width: 55%;
+    height: auto;
+    margin: auto;
+  }
+
+  .af-view .af-class-imagegear1.af-class-imageinsidegear.af-class-imageinsidegear2 {
+    width: 70%;
+    margin-top: 25px;
+  }
+
+  .af-view .af-class-divgear {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 180px;
+    height: 180px;
+  }
+
+  .af-view .af-class-divgear.af-class-divgear2 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .af-view .af-class-paragraphexplain-end {
+    margin-bottom: 0px;
+  }
+
+  .af-view .af-class-separator {
+    height: 110px;
+  }
+
+  .af-view .af-class-divimagegame {
+    height: 300px;
+    width: 100%;
+  }
+
+  .af-view .af-class-divimagegame img {
+    height: 90%;
+    width: 90%;
+    top: 30%;
+  }
+
+  .af-view .af-class-div-block-21 {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 480px) {}

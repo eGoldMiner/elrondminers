@@ -38,19 +38,23 @@ export default function Menu({ setWindowConnect }) {
                 </a>
                 <div className="af-class-navigation-wrap d-md-block" ref={menuNav}>
                     <nav role="navigation" className="af-class-navigation-items af-class-navigationlist w-nav-menu">
-                        <a href="/#Home" className="af-class-navigation-item w-nav-link">HOME</a>
-                        <a href="/#About" className="af-class-navigation-item w-nav-link">ABOUT</a>
-                        <a href="/#Team" className="af-class-navigation-item w-nav-link">TEAM</a>
-                        <a href="/#Faq" className="af-class-navigation-item w-nav-link">FAQ</a>
-                        <a href="#" className="af-class-button-2 w-button menu-button">
+                        <a href="/#Home" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>HOME</a>
+                        <a href="/#About" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>ABOUT</a>
+                        <a href="/#Team" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>TEAM</a>
+                        <a href="/#Faq" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>FAQ</a>
+                        <a href="#" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
                             <span className="af-class-text-span-2">&#128377;</span>
                             <span className="af-class-textspantext"> Play now</span>
                         </a>
-                        <a href="/explore" target="_blank" className="af-class-button-2 w-button menu-button">
+                        <a href="/explore" target="_blank" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
                             <span className="af-class-text-span-2">&#9935;</span>
                             <span className="af-class-textspantext"> Explore the Mine</span>
                         </a>
-                        <a id="btn-connect-wallet" className="af-class-button-2 w-button menu-button" onClick={() => setWindowConnect(true)}>
+                        <a id="btn-connect-wallet" className="af-class-button-2 w-button menu-button"
+                            onClick={() => {
+                                setWindowConnect(true);
+                                menuNav.current.classList.toggle("open");
+                            }}>
                             <span className="af-class-text-span-2">&#9889;</span>
                             <span className="af-class-textspantext"> Connect Wallet</span>
                         </a>
@@ -66,7 +70,7 @@ export default function Menu({ setWindowConnect }) {
                         menuNav.current.classList.toggle("open")
                     }}
                 >
-                    <BurgerMenu />
+                    <img src="images/burger-menu-35.svg" />
                 </IconButton>
             </div>
         </div>

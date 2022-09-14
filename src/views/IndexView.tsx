@@ -172,7 +172,7 @@ export default function ({ setWindowMint }: any) {
       </div>
       <div id="img-carts" className="af-class-sectioncart af-class-wf-section">
         <img id="cart-1" src="images/Fichier-4_2.png" loading="lazy" alt="" className="af-class-carts" />
-        <img id="cart-2" src="images/Fichier-2.png" loading="lazy"  alt="" className="af-class-carts" />
+        <img id="cart-2" src="images/Fichier-2.png" loading="lazy" alt="" className="af-class-carts" />
         <img id="cart-3" src="images/Fichier-3_1.png" loading="lazy" alt="" className="af-class-carts" />
       </div>
       <div className="af-class-separator">
@@ -318,16 +318,16 @@ export default function ({ setWindowMint }: any) {
         <div className="af-class-divseparatorcenter" />
         <div className="af-class-divseparatorright" />
       </div>
-      <div id="About" className="af-class-sectionabout af-class-wf-section">
-        <div className="af-class-divabout">
-          <h1 className="af-class-headingsection">About the <span className="af-class-text-span-3">Project</span></h1>
+      <div id="About" className="af-class-sectionabout">
+        <h1 className="af-class-headingsection af-class-centertitle">About the <span className="af-class-text-span-3">Project</span></h1>
+        <div className="af-class-wf-section af-class-wf-section-explain">
           <p className="af-class-paragraphabout"> A collection of 5,000 3D animated miners mining real gold !<br />‍<br />Elrond Miners are not only images of classic gold miners, those miners can also mine gold inside a cave and bring you rewards.<br />‍<br />
             <span className="af-class-text-span-5">As before, gold miners work hard for rewards, today they are going to work for you in the world of Elrond blockchain.</span><br />
           </p>
           <img src="images/Elrond_Logo-300x292.png" loading="lazy" width={31} alt="" className="af-class-imageelrond" />
-        </div>
-        <div className="divimageminer">
-          <img id="img-pickaxe" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" alt="" className="af-class-imageabout" />
+          <div className="divimageminer">
+            <img id="img-pickaxe" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" alt="" className="af-class-imageabout" />
+          </div>
         </div>
       </div>
       <div className="af-class-separator">
@@ -337,7 +337,7 @@ export default function ({ setWindowMint }: any) {
       </div>
       <div className="af-class-sectionnode">
         <h1 className="af-class-headingsection af-class-centertitle">Validator <span className="af-class-text-span-3">Elrond Node</span></h1>
-        <div className="af-class-wf-section">
+        <div className="af-class-wf-section af-class-wf-section-explain">
           <div className="af-class-divimagenode">
             <a href="https://docs.elrond.com/validators/overview/" target="_blank" className="af-class-linknode1 w-inline-block">
               <div className="af-class-divgear">
@@ -353,7 +353,7 @@ export default function ({ setWindowMint }: any) {
           <div className="af-class-divtextnode">
             <p className="af-class-paragraphexplain">Contributing in Elrond ecosystem growth is one of our goal.<br />This is why our objective is to open our own Validating node. <br /></p>
             <p className="af-class-paragraphexplain af-class-pargraph2node">By doing it, we participate to Elrond development, but also to get rewards for it. <br />Each time there is a transaction in Elrond's blockchain, nodes validate the transaction.<br />As a reward, gas fee of that transaction are split among those nodes.<br /></p>
-            <p className="af-class-paragraphexplain">Each week, we accumulate rewards that are then distributed to you.<br />Click on the wheels to know more about validiting nodes.<br /></p>
+            <p className="af-class-paragraphexplain af-class-paragraphexplain-end">Each week, we accumulate rewards that are then distributed to you.<br />Click on the wheels to know more about validiting nodes.<br /></p>
           </div>
         </div>
       </div>
@@ -364,7 +364,7 @@ export default function ({ setWindowMint }: any) {
       </div>
       <div className="af-class-sectiongold">
         <h1 className="af-class-headingsection af-class-centertitle">Earn real <span className="af-class-text-span-3">goldbar</span></h1>
-        <div className="af-class-wf-section">
+        <div className="af-class-wf-section af-class-wf-section-explain">
           <div className="af-class-divtextgold">
             <p className="af-class-paragraphexplain af-class-paragraphearngold">We are the first collection to distribute real gold to holders. <br />Each week, we draw 5 winners among the holders. <br />These lucky miners will win either gold or silver bar. <br /><br />A miner's goal is to bring gold. Your miner, your gold. <br /><br />Elrond Miners give you electronic gold (EGLD) and real gold.<br />‍</p>
           </div>
@@ -380,12 +380,12 @@ export default function ({ setWindowMint }: any) {
       </div>
       <div className="af-class-sectioncard">
         <h1 className="af-class-headingsection af-class-centertitle">Collection of <span className="af-class-text-span-3">cards</span></h1>
-        <div className="af-class-div-block-25 af-class-wf-section">
+        <div className="af-class-div-block-25 af-class-wf-section af-class-wf-section-explain">
           <div className="af-class-divimagecard">
             <img id="img-card" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
           </div>
           <div className="af-class-divtextcard">
-            <p className="af-class-paragraphexplain">Holders can also win their NFT in a physical collection card. <br />This is an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
+            <p className="af-class-paragraphexplain af-class-paragraphexplain-end">Holders can also win their NFT in a physical collection card. <br />This is an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
           </div>
           <div />
         </div>
@@ -397,9 +397,9 @@ export default function ({ setWindowMint }: any) {
       </div>
       <div>
         <h1 className="af-class-headingsection af-class-centertitle">Elrond Mine <span className="af-class-text-span-3">video game</span></h1>
-        <div className="af-class-wf-section af-class-divgamesection">
+        <div className="af-class-wf-section af-class-divgamesection af-class-wf-section-explain">
           <div className="af-class-divtextgame">
-            <p className="af-class-paragraphexplain">
+            <p className="af-class-paragraphexplain af-class-paragraphexplain-end">
               Playing video games and winning prizes. Our game is the first mobile P2E.
               <br />
               <br />
