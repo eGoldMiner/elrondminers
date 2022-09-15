@@ -3289,6 +3289,11 @@ Laptop4: 1920 x 1080
 }
 
 @media screen and (max-width: 768px) {
+
+  .af-view .af-class-headingpresentation {
+    font-size: 2.5rem;
+  }
+
   .af-view .af-class-wf-section-explain {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
