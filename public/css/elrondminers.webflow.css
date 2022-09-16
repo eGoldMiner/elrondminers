@@ -3278,7 +3278,7 @@ Laptop4: 1920 x 1080
     margin: auto;
     row-gap: 15px;
   }
-  
+
   .af-view .div-footer p {
     text-align: center;
   }
@@ -3291,7 +3291,35 @@ Laptop4: 1920 x 1080
 @media screen and (max-width: 768px) {
 
   .af-view .af-class-headingpresentation {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .af-view .af-class-paragraphepresentation {
+    font-size: 1rem;
+  }
+
+  .af-view .img-social {
+    width: 45px;
+    height: 45px;
+  }
+
+  .af-view .af-class-buttonmint {
+    width: 210px;
+    padding: 12px;
+  }
+
+  .af-view .af-class-divpresentation {
+    height: 80vw;
+  }
+
+  .af-view .video-background {
+    width: 140%;
+  }
+
+  .af-view .af-class-divpresentation {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    justify-content: center;
   }
 
   .af-view .af-class-wf-section-explain {
