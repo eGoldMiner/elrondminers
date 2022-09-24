@@ -60,8 +60,8 @@ export default function MintPanel({ windowState, setWindowState }) {
     const mintButton = async () => {
         if (getIsLoggedIn()) {
             const mintTransaction = {
-                value: '800000000000000000',
-                data: 'mint@01',
+                value: numberMint * '1000000000000000000',
+                data: 'mint@0'+ numberMint,
                 receiver: contractAddress
             };
             await refreshAccount();
