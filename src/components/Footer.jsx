@@ -17,7 +17,7 @@ export default function () {
                         <a href="#Home" className="af-class-linkfooter">Home</a>
                         <a href="#About" className="af-class-linkfooter">About</a>
                         <a href="#Team" className="af-class-linkfooter">Team</a>
-                        <a href="#Faq" className="af-class-linkfooter">Faq</a>
+                        {/*                         <a href="#Faq" className="af-class-linkfooter">Faq</a> */}
                     </div>
                     <div className="af-class-div-block-33">
                         <a href="#" className="af-class-linkfooter">Play Now</a>

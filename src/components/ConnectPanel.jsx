@@ -4,7 +4,7 @@ import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
 import * as logoutServices from "@elrondnetwork/dapp-core/utils/logout"
 import QRCode from 'qrcode';
 
-const ConnectPanel = ({ windowState, setWindowState }) => {
+const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
 
     const [openMaiarApp, setOpenMaiarApp] = useState(false);
 
@@ -101,12 +101,12 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
             }
             throw new Error("Cannot success to refresh minted NFTs");
         })
-        .then((responseJson) => {
-            setNbMiners(responseJson);
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then((responseJson) => {
+                setNbMiners(responseJson);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     return (
@@ -223,7 +223,7 @@ const ConnectPanel = ({ windowState, setWindowState }) => {
                     <div className="text-block-16">{nbMiners}</div>
                 </div>
                 <div className="divbtnaccouninformation">
-                    <a className="button-connect-elrond w-button">Mint Miners</a>
+                    <a className="button-connect-elrond w-button" onClick={() => setWindowMint(true)} >Mint Miners</a>
                     <img src="images/cart.png" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>
                 <div className="divbtnaccouninformation" onClick={() => logoutServices.logout('')}>
