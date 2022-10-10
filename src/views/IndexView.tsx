@@ -442,7 +442,7 @@ export default function ({ setWindowMint }: any) {
             </div>
           </div>
           <div className="af-class-divroadmapstep">
-            <div className="af-class-divcircleroadmapinprogress col-auto" />
+            <div className="af-class-divcircleroadmapinprogresse col-auto" />
             <div className='col'>
               <h1 className="af-class-heading-5"><span className="af-class-text-span-7">Q3</span> 2022<br /><span className="af-class-text-span-8">Improvment of working conditions</span></h1>
               <p className="af-class-paragraph-6">- Giveaway of real gold every week<br />- Release of a teaser for the new Elrond Miners game</p>
