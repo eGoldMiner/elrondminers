@@ -61,8 +61,9 @@ export default function MintPanel({ windowState, setWindowState }) {
         if (getIsLoggedIn()) {
             const mintTransaction = {
                 value: numberMint * '1000000000000000000',
-                data: 'mint@0'+ numberMint,
-                receiver: contractAddress
+                data: 'mint@0' + numberMint,
+                receiver: contractAddress,
+                gasLimit: 60000000
             };
             await refreshAccount();
 
@@ -128,8 +129,8 @@ export default function MintPanel({ windowState, setWindowState }) {
                 contractAddress
             }).then(({ data, success: transactionsFetched }) => {
                 refreshAccount();
-                window.location.href =
-                    routeNames.reveal + '?txHash=' + data[0]['txHash'];
+                /*window.location.href =
+                    routeNames.reveal + '?txHash=' + data[0]['txHash'];*/
             });
         },
         onFail: () => console.log('fail'),
