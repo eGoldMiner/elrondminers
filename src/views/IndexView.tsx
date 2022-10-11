@@ -344,7 +344,7 @@ export default function ({ setWindowMint }: any) {
                 <img src="images/Fichier-4.png" id="gear-1" loading="lazy" alt="" className="af-class-imagegear1" />
                 <img src="images/Elrond_Logo-300x292.png" loading="lazy" alt="" className="af-class-imagegear1 af-class-imageinsidegear" />
               </div>
-              <div className="af-class-divgear af-class-divgear2" style={{ marginLeft: "-47px", marginTop: "132px" }}>
+              <div className="af-class-divgear af-class-divgear2">
                 <img src="images/Fichier-6.png" id="gear-2" loading="lazy" alt="" className="af-class-imagegear1" />
                 <img src="images/Fichier-7.png" loading="lazy" alt="" className="af-class-imagegear1 af-class-imageinsidegear af-class-imageinsidegear2" />
               </div>

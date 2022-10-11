@@ -1711,6 +1711,7 @@
 
 .af-view .af-class-logo-image {
   display: block;
+  width: 165px;
 }
 
 .af-view .af-class-navigation-wrap {
@@ -1931,9 +1932,9 @@
   padding-left: 200px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-pack: space-around;
   -webkit-justify-content: space-around;
   -ms-flex-pack: space-around;
@@ -2066,6 +2067,8 @@
 .af-view .af-class-divgear.af-class-divgear2 {
   width: 120px;
   height: 120px;
+  margin-left: -47px;
+  margin-top: 132px;
 }
 
 .af-view .af-class-image-6 {
@@ -3469,6 +3472,14 @@ Laptop4: 1920 x 1080
 }
 
 @media screen and (max-width: 600px) {
+  .af-view .af-class-navigation {
+    height: 60px;
+  }
+
+  .af-view .af-class-logo-image {
+    width: 90px;
+  }
+
   .af-view .af-class-divpresentation {
     width: 90%;
   }
@@ -3487,24 +3498,25 @@ Laptop4: 1920 x 1080
     grid-row-gap: 5px;
   }
 
-  .af-view .af-class-divlineroadmap1 {
-    height: 1430px;
-  }
-
   .af-view .af-class-background-video-2 {
     width: 120px;
     height: 120px;
   }
+
   .af-view .af-class-background-video-2>video {
     border-radius: 0px;
   }
 
   .af-view .af-class-headingsection {
-    font-size: 50px;
+    font-size: 35px;
   }
 
   .af-view .af-class-paragraphabout {
-    font-size: 18px;
+    font-size: 15px;
+  }
+
+  .af-view .af-class-paragraphexplain {
+    font-size: 15px;
   }
 
   .af-view .af-class-divimagecard {
@@ -3523,5 +3535,257 @@ Laptop4: 1920 x 1080
 
   .af-view .af-class-divcards {
     flex-direction: column;
+  }
+
+  .af-view .af-class-carts {
+    width: 140px;
+  }
+
+  .af-view .af-class-divgear {
+    width: 140px;
+    height: 140px;
+  }
+
+  .af-view .af-class-divgear.af-class-divgear2 {
+    width: 80px;
+    height: 80px;
+    margin-left: -35px;
+    margin-top: 107px;
+  }
+
+  .af-view .af-class-imagegear1.af-class-imageinsidegear.af-class-imageinsidegear2 {
+    margin-top: 16px;
+  }
+
+  .af-view .af-class-divimagegame {
+    height: 220px;
+  }
+
+  .af-view .af-class-image-11 {
+    height: 150px;
+  }
+
+  .af-view .af-class-div-block-21 {
+    margin-top: 25px;
+  }
+
+  .af-view .af-class-divimagegame img {
+    height: 80%;
+    width: 70%;
+    top: 38%;
+  }
+
+  .af-view .af-class-paragraph-6 {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .af-view ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .af-view .af-class-buttonexplore {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+
+  .af-view .af-class-background-video-2 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .af-view .af-class-buttonexplore {
+    padding: 8px 15px;
+  }
+
+  .af-view .af-class-divpresentation {
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+
+  .af-view .af-class-headingpresentation {
+    font-size: 1.2rem;
+  }
+
+  .af-view .af-class-buttonmint {
+    width: 180px;
+    padding: 6px;
+    font-size: 18px;
+  }
+
+  .af-view .af-class-sectioncart {
+    margin-top: 40px;
+  }
+
+  .af-view .af-class-divseparatorleft {
+    height: 1px;
+  }
+
+  .af-view .af-class-divseparatorright {
+    height: 1px;
+  }
+
+  .af-view .af-class-divseparatorcenter {
+    width: 11px;
+    height: 11px;
+  }
+
+  .af-view .af-class-separator {
+    height: 60px;
+  }
+
+  .af-view .af-class-carts {
+    width: 100px;
+  }
+
+  .af-view .af-class-sectioncart {
+    margin-top: 30px;
+  }
+
+  .af-view .af-class-paragraphepresentation {
+    font-size: 0.8rem;
+    line-height: initial;
+  }
+
+  .af-view .img-social {
+    width: 35px;
+    height: 35px;
+  }
+
+  .af-view .af-class-buttonmint {
+    width: 140px;
+    padding: 4px;
+  }
+
+  #footer-img {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  h1 {
+    padding: 0 15px;
+  }
+
+  .af-class-headingpresentation {
+    padding: 0 0px;
+  }
+
+  .af-view .af-class-paragraphabout {
+    font-size: 12px;
+  }
+
+  .af-view .af-class-paragraphexplain {
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .af-view {
+    line-height: initial;
+  }
+
+  .af-view .af-class-divgear {
+    width: 100px;
+    height: 100px;
+  }
+
+  .af-view .af-class-imagegear1.af-class-imageinsidegear.af-class-imageinsidegear2 {
+    margin-top: 12px;
+  }
+
+  .af-view .af-class-divimagegame {
+    height: 120px;
+  }
+
+  .af-view .af-class-divcircleroadmapinprogress {
+    width: 35px;
+    height: 35px;
+    margin-left: 3px;
+  }
+
+  .af-view .af-class-divroadmapstep {
+    margin-bottom: -10px;
+  }
+
+  .af-view .af-class-divcircleroadmapnot {
+    width: 35px;
+    height: 35px;
+    margin-left: 3px;
+  }
+
+  .af-view .af-class-divlineroadmap1 {
+    height: 940px;
+  }
+
+  .af-view .af-class-paragraph-6 {
+    font-size: 12px;
+  }
+
+  .af-view .af-class-divimagegold img {
+    width: 220px;
+    height: 139px;
+  }
+
+  .af-view .af-class-heading-4 {
+    font-size: 40px;
+  }
+
+  .af-view .af-class-heading-5 {
+    margin-left: 0px;
+  }
+
+  .af-view .af-class-paragraph-6 {
+    margin-left: 30px;
+  }
+
+  .af-view .af-class-text-span-8 {
+    font-size: 18px;
+  }
+
+  .af-view .af-class-image-11 {
+    height: 110px;
+  }
+
+  .af-view .af-class-divgear.af-class-divgear2 {
+    width: 60px;
+    height: 60px;
+    margin-left: -25px;
+    margin-top: 76px;
+  }
+
+  .af-view .af-class-headingsection {
+    font-size: 30px;
+  }
+
+  .af-view .af-class-wf-section {
+    padding: 0px 15px;
+  }
+
+}
+
+@media screen and (max-width: 350px) {
+  .af-view .af-class-headingpresentation {
+    font-size: 1rem;
+  }
+
+  .af-view .af-class-buttonmint {
+    font-size: 16px;
+  }
+
+  .af-view .af-class-paragraphepresentation {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .af-view .img-social {
+    width: 30px;
+    height: 30px;
+  }
+
+  .af-view .af-class-buttonmint {
+    width: 120px;
+    padding: 2px;
   }
 }
