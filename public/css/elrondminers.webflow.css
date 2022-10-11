@@ -1931,9 +1931,9 @@
   padding-left: 200px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: space-around;
   -webkit-justify-content: space-around;
   -ms-flex-pack: space-around;
@@ -2095,6 +2095,7 @@
   align-items: center;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
+  flex-direction: row;
 }
 
 .af-view .af-class-carts {
@@ -3368,7 +3369,7 @@ Laptop4: 1920 x 1080
   }
 
   .af-view .divimageminer {
-    width: 40%;
+    width: 50%;
   }
 
   .af-view .af-class-divimagecard {
@@ -3433,6 +3434,94 @@ Laptop4: 1920 x 1080
   .af-view .af-class-div-block-21 {
     margin-top: 80px;
   }
+
+  .af-view .af-class-paragraph-6 {
+    margin-right: 25px;
+    margin-right: 25px;
+  }
+
+  .af-view .af-class-divlineroadmap1 {
+    height: 1330px;
+  }
+
+  .af-view .af-class-divdecoroadmap {
+    margin-left: 5%;
+  }
+
+  .af-view .af-class-divcards {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+
+  .af-view .af-class-divcardcontainer {
+    width: 180px;
+    height: 210px;
+  }
+
+  .backgroundvideocard {
+    width: 180px;
+    height: 210px;
+  }
+
+  .af-view .af-class-divroadmaplaststep {
+    margin-bottom: 0px;
+  }
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 600px) {
+  .af-view .af-class-divpresentation {
+    width: 90%;
+  }
+
+  .af-view .af-class-headingpresentation {
+    font-size: 1.5rem;
+  }
+
+  .af-view .af-class-buttonmint {
+    width: 180px;
+    padding: 6px;
+  }
+
+  .af-view .af-class-list {
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+  }
+
+  .af-view .af-class-divlineroadmap1 {
+    height: 1430px;
+  }
+
+  .af-view .af-class-background-video-2 {
+    width: 120px;
+    height: 120px;
+  }
+  .af-view .af-class-background-video-2>video {
+    border-radius: 0px;
+  }
+
+  .af-view .af-class-headingsection {
+    font-size: 50px;
+  }
+
+  .af-view .af-class-paragraphabout {
+    font-size: 18px;
+  }
+
+  .af-view .af-class-divimagecard {
+    width: 50%;
+  }
+
+  .af-view .af-class-list-item-2 {
+    border-width: 2px;
+    border-radius: 20px;
+    box-shadow: 0 0 6px 2px #415e74;
+  }
+
+  .af-view .af-class-buttonexplore {
+    padding: 15px 20px;
+  }
+
+  .af-view .af-class-divcards {
+    flex-direction: column;
+  }
+}
