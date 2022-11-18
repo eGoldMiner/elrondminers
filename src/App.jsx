@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
+import Game from 'views/Game';
 
 const environment = 'mainnet';
 const { TransactionsToastList, SignTransactionsModals, NotificationModal } = DappUI;
@@ -38,6 +39,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<IndexView setWindowMint={setWindowStateMint} />} />
             <Route exact path="/explore" element={<MineExplorerView />} />
+            <Route exact path="/game" element={<Game />} />
             <Route path="*" element={<Navigate to="/" />}>
             </Route>
           </Routes>

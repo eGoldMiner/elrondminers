@@ -75,6 +75,7 @@ export default function MineExplorerView() {
   let items = All
   if (Object.keys(filters).length) {
     Object.keys(filters).map(filter => {
+      
       if (filters[filter]) {
         if (filter === "Accessory" && filters[filter] === "Unique") {
           items = items.filter(item => {
@@ -139,6 +140,18 @@ export default function MineExplorerView() {
 
         <a onClick={() => setFilters({})} className="button-7 w-button">CLEAR</a>
         <div className="text-block-17">FILTERS</div>
+        <div className='div-filter-id'>
+          <div className='div-text-filter-id'>
+            Miner ID :
+          </div>
+          <input className='div-text-filter-id-num' onInput={
+              (e) => 
+              Object.keys(Filters).map((filter) => {
+              setFilters({ ...filters, [filter]: e.value})
+              console.log(e.target.value)
+            })}>
+          </input>
+        </div>
         <div className="div-block-66">
           {
             Object.keys(Filters).map((filter) => {
