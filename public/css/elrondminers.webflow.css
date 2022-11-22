@@ -80,16 +80,13 @@
 }
 
 .div-block-65 {
-  position: fixed;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  width: 20%;
+  width: 100%;
   height: auto;
   top: 60px;
-  margin-top: 150px;
-  margin-left: 30px;
   padding-top: 30px;
   padding-bottom: 50px;
   -webkit-box-orient: vertical;
@@ -108,7 +105,17 @@
   border-radius: 40px;
   background-color: #415e74;
   font-family: Alatsi, sans-serif;
-  z-index: 0;
+}
+
+@media only screen and (min-width : 1024px) {
+  .div-block-65 {
+      position: fixed;
+      width: 20%;
+      top: 60px;
+      margin-top: 150px;
+      margin-left: 30px;
+      z-index: 0;
+    }
 }
 
 .div-filter-id {
