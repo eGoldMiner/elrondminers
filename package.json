@@ -26,6 +26,7 @@
     "qrcode": "^1.5.1",
     "react": "18.1.0",
     "react-bootstrap": "2.1.2",
+    "react-device-detect": "^2.2.2",
     "react-dom": "18.1.0",
     "react-redux": "latest",
     "react-router-dom": "6.2.1",

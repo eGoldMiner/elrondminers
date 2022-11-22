@@ -5,6 +5,7 @@ import All from "../data/All";
 import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
 import React from "react";
+import { isMobile } from "react-device-detect";
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
@@ -38,9 +39,9 @@ const Clip = ({ url, id }) => {
 export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({});
+  const [showFilters, setShowFilters] = useState(true);
   const [order, setOrder] = useState("highest");
   const [current, setCurrent] = useState(null); ///////REMETTRE A NULL
-  const filtersMenu = useRef(null);
   const itemList = useRef();
   const modal = useRef();
 
@@ -75,6 +76,12 @@ export default function MineExplorerView() {
   useEffect(() => {
     setCurrentPage(1);
   }, [filters]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setShowFilters(false);
+    }
+  }, [setShowFilters]);
 
   let items = All;
   if (Object.keys(filters).length) {
@@ -129,20 +136,20 @@ export default function MineExplorerView() {
   return (
     <>
       <div id="explorer">
-        {/* <div className="col-12 text-center">
+        <div className="col-12 text-center">
           <Button
             variant="outlined"
             color="secondary"
             className="mb-3 d-sm-none"
             onClick={() => {
-              filtersMenu.current.classList.toggle("open");
+              setShowFilters(!showFilters);
             }}
           >
             Filters
           </Button>
-        </div> */}
+        </div>
 
-        <div className="div-block-65">
+        <div className={showFilters ? "div-block-65" : "d-none"}>
           <a onClick={() => setFilters({})} className="button-7 w-button">
             CLEAR
           </a>
@@ -237,7 +244,6 @@ export default function MineExplorerView() {
           <div
             className="col-lg-3 col-md-4 col-sm-5 px-5 mb-3"
             id="filters"
-            ref={filtersMenu}
           ></div>
           <div className="col-lg-9 col-md-8 col-sm-7 px-0">
             <div id="results-container" className="row w-100">
