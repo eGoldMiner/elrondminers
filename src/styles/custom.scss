@@ -1,0 +1,79 @@
+.filter-holder{
+    @media only screen and (max-width: 1023px){
+        position: fixed;
+        z-index: 1;
+        right: 0;
+        top: 6.725rem;
+        transform: translateX(100%);
+        transition: all 1s ease;
+    }
+    &.filter-expended{
+        transform: translateX(0);
+        .filter-toggle-btn{display: none;}
+        .div-block-65{box-shadow: 0 0 7px 6px #415e74;}
+    }
+    .filter-close-btn{
+        display: none;
+        @media only screen and (max-width: 1023px){
+            display: block;
+            position: absolute;
+            right: 1.5rem;
+            top: 1.125rem;
+            background: none;
+            padding: 0;
+            color: #eaba20;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: none;
+        }
+    }
+    .div-block-65{
+        @media only screen and (max-width: 1023px){
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+    .select-field{
+        @media only screen and (min-width: 1024px) and (max-width: 1300px){
+            width: 100px;
+        }
+    }
+}
+.filter-toggle-btn{
+    position: absolute !important;
+    right: 100%;
+    top: 1.825rem;
+    z-index: 1;
+    background: #eaba20 !important;
+    color: #415e74 !important;
+    border-radius: 8px 0 0 8px !important;
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    padding-block: 7px !important;
+}
+#explorer{
+    @media only screen and (max-width: 1023px){padding-top: 160px !important;}
+    #results-container{
+        #header{
+            @media only screen and (max-width: 767px){
+                width: 90%;
+                padding: 10px;
+            }
+        }
+    }
+    .miner-item{
+        video{
+            @media only screen and (max-width: 767px){aspect-ratio: 1 / 1.25;}
+        }
+    }
+}
+.additional-nav{
+    @media only screen and (max-width: 767px){
+        width: 100% !important;
+    }
+}

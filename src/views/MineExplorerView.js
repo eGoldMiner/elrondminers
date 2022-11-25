@@ -6,6 +6,8 @@ import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
@@ -39,7 +41,7 @@ const Clip = ({ url, id }) => {
 export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({});
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [order, setOrder] = useState("highest");
   const [current, setCurrent] = useState(null); ///////REMETTRE A NULL
   const itemList = useRef();
@@ -117,7 +119,12 @@ export default function MineExplorerView() {
             filterValue = beards[filterValue];
           }
           items = items.filter((item) => {
-            return item.assets[Filters[filter].index] === filterValue;
+            if(typeof(filterValue) == Number){
+              return item.id[Filters[filter].index] === filterValue;
+            }
+            else{
+              return item.assets[Filters[filter].index] === filterValue;
+            }
           });
         }
       }
@@ -136,20 +143,19 @@ export default function MineExplorerView() {
   return (
     <>
       <div id="explorer">
-        <div className="col-12 text-center">
+        <div className={`filter-holder ${showFilters ? "filter-expended" : ""}`}>
           <Button
             variant="outlined"
             color="secondary"
-            className="mb-3 d-sm-none"
+            className="filter-toggle-btn"
             onClick={() => {
               setShowFilters(!showFilters);
             }}
           >
-            Filters
+            <FontAwesomeIcon icon={faFilter} />
           </Button>
-        </div>
-
-        <div className={showFilters ? "div-block-65" : "d-none"}>
+        <div className="div-block-65">
+          <button className="filter-close-btn" onClick={() => {setShowFilters(!showFilters);}}><FontAwesomeIcon icon={faXmark} /></button>
           <a onClick={() => setFilters({})} className="button-7 w-button">
             CLEAR
           </a>
@@ -158,12 +164,33 @@ export default function MineExplorerView() {
             <div className="div-text-filter-id">Miner ID :</div>
             <input
               className="div-text-filter-id-num"
-              onInput={(e) =>
-                Object.keys(Filters).map((filter) => {
-                  setFilters({ ...filters, [filter]: e.value });
-                  console.log(e.target.value);
-                })
-              }
+              onInput={(e) =>{
+                const searchResult = items.filter((item) => {
+                  // console.log(item.id)
+                  return item.id == e.target.value;
+                });
+                setFilters({ ...items, [items] : e.target.value });
+                console.log(searchResult)
+                // items = items.filter((item) => {
+                //   console.log(JSON.stringify(filters))
+                  //    setFilters({
+                  //   ...filters,[item.id]:
+                  //     filters[item.id] === e.value ? null : e.value,
+                  // });
+                // })
+                
+                
+                // Object.keys(items).map((item) => {
+                //   console.log("mango" + item);
+                //   // setFilters({ ...filters, [filter]: e.value });
+                //   // setFilters({
+                //   //   ...filters,
+                //   //   [filter]:
+                //   //     filters[filter] === e.value ? null : e.value,
+                //   // });
+                  
+                // })
+              }}
             ></input>
           </div>
           <div className="div-block-66">
@@ -239,13 +266,14 @@ export default function MineExplorerView() {
             })}
           </div>
         </div>
+        </div>
 
         <div className="row mt-3">
           <div
-            className="col-lg-3 col-md-4 col-sm-5 px-5 mb-3"
+            className="col-lg-3 px-5 mb-3"
             id="filters"
           ></div>
-          <div className="col-lg-9 col-md-8 col-sm-7 px-0">
+          <div className="col-lg-9 px-0">
             <div id="results-container" className="row w-100">
               <div id="header">
                 <div className="row p-3">
@@ -278,7 +306,7 @@ export default function MineExplorerView() {
                 <div className="af-class-divseparatorright" />
               </div>
               <div
-                className="col-12 ps-sm-3 pe-sm-5 mt-4 pt-1"
+                className="col-12 ps-sm-5 pe-sm-5 mt-4 pt-1"
                 id="miner-list-container"
               >
                 <div className="row w-100" ref={itemList} id="miner-list">
