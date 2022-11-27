@@ -46,6 +46,15 @@ export default function MineExplorerView() {
   const [current, setCurrent] = useState(null); ///////REMETTRE A NULL
   const itemList = useRef();
   const modal = useRef();
+  const [selectedID, setSelectedID] = useState(null);
+
+  // const [mobileScreen, setMobileScreen] = useState(false);
+
+  // const handleMobileScreen =()=> {
+  //   if(window.innerWidth < 768){
+  //     setMobileScreen = true;
+  //   }
+  // }
 
   const loadMore = () => {
     if (itemList.current.offsetTop != null) {
@@ -77,7 +86,7 @@ export default function MineExplorerView() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters]);
+  }, [filters,selectedID]);
 
   useEffect(() => {
     if (isMobile) {
@@ -85,8 +94,15 @@ export default function MineExplorerView() {
     }
   }, [setShowFilters]);
 
-  let items = All;
-  if (Object.keys(filters).length) {
+  let items = All
+  console.log(items[0]);
+  if(selectedID){
+    items = items.filter((item)=>{
+      return parseInt(item.id)==selectedID
+    });
+    // console.log(selectedID)
+    // console.log(items);
+  } else if (Object.keys(filters).length) {
     Object.keys(filters).map((filter) => {
       if (filters[filter]) {
         if (filter === "Accessory" && filters[filter] === "Unique") {
@@ -119,16 +135,18 @@ export default function MineExplorerView() {
             filterValue = beards[filterValue];
           }
           items = items.filter((item) => {
-            if(typeof(filterValue) == Number){
-              return item.id[Filters[filter].index] === filterValue;
-            }
-            else{
+            
               return item.assets[Filters[filter].index] === filterValue;
-            }
+            
           });
         }
       }
     });
+  }
+
+  const clearFilters =()=>{
+    setFilters({});
+    setSelectedID(null);
   }
 
   let totalItems = items.length;
@@ -156,7 +174,7 @@ export default function MineExplorerView() {
           </Button>
         <div className="div-block-65">
           <button className="filter-close-btn" onClick={() => {setShowFilters(!showFilters);}}><FontAwesomeIcon icon={faXmark} /></button>
-          <a onClick={() => setFilters({})} className="button-7 w-button">
+          <a onClick={clearFilters} className="button-7 w-button">
             CLEAR
           </a>
           <div className="text-block-17">FILTERS</div>
@@ -165,31 +183,8 @@ export default function MineExplorerView() {
             <input
               className="div-text-filter-id-num"
               onInput={(e) =>{
-                const searchResult = items.filter((item) => {
-                  // console.log(item.id)
-                  return item.id == e.target.value;
-                });
-                setFilters({ ...items, [items] : e.target.value });
-                console.log(searchResult)
-                // items = items.filter((item) => {
-                //   console.log(JSON.stringify(filters))
-                  //    setFilters({
-                  //   ...filters,[item.id]:
-                  //     filters[item.id] === e.value ? null : e.value,
-                  // });
-                // })
-                
-                
-                // Object.keys(items).map((item) => {
-                //   console.log("mango" + item);
-                //   // setFilters({ ...filters, [filter]: e.value });
-                //   // setFilters({
-                //   //   ...filters,
-                //   //   [filter]:
-                //   //     filters[filter] === e.value ? null : e.value,
-                //   // });
-                  
-                // })
+                setSelectedID(e.target.value)
+                console.log(selectedID)
               }}
             ></input>
           </div>
@@ -311,6 +306,7 @@ export default function MineExplorerView() {
               >
                 <div className="row w-100" ref={itemList} id="miner-list">
                   {items.map((item, index) => {
+                    // {items.filter(el => el.id == selectedID && selectedID !== "").map((item, index) => {
                     return (
                       <div
                         className="col-6 col-lg-4 col-xl-3 p-3"
