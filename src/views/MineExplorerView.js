@@ -47,6 +47,7 @@ export default function MineExplorerView() {
   const itemList = useRef();
   const modal = useRef();
   const [selectedID, setSelectedID] = useState(null);
+  const clearField = useRef();
 
   // const [mobileScreen, setMobileScreen] = useState(false);
 
@@ -158,6 +159,7 @@ export default function MineExplorerView() {
   const clearFilters =()=>{
     setFilters({});
     setSelectedID(null);
+    clearField.current.value = "";
   }
 
   let totalItems = items.length;
@@ -192,10 +194,11 @@ export default function MineExplorerView() {
           <div className="div-filter-id">
             <div className="div-text-filter-id">Miner ID :</div>
             <input
+            ref={clearField}
               className="div-text-filter-id-num"
               onInput={(e) =>{
                 setSelectedID(e.target.value)
-                console.log(selectedID)
+                // console.log(selectedID)
               }}
             ></input>
           </div>
@@ -346,7 +349,7 @@ export default function MineExplorerView() {
             </div>
           </div>
         </div>
-        <div ref={modal}>
+        <div ref={modal} className="minor-item-modal">
           {current ? (
             <>
               <div className="divcardcontainer-wrapper">
