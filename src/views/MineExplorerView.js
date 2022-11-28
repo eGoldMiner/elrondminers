@@ -97,9 +97,20 @@ export default function MineExplorerView() {
   let items = All
   console.log(items[0]);
   if(selectedID){
-    items = items.filter((item)=>{
-      return parseInt(item.id)==selectedID
-    });
+    if(selectedID.includes(",")){
+      console.log(selectedID)
+      let ids = selectedID.split(",").map(id=>parseInt(id));
+
+      console.log(ids)
+      items = items.filter((item)=>{
+        return ids.includes (item.id)
+      });
+    }else{
+      items = items.filter((item)=>{
+        return  (item.id == selectedID)
+      });
+
+    }
     // console.log(selectedID)
     // console.log(items);
   } else if (Object.keys(filters).length) {
