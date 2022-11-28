@@ -107,10 +107,29 @@
                 width: auto;
                 width: 100%;
             }
+            @media only screen and (max-width: 767px){
+                padding-top: 140px;
+            }
             .headingExplorerMiner{
                 @media only screen and (max-width: 767px){
                     font-size: 30px;
+                    margin: 0 0 20px;
                 }
+            }
+            .divblockcategoryimg{
+                @media only screen and (max-width: 767px){
+                    width: 34px;
+                    height: 34px;
+                }
+                .image-15{
+                    @media only screen and (max-width: 767px){
+                        width: 24px;
+                        height: 24px;
+                    }   
+                }
+            }
+            .separatorinside{
+                @media only screen and (max-width: 767px){height: 20px;}
             }
         }
         .div-block-41{
@@ -125,7 +144,7 @@
                     width: 100%;
                     justify-content: flex-start;
                     flex: 0 0 100%;
-                    margin: 0 0 20px;
+                    margin: 0 0 10px;
                 }
             }
             .divblockpickaxe{
@@ -141,7 +160,7 @@
             > div{
                 @media only screen and (max-width: 767px){
                     justify-content: flex-start;
-                    margin: 0 0 20px;
+                    margin: 0 0 10px;
                 }
             }
         }
@@ -151,6 +170,11 @@
         }
         .div-block-39{
             @media only screen and (max-width: 767px){height: auto;}
+            .text-block-3{
+                @media only screen and (max-width: 767px){
+                    font-size: 18px;
+                }
+            }
         }
         .divcardexplorerbtnquit{
             @media only screen and (max-width: 1023px){
