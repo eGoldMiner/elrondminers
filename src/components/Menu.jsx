@@ -41,7 +41,7 @@ export default function Menu({ setWindowConnect }) {
 
 
     return <>
-        <div data-animation="over-right" id="af-class-navigation" className="af-class-navigation w-nav" data-easing2="linear" data-easing="ease-in-out-back" data-collapse="medium" data-w-id="4990a16e-0ffe-6b5d-24e6-cb04cd55b9ef" role="banner" data-duration={300} data-doc-height={1}>
+        <div data-animation="over-right" id="af-class-navigation" className="af-class-navigation w-nav additional-nav" data-easing2="linear" data-easing="ease-in-out-back" data-collapse="medium" data-w-id="4990a16e-0ffe-6b5d-24e6-cb04cd55b9ef" role="banner" data-duration={300} data-doc-height={1}>
             <div className="af-class-navigation-items">
                 <a href="/" aria-current="page" className="af-class-logo-link w-nav-brand">
                     <img src="images/v2.png" className="af-class-logo-image" />

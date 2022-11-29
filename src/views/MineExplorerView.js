@@ -6,6 +6,8 @@ import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
 import React from "react";
 import { isMobile } from "react-device-detect";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
@@ -39,11 +41,21 @@ const Clip = ({ url, id }) => {
 export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({});
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [order, setOrder] = useState("highest");
   const [current, setCurrent] = useState(null); ///////REMETTRE A NULL
   const itemList = useRef();
   const modal = useRef();
+  const [selectedID, setSelectedID] = useState(null);
+  const clearField = useRef();
+
+  // const [mobileScreen, setMobileScreen] = useState(false);
+
+  // const handleMobileScreen =()=> {
+  //   if(window.innerWidth < 768){
+  //     setMobileScreen = true;
+  //   }
+  // }
 
   const loadMore = () => {
     if (itemList.current.offsetTop != null) {
@@ -75,7 +87,7 @@ export default function MineExplorerView() {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters]);
+  }, [filters,selectedID]);
 
   useEffect(() => {
     if (isMobile) {
@@ -83,8 +95,26 @@ export default function MineExplorerView() {
     }
   }, [setShowFilters]);
 
-  let items = All;
-  if (Object.keys(filters).length) {
+  let items = All
+  console.log(items[0]);
+  if(selectedID){
+    if(selectedID.includes(",")){
+      console.log(selectedID)
+      let ids = selectedID.split(",").map(id=>parseInt(id));
+
+      console.log(ids)
+      items = items.filter((item)=>{
+        return ids.includes (item.id)
+      });
+    }else{
+      items = items.filter((item)=>{
+        return  (item.id == selectedID)
+      });
+
+    }
+    // console.log(selectedID)
+    // console.log(items);
+  } else if (Object.keys(filters).length) {
     Object.keys(filters).map((filter) => {
       if (filters[filter]) {
         if (filter === "Accessory" && filters[filter] === "Unique") {
@@ -117,11 +147,19 @@ export default function MineExplorerView() {
             filterValue = beards[filterValue];
           }
           items = items.filter((item) => {
-            return item.assets[Filters[filter].index] === filterValue;
+            
+              return item.assets[Filters[filter].index] === filterValue;
+            
           });
         }
       }
     });
+  }
+
+  const clearFilters =()=>{
+    setFilters({});
+    setSelectedID(null);
+    clearField.current.value = "";
   }
 
   let totalItems = items.length;
@@ -136,34 +174,32 @@ export default function MineExplorerView() {
   return (
     <>
       <div id="explorer">
-        <div className="col-12 text-center">
+        <div className={`filter-holder ${showFilters ? "filter-expended" : ""}`}>
           <Button
             variant="outlined"
             color="secondary"
-            className="mb-3 d-sm-none"
+            className="filter-toggle-btn"
             onClick={() => {
               setShowFilters(!showFilters);
             }}
           >
-            Filters
+            <FontAwesomeIcon icon={faFilter} />
           </Button>
-        </div>
-
-        <div className={showFilters ? "div-block-65" : "d-none"}>
-          <a onClick={() => setFilters({})} className="button-7 w-button">
+        <div className="div-block-65">
+          <button className="filter-close-btn" onClick={() => {setShowFilters(!showFilters);}}><FontAwesomeIcon icon={faXmark} /></button>
+          <a onClick={clearFilters} className="button-7 w-button">
             CLEAR
           </a>
           <div className="text-block-17">FILTERS</div>
           <div className="div-filter-id">
             <div className="div-text-filter-id">Miner ID :</div>
             <input
+            ref={clearField}
               className="div-text-filter-id-num"
-              onInput={(e) =>
-                Object.keys(Filters).map((filter) => {
-                  setFilters({ ...filters, [filter]: e.value });
-                  console.log(e.target.value);
-                })
-              }
+              onInput={(e) =>{
+                setSelectedID(e.target.value)
+                // console.log(selectedID)
+              }}
             ></input>
           </div>
           <div className="div-block-66">
@@ -239,13 +275,14 @@ export default function MineExplorerView() {
             })}
           </div>
         </div>
+        </div>
 
         <div className="row mt-3">
           <div
-            className="col-lg-3 col-md-4 col-sm-5 px-5 mb-3"
+            className="col-lg-3 px-5 mb-3"
             id="filters"
           ></div>
-          <div className="col-lg-9 col-md-8 col-sm-7 px-0">
+          <div className="col-lg-9 px-0">
             <div id="results-container" className="row w-100">
               <div id="header">
                 <div className="row p-3">
@@ -278,11 +315,12 @@ export default function MineExplorerView() {
                 <div className="af-class-divseparatorright" />
               </div>
               <div
-                className="col-12 ps-sm-3 pe-sm-5 mt-4 pt-1"
+                className="col-12 ps-sm-5 pe-sm-5 mt-4 pt-1"
                 id="miner-list-container"
               >
                 <div className="row w-100" ref={itemList} id="miner-list">
                   {items.map((item, index) => {
+                    // {items.filter(el => el.id == selectedID && selectedID !== "").map((item, index) => {
                     return (
                       <div
                         className="col-6 col-lg-4 col-xl-3 p-3"
@@ -311,7 +349,7 @@ export default function MineExplorerView() {
             </div>
           </div>
         </div>
-        <div ref={modal}>
+        <div ref={modal} className="minor-item-modal">
           {current ? (
             <>
               <div className="divcardcontainer-wrapper">
