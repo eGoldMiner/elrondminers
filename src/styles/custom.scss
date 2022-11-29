@@ -134,7 +134,6 @@
         }
         .div-block-41{
             @media only screen and (max-width: 767px){
-                display: block;
                 width: 100%;
                 margin: 0;
             }
@@ -153,7 +152,6 @@
         }
         .div-block-40{
             @media only screen and (max-width: 767px){
-                display: block;
                 width: 100%;
                 margin: 0;
             }
@@ -169,10 +167,19 @@
             @media only screen and (max-width: 1023px){display: none;}    
         }
         .div-block-39{
-            @media only screen and (max-width: 767px){height: auto;}
+            @media only screen and (max-width: 767px){
+                height: auto;
+                margin-left: 10px;
+            }
             .text-block-3{
                 @media only screen and (max-width: 767px){
-                    font-size: 18px;
+                    font-size: 14px;
+                    line-height: 1.4;
+                }
+            }
+            .text-block-4{
+                @media only screen and (max-width: 767px){
+                    font-size: 12px;
                 }
             }
         }
