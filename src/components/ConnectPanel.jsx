@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
 import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
-import * as logoutServices from "@elrondnetwork/dapp-core/utils/logout"
+import { logout } from "@elrondnetwork/dapp-core/utils/"
 import QRCode from 'qrcode';
 
 const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
@@ -226,7 +226,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                     <a className="button-connect-elrond w-button" onClick={() => setWindowMint(true)} >Mint Miners</a>
                     <img src="images/cart.png" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>
-                <div className="divbtnaccouninformation" onClick={() => logoutServices.logout('')}>
+                <div className="divbtnaccouninformation" onClick={() => logout('/')}>
                     <a className="button-connect-elrond w-button">Disconnect</a>
                     <img src="images/log-out-svgrepo-com.svg" loading="lazy" alt="" className="imageAccountInformation" />
                 </div>

@@ -5,7 +5,6 @@ import { ImagesPioches } from '../data/images/Pioches';
 import { ImagesCard } from '../data/images/Card';
 import { ImagesLantern } from '../data/images/Lanterne';
 import SequencePlayer from 'react-sequence-player';
-import { getIsLoggedIn } from '@elrondnetwork/dapp-core-components';
 
 
 export default function ({ setWindowMint }: any) {

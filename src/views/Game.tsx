@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useRef, useState, createRef } from 'react';
 import Background from './Background';
-import { getIsLoggedIn } from '@elrondnetwork/dapp-core-components';
+import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
 
 
 export default function Game ({ setWindowMint }: any) {
