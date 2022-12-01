@@ -3,7 +3,7 @@ import { useGetLoginInfo, useGetAccountInfo } from "@elrondnetwork/dapp-core/hoo
 import * as transactionServices from "@elrondnetwork/dapp-core/hooks/"
 import { sendTransactions } from '@elrondnetwork/dapp-core/services';
 import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils/account';
+import { refreshAccount, getAddress } from '@elrondnetwork/dapp-core/utils/account';
 import { getTransactions } from '../apiRequests/'
 import { contractAddress } from 'config';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,8 +18,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const [numberMint, setNumberMint] = useState(1);
     const [priceTotal, setPriceTotal] = useState(0.700);
     const [transactionSessionId, setTransactionSessionId] = React.useState(null);
-    const account = transactionServices.useGetAccountInfo();
-    const [goldbarHandler, setGoldbarHandler] = useState(false);
+    const account = useGetAccountInfo();
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
@@ -49,7 +48,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     }, []);
 
     function addMint() {
-        if (numberMint < 5) {
+        if (numberMint < 10) {
             setNumberMint(numberMint + 1);
         }
     }
@@ -66,9 +65,10 @@ export default function MintPanel({ windowState, setWindowState }) {
 
     const mintButton = async () => {
         if (getIsLoggedIn()) {
+            var mintTxt = numberMint > 9 ? "mint@" : "mint@0";
             const mintTransaction = {
                 value: numberMint * '1000000000000000000',
-                data: 'mint@0' + numberMint,
+                data: mintTxt + numberMint,
                 receiver: contractAddress,
                 gasLimit: 60000000
             };
@@ -96,7 +96,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const {
         network: { apiAddress }
     } = transactionServices.useGetNetworkConfig();
-    const { success, fail, hasActiveTransactions } =
+    const { pending, timedOut, fail, success, hasActiveTransactions } =
         transactionServices.useGetActiveTransactionsStatus();
 
     const [state, setState] = React.useState({
@@ -128,7 +128,6 @@ export default function MintPanel({ windowState, setWindowState }) {
     const transactionStatus = transactionServices.useTrackTransactionStatus({
         transactionId: transactionSessionId,
         onSuccess: () => {
-            console.log('success');
             getTransactions({
                 apiAddress,
                 address: account.address,
@@ -183,7 +182,10 @@ export default function MintPanel({ windowState, setWindowState }) {
                 <div className="div-block-49">
                     <div>{minted}</div>
                     <div className="text-block-10">/</div>
-                    <div>5000</div>
+                    <div>1000</div>
+                </div>
+                <div className="div-block-49">
+                    <div>10 minted = 1 gold bar</div>
                 </div>
                 <div className="text-block-14">10 minted = <button onClick={goldbarOpener} className="hiring-goldbar-link">1 gold bar <span className={`d-${goldbarHandler ? "block" : "none"}`}><img src="images/img-boldbar-tooltip.jpg" alt="goldbar" /> <button onClick={goldbarOpener} className="hiring-goldbar-link-close"><FontAwesomeIcon icon={faTimes} /></button></span></button></div>
                 <div className="div-block-51">
