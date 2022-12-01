@@ -6,6 +6,8 @@ import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
 import { refreshAccount } from '@elrondnetwork/dapp-core/utils/account';
 import { getTransactions } from '../apiRequests/'
 import { contractAddress } from 'config';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 //import { StateType } from "./StateType";
 
 
@@ -17,6 +19,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const [priceTotal, setPriceTotal] = useState(0.700);
     const [transactionSessionId, setTransactionSessionId] = React.useState(null);
     const account = transactionServices.useGetAccountInfo();
+    const [goldbarHandler, setGoldbarHandler] = useState(false);
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
@@ -55,6 +58,10 @@ export default function MintPanel({ windowState, setWindowState }) {
         if (numberMint > 1) {
             setNumberMint(numberMint - 1);
         }
+    }
+
+    const goldbarOpener =()=> {
+        setGoldbarHandler(!goldbarHandler);
     }
 
     const mintButton = async () => {
@@ -149,7 +156,7 @@ export default function MintPanel({ windowState, setWindowState }) {
 
 
     return <>
-        <div className="divmintcontainer"
+        <div className="divmintcontainer additional"
             style={{
                 opacity: windowState ? '1' : '0',
                 visibility: windowState ? 'visible' : 'hidden',
@@ -178,6 +185,7 @@ export default function MintPanel({ windowState, setWindowState }) {
                     <div className="text-block-10">/</div>
                     <div>5000</div>
                 </div>
+                <div className="text-block-14">10 minted = <button onClick={goldbarOpener} className="hiring-goldbar-link">1 gold bar <span className={`d-${goldbarHandler ? "block" : "none"}`}><img src="images/img-boldbar-tooltip.jpg" alt="goldbar" /> <button onClick={goldbarOpener} className="hiring-goldbar-link-close"><FontAwesomeIcon icon={faTimes} /></button></span></button></div>
                 <div className="div-block-51">
                     <div className="div-block-50">
                         <a className="button-nbMint w-button" onClick={removeMint}>-</a>
