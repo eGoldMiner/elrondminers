@@ -12,11 +12,7 @@ export default function Game ({ setWindowMint }: any) {
     <>
     <div id='div-game-container'>
       <div id='div-game'>
-        {isLoggedIn ? (
-          <h1>Connected</h1>
-         ) : (
-          <h1>Not connected</h1>
-         )}
+        <iframe src="https://itch.io/embed-upload/6927993?color=333333"><a href="https://kartabble.itch.io/elrondminers">Play Elrondminers on itch.io</a></iframe>
       </div>
     </div>
     </>
