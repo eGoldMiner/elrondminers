@@ -12,7 +12,7 @@ export default function Game ({ setWindowMint }: any) {
     <>
     <div id='div-game-container'>
       <div id='div-game'>
-        <iframe src="https://itch.io/embed-upload/6927993?color=333333"><a href="https://kartabble.itch.io/elrondminers">Play Elrondminers on itch.io</a></iframe>
+        <iframe src="https://itch.io/embed-upload/6956470?color=333333"><a href="https://kartabble.itch.io/elrondminers">Play Elrondminers on itch.io</a></iframe>
       </div>
     </div>
     </>

@@ -22,34 +22,34 @@ export default function ({ setWindowMint }: any) {
   };
 
 
-  const animImgPickaxe = async () => {
-    let count = 0;
-    while (true) {
-      if (count >= ImagesPioches.length) {
-        count = 0;
-      }
-      let img_Pickaxe = document.getElementById("img-pickaxe") as HTMLImageElement;
-      if (img_Pickaxe != null) {
-        img_Pickaxe.src = ImagesPioches[count];
-      }
-      count++;
-      await new Promise(resolve => setTimeout(resolve, 30));
-    }
-  }
-  const animImgCard = async () => {
-    let count = 0;
-    while (true) {
-      if (count >= ImagesCard.length) {
-        count = 0;
-      }
-      let img_Card = document.getElementById("img-card") as HTMLImageElement;
-      if (img_Card != null) {
-        img_Card.src = ImagesCard[count];
-      }
-      count++;
-      await new Promise(resolve => setTimeout(resolve, 50));
-    }
-  }
+  // const animImgPickaxe = async () => {
+  //   let count = 0;
+  //   while (true) {
+  //     if (count >= ImagesPioches.length) {
+  //       count = 0;
+  //     }
+  //     let img_Pickaxe = document.getElementById("img-pickaxe") as HTMLImageElement;
+  //     if (img_Pickaxe != null) {
+  //       img_Pickaxe.src = ImagesPioches[count];
+  //     }
+  //     count++;
+  //     await new Promise(resolve => setTimeout(resolve, 30));
+  //   }
+  // }
+  // const animImgCard = async () => {
+  //   let count = 0;
+  //   while (true) {
+  //     if (count >= ImagesCard.length) {
+  //       count = 0;
+  //     }
+  //     let img_Card = document.getElementById("img-card") as HTMLImageElement;
+  //     if (img_Card != null) {
+  //       img_Card.src = ImagesCard[count];
+  //     }
+  //     count++;
+  //     await new Promise(resolve => setTimeout(resolve, 50));
+  //   }
+  // }
 
 
   useEffect(() => {
@@ -63,11 +63,11 @@ export default function ({ setWindowMint }: any) {
     };
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
     // animImgLantern();
-    animImgPickaxe();
-    animImgCard();
-  }, []);
+    // animImgPickaxe();
+    // animImgCard();
+  // }, []);
 
 
   const offsetRatio = 1;
@@ -325,7 +325,7 @@ export default function ({ setWindowMint }: any) {
           </p>
           <img src="images/Elrond_Logo-300x292.png" loading="lazy" width={31} alt="" className="af-class-imageelrond" />
           <div className="divimageminer">
-            <img id="img-pickaxe" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" alt="" className="af-class-imageabout" />
+            <img id="img-pickaxe" src="/images/Pickaxe.gif" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 6000px) 32vw, 1920px" alt="" className="af-class-imageabout" />
           </div>
         </div>
       </div>
@@ -381,7 +381,7 @@ export default function ({ setWindowMint }: any) {
         <h1 className="af-class-headingsection af-class-centertitle">Collection of <span className="af-class-text-span-3">cards</span></h1>
         <div className="af-class-div-block-25 af-class-wf-section af-class-wf-section-explain">
           <div className="af-class-divimagecard">
-            <img id="img-card" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
+            <img id="img-card" src="/images/Card.gif" loading="lazy" sizes="(max-width: 991px) 20vh, 21vw" alt="" className="af-class-imagegold" />
           </div>
           <div className="af-class-divtextcard">
             <p className="af-class-paragraphexplain af-class-paragraphexplain-end">Holders can also win their NFT in a physical collection card. <br />This is an IRL reminder of your hard working miner. Frame your NFT on your wall or on your desk.<br />‍<br />Many collabs will use our collection card format. <br />If you’re not lucky, you can still order your NFT's collection card.<br />‍<br />How much card will you collect ?</p>
@@ -414,7 +414,7 @@ export default function ({ setWindowMint }: any) {
               Join our Alpha and win prizes already !</p>
           </div>
           <div className="af-class-divimagegame">
-            <img id="img-lantern" src="images/Lantertne_00000.png" loading="lazy" alt="" className="af-class-image-6" />
+            <img id="img-lantern" src="images/Lantern.gif" loading="lazy" alt="" className="af-class-image-6" />
           </div>
         </div>
       </div>
