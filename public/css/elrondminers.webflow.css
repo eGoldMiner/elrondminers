@@ -148,6 +148,44 @@
   color: #fff;
 }
 
+.div-block-header-filter-my-miners {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.div-text-my-miners {
+  padding: 10px 30px;
+  border-radius: 10px;
+  width: auto;
+  background-color: #33495a;
+  justify-content: center;
+  color: #eaba20;
+  margin-right: 20px;
+  font-size: larger;
+  font-family: 'Alatsi';
+  cursor: hand;
+  outline: none;
+  text-align: center;
+  margin: auto;
+}
+
+#count {
+  text-align: center;
+}
+
+#miners {
+  text-align: center;
+}
+
+.div-text-my-miners:hover {
+  background-color: #eaba20;
+  color: #33495a;
+}
+
+.div-block-filter-container {
+  flex: 0 0 0;
+}
+
 .text-block-17 {
   margin-bottom: 15px;
   color: #fff;
@@ -3633,6 +3671,21 @@ Laptop4: 1920 x 1080
 
   .af-view .af-class-paragraph-6 {
     font-size: 15px;
+  }
+
+  .div-text-my-miners {
+    font-size: large;
+    margin: auto !important;
+  }
+
+  .div-block-header-filter-my-miners {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  .div-block-filter-container {
+    margin: auto !important;
+    justify-content: center !important;
   }
 }
 

@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-
+import { refreshAccount, getAddress } from '@elrondnetwork/dapp-core/utils/account';
 import All from "../data/All";
 import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
@@ -8,6 +8,7 @@ import React from "react";
 import { isMobile } from "react-device-detect";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useAccordionButton } from "react-bootstrap";
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
@@ -48,6 +49,7 @@ export default function MineExplorerView() {
   const modal = useRef();
   const [selectedID, setSelectedID] = useState(null);
   const clearField = useRef();
+  const [myMiners, setMyMiners] = useState(false);
 
   // const [mobileScreen, setMobileScreen] = useState(false);
 
@@ -56,6 +58,43 @@ export default function MineExplorerView() {
   //     setMobileScreen = true;
   //   }
   // }
+
+  async function getMyMinersApiCall() {
+    let address = await getAddress();
+    const apiUrl = "https://api.multiversx.com/accounts/" + address + "/nfts?search=EMINERS-5b421f";
+      fetch(apiUrl).then((response) => {
+          if (response.ok) {
+              return response.json();
+          }
+          throw new Error("Cannot success to refresh minted NFTs");
+      })
+          .then((responseJson) => {
+              let listMyMiners = "";
+              responseJson.forEach(value => {
+                listMyMiners += value["metadata"][0]["id"] + ",";
+              });
+              listMyMiners = listMyMiners.slice(0,-1);
+              setSelectedID(listMyMiners);
+          })
+          .catch((error) => {
+              console.log(error);
+          })
+  }
+
+  const getMyMiners = () => {
+    if (myMiners) {
+      document.getElementsByClassName("div-text-my-miners")[0].style.color = "#33495a";
+      document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#eaba20";
+      getMyMinersApiCall();
+      setMyMiners(false);
+    }
+    else {
+      document.getElementsByClassName("div-text-my-miners")[0].style.color = "#eaba20";
+      document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#33495a";
+      setSelectedID("");
+      setMyMiners(true);
+    }
+  }
 
   const loadMore = () => {
     if (itemList.current.offsetTop != null) {
@@ -285,12 +324,13 @@ export default function MineExplorerView() {
           <div className="col-lg-9 px-0">
             <div id="results-container" className="row w-100">
               <div id="header">
-                <div className="row p-3">
+                <div className="row p-3 div-block-header-filter-my-miners">
                   <div className="col-auto p-0">
                     <div id="count">{totalItems}</div>
                     <div id="miners">Miners</div>
                   </div>
-                  <div className="col p-0 d-flex align-items-center justify-content-end">
+                  <Button className="div-text-my-miners" onClick={() => {getMyMiners()}}>MY MINERS</Button>
+                  <div className="col p-0 d-flex align-items-center justify-content-end div-block-filter-container">
                     <div className="div-block-69">
                       <select
                         id="field-2"
