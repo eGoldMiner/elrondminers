@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { refreshAccount, getAddress } from '@elrondnetwork/dapp-core/utils/account';
+import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
 import All from "../data/All";
 import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
@@ -82,17 +83,22 @@ export default function MineExplorerView() {
   }
 
   const getMyMiners = () => {
-    if (myMiners) {
-      document.getElementsByClassName("div-text-my-miners")[0].style.color = "#33495a";
-      document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#eaba20";
-      getMyMinersApiCall();
-      setMyMiners(false);
+    if (!getIsLoggedIn()) {
+      document.getElementById("infoConnect").setAttribute("style", "display: block");
     }
     else {
-      document.getElementsByClassName("div-text-my-miners")[0].style.color = "#eaba20";
-      document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#33495a";
-      setSelectedID("");
-      setMyMiners(true);
+      if (myMiners) {
+        document.getElementsByClassName("div-text-my-miners")[0].style.color = "#33495a";
+        document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#eaba20";
+        getMyMinersApiCall();
+        setMyMiners(false);
+      }
+      else {
+        document.getElementsByClassName("div-text-my-miners")[0].style.color = "#eaba20";
+        document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#33495a";
+        setSelectedID("");
+        setMyMiners(true);
+      }
     }
   }
 
