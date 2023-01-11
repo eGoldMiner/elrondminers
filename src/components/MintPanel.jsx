@@ -19,7 +19,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const [priceTotal, setPriceTotal] = useState(0.700);
     const [transactionSessionId, setTransactionSessionId] = React.useState(null);
     const account = useGetAccountInfo();
-    const [goldbarHandler , setGoldbarHandler] = useState(false);
+    const [goldbarHandler, setGoldbarHandler] = useState(false);
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
@@ -45,7 +45,7 @@ export default function MintPanel({ windowState, setWindowState }) {
         callApiMinted();
         setInterval(() => {
             callApiMinted();
-        }, 8000);
+        }, 80000);
     }, []);
 
     function addMint() {
@@ -60,7 +60,7 @@ export default function MintPanel({ windowState, setWindowState }) {
         }
     }
 
-    const goldbarOpener =()=> {
+    const goldbarOpener = () => {
         setGoldbarHandler(!goldbarHandler);
     }
 

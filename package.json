@@ -6,10 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "^2.0.0-alpha.10",
-    "@elrondnetwork/dapp-core-components": "^0.3.7",
-    "@elrondnetwork/erdjs": "10.2.5",
-    "@elrondnetwork/erdjs-network-providers": "0.1.5",
+    "@elrondnetwork/dapp-core": "2.2.6",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@fortawesome/fontawesome-svg-core": "6.1.0",
@@ -17,17 +14,14 @@
     "@fortawesome/react-fontawesome": "0.1.18",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "axios": "0.27.2",
     "bootstrap": "^5.2.0",
     "moment": "2.29.4",
     "qrcode": "^1.5.1",
-    "react": "18.1.0",
+    "react": "18.2.0",
     "react-bootstrap": "2.1.2",
     "react-device-detect": "^2.2.2",
-    "react-dom": "18.1.0",
+    "react-dom": "18.2.0",
     "react-redux": "latest",
     "react-router-dom": "6.2.1",
     "react-scripts": "^4.0.3",
@@ -51,30 +45,18 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
   "devDependencies": {
-    "@testing-library/jest-dom": "5.16.2",
-    "@testing-library/react": "12.1.2",
-    "@testing-library/user-event": "13.5.0",
-    "@types/jest": "26.0.15",
     "@types/node": "12.0.0",
-    "@types/react": "18.0.10",
-    "@types/react-dom": "18.0.5",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.1.7",
     "@typescript-eslint/eslint-plugin": "4.22.1",
     "@typescript-eslint/parser": "4.22.1",

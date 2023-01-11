@@ -38,10 +38,8 @@ const App = () => {
           <MintPanel windowState={windowStateMint} setWindowState={setWindowStateMint} />
           <Routes>
             <Route exact path="/" element={<IndexView setWindowMint={setWindowStateMint} />} />
-            <Route exact path="/explore" element={<MineExplorerView />} />
+            <Route exact path="/explore" element={<MineExplorerView setWindowConnect={setWindowStateConnect} />} />
             <Route exact path="/game" element={<Game />} />
-            <Route path="*" element={<Navigate to="/" />}>
-            </Route>
           </Routes>
           <Footer />
         </DappProvider>
