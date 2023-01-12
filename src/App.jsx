@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import IndexView from './views/IndexView.tsx';
 import MineExplorerView from './views/MineExplorerView';
+import ClaimGoldBar from './views/ClaimGoldBar';
 import Game from 'views/Game';
 
 const environment = 'mainnet';
@@ -40,6 +41,7 @@ const App = () => {
             <Route exact path="/" element={<IndexView setWindowMint={setWindowStateMint} />} />
             <Route exact path="/explore" element={<MineExplorerView />} />
             <Route exact path="/game" element={<Game />} />
+            <Route exact path="/claim-gold" element={<ClaimGoldBar setWindowConnect={setWindowStateConnect}/>} />
             <Route path="*" element={<Navigate to="/" />}>
             </Route>
           </Routes>

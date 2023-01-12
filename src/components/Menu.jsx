@@ -52,6 +52,10 @@ export default function Menu({ setWindowConnect }) {
                         <a href="/#About" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>ABOUT</a>
                         <a href="/#Team" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>TEAM</a>
                         {/*                         <a href="/#Faq" className="af-class-navigation-item w-nav-link" onClick={() => { menuNav.current.classList.toggle("open") }}>FAQ</a> */}
+                        <a href="/claim-gold" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
+                            <span className="af-class-text-span-2">&#9745;</span>
+                            <span className="af-class-textspantext"> Claim your gold bar</span>
+                        </a>
                         <a href="/game" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
                             <span className="af-class-text-span-2">&#128377;</span>
                             <span className="af-class-textspantext"> Play now</span>

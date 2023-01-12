@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAccordionButton } from "react-bootstrap";
 
-const Clip = ({ url, id }) => {
+export const Clip = ({ url, id }) => {
   const videoRef = useRef();
 
   const stopMovie = (e) => {
