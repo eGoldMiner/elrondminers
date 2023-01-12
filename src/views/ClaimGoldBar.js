@@ -11,8 +11,9 @@ const ClaimGoldBar = (props) => {
   const { isLoggedIn } = useGetLoginInfo();
   const { setWindowConnect } = props;
   const [selectedMints, setSelectedMints] = useState([]);
+  const [minedMintCount, setMinedMintCount] = useState([]);
 
-  const onChange = (id) => {
+  const onChangeHandler = (id) => {
     if (selectedMints.hasOwnProperty(id)) {
       delete (selectedMints[id])
     } else {
@@ -22,9 +23,9 @@ const ClaimGoldBar = (props) => {
     }
 
     setSelectedMints({ ...selectedMints });
+    console.log(Object.keys(selectedMints).length)
   }
 
-  console.log(Object.keys(selectedMints).length)
   const getData = (address) => {
     axios.get(`https://api.multiversx.com/accounts/erd1x2avtcjdvvgpszwm8fxujlnxmsy6gcch43vk8uzrj3nswud0cjjsas0d08/nfts?search=EMINERS-5b421f`)
       .then(response => {
@@ -47,15 +48,15 @@ const ClaimGoldBar = (props) => {
     <div id="explorer" className="claim-page">
       <div id="header">
         <div className="row p-3 div-block-header-filter-my-miners align-items-center">
-          <div className="col-md-4 p-0">
+          <div className="col-12 col-md-4 p-0">
             <div id="count">10 NFT</div>
             <div id="miners">non blacklisted held</div>
           </div>
-          <div className="col-md-4 p-0">
+          <div className="col-12 col-md-4 p-0">
             <div id="count" className="text-center">=</div>
           </div>
-          <div className="col-md-4 p-0">
-            <div id="count" className="text-end">1 Gold bar</div>
+          <div className="col-12 col-md-4 p-0">
+            <div id="count" className="text-center text-md-end">1 Gold bar</div>
           </div>
         </div>
       </div>
@@ -70,7 +71,7 @@ const ClaimGoldBar = (props) => {
             return (
               <div key={item.identifier} className="col-6 col-md-4 col-xl-3 col-xxl-2 p-3">
                 <label className="minted-nfts">
-                  <input type="checkbox" onChange={onChange} />
+                  <input type="checkbox" onChange={()=>{onChangeHandler(item.identifier)}} />
                     <span className="checkmark"></span>
                     <div className="miner-item h-100">
                       <div className="id">
@@ -86,6 +87,9 @@ const ClaimGoldBar = (props) => {
           })}
 
         </div>
+      </div>
+      <div className="claim-btn-holder pt-5">
+        <button type="submit" className={`af-class-buttonexplore ${Object.keys(selectedMints).length < 5 ? 'disabled' : ''}`}>Claim my goldbar</button>
       </div>
     </div>
   );

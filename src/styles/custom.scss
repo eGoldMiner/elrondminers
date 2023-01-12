@@ -95,18 +95,21 @@
         #header {
             #count {
                 color: #eaba20;
-                text-align: left;
+                @media only screen and (min-width: 768px){
+                    text-align: left;
+                }
             }
 
             #miners {
-                text-align: left;
+                @media only screen and (min-width: 768px){
+                    text-align: left;
+                }
             }
         }
 
         .minted-nfts {
             display: block;
             position: relative;
-            padding-left: 35px;
             margin-bottom: 12px;
             cursor: pointer;
             // font-size: 22px;
@@ -166,6 +169,20 @@
                     -webkit-transform: rotate(45deg);
                     -ms-transform: rotate(45deg);
                     transform: rotate(45deg);
+                }
+            }
+        }
+        .claim-btn-holder{
+            text-align: center;
+            overflow: hidden;
+            .af-class-buttonexplore{
+                margin: 0 auto;
+                &.disabled{
+                    opacity: .5;
+                    pointer-events: none;
+                    cursor: default;
+                    background: #415e74;
+                    color: #eaba20;
                 }
             }
         }
