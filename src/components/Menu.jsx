@@ -60,7 +60,7 @@ export default function Menu({ setWindowConnect }) {
                             <span className="af-class-text-span-2">&#128377;</span>
                             <span className="af-class-textspantext"> Play now</span>
                         </a>
-                        <a href="/explore" target="_blank" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
+                        <a href="/explore" className="af-class-button-2 w-button menu-button" onClick={() => { menuNav.current.classList.toggle("open") }}>
                             <span className="af-class-text-span-2">&#9935;</span>
                             <span className="af-class-textspantext"> Explore the Mine</span>
                         </a>

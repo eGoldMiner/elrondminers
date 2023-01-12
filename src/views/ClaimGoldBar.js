@@ -23,24 +23,24 @@ const ClaimGoldBar = (props) => {
     }
 
     setSelectedMints({ ...selectedMints });
-    console.log(Object.keys(selectedMints).length)
   }
 
   const getData = (address) => {
-    axios.get(`https://api.multiversx.com/accounts/erd1x2avtcjdvvgpszwm8fxujlnxmsy6gcch43vk8uzrj3nswud0cjjsas0d08/nfts?search=EMINERS-5b421f`)
+    axios.get(`https://api.multiversx.com/accounts/${address}/nfts?search=EMINERS-5b421f`)
       .then(response => {
         setMinedData(response.data);
       })
   }
   useEffect(() => {
-    // if(isLoggedIn){
+    if(isLoggedIn){
     getData(account.address);
-    // }
-    // else{
-    //   // menuNav.current.classList.toggle("open");
-    //   props.setWindowConnect(true);
-    // }
+    }
+    else{
+      // menuNav.current.classList.toggle("open");
+      props.setWindowConnect(true);
+    }
   }, []);
+
 
 
 
@@ -79,7 +79,7 @@ const ClaimGoldBar = (props) => {
                           {item.name}
                         </Typography>
                       </div>
-                      <Clip url={item.media[0].thumbnailUrl} id={item.metadata[0].id} />
+                      <Clip url={item.media[0].url} id={item.metadata[0].id} />
                     </div>
                 </label>
               </div>
@@ -89,7 +89,7 @@ const ClaimGoldBar = (props) => {
         </div>
       </div>
       <div className="claim-btn-holder pt-5">
-        <button type="submit" className={`af-class-buttonexplore ${Object.keys(selectedMints).length < 5 ? 'disabled' : ''}`}>Claim my goldbar</button>
+        <button type="submit" className={`af-class-buttonexplore ${Object.keys(selectedMints).length < 10 ? 'disabled' : ''}`}>Claim my goldbar</button>
       </div>
     </div>
   );
