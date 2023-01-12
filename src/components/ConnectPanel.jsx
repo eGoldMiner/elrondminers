@@ -8,8 +8,8 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
 
     const [openMaiarApp, setOpenMaiarApp] = useState(false);
 
-    const logoutRoute = '/';
-    const callbackRoute = '/';
+    const logoutRoute = '';
+    const callbackRoute = '';
     const token = '';
 
     const { account } = useGetAccountInfo();
@@ -64,18 +64,13 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                 "</span><span className='af-class-textspantext'> My Wallet</span>";
         } else {
             setOpenMaiarApp(false);
-            initLoginWithWalletConnect(false);
+            initLoginWithWalletConnect(true);
             document.getElementById("btn-connect-wallet").innerHTML =
                 "<span className='af-class-text-span-2' style='font-family: Noto Emoji; font-size: 15px; font-weight: 700;'>" +
                 "&#9889;" +
                 "</span><span className='af-class-textspantext'> Connect Wallet</span>";
         }
     }, [isLoggedIn]);
-
-    React.useEffect(() => {
-        setOpenMaiarApp(false);
-        initLoginWithWalletConnect(true);
-    }, []);
 
     React.useEffect(() => {
         generateQRCode();

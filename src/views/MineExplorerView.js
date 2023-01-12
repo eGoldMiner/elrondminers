@@ -51,6 +51,7 @@ export default function MineExplorerView({ setWindowConnect }) {
   const [selectedID, setSelectedID] = useState(null);
   const clearField = useRef();
   const [myMiners, setMyMiners] = useState(false);
+  const [listMyMiners, setListMyMiners] = useState(null);
 
   // const [mobileScreen, setMobileScreen] = useState(false);
 
@@ -70,12 +71,12 @@ export default function MineExplorerView({ setWindowConnect }) {
       throw new Error("Cannot success to refresh minted NFTs");
     })
       .then((responseJson) => {
-        let listMyMiners = "";
+        let lstMyMiners = "";
         responseJson.forEach(value => {
-          listMyMiners += value["metadata"][0]["id"] + ",";
+          lstMyMiners += value["metadata"][0]["id"] + ",";
         });
-        listMyMiners = listMyMiners.slice(0, -1);
-        setSelectedID(listMyMiners);
+        lstMyMiners = lstMyMiners.slice(0, -1);
+        setListMyMiners(lstMyMiners);
       })
       .catch((error) => {
         console.log(error);
@@ -88,17 +89,18 @@ export default function MineExplorerView({ setWindowConnect }) {
       setWindowConnect(true);
     }
     else {
-      if (myMiners) {
+      if (!myMiners) {
         document.getElementsByClassName("div-text-my-miners")[0].style.color = "#33495a";
         document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#eaba20";
-        getMyMinersApiCall();
-        setMyMiners(false);
+        setSelectedID(listMyMiners);
+        console.log(listMyMiners);
+        setMyMiners(true);
       }
       else {
         document.getElementsByClassName("div-text-my-miners")[0].style.color = "#eaba20";
         document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#33495a";
         setSelectedID("");
-        setMyMiners(true);
+        setMyMiners(false);
       }
     }
   }
@@ -121,6 +123,10 @@ export default function MineExplorerView({ setWindowConnect }) {
 
   useEffect(() => {
     loadMore();
+  }, []);
+
+  useEffect(() => {
+    getMyMinersApiCall();
   }, []);
 
   useEffect(() => {
