@@ -3,6 +3,7 @@ import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hoo
 import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
 import { logout } from "@elrondnetwork/dapp-core/utils/"
 import QRCode from 'qrcode';
+import Cookies from 'js-cookie';
 
 const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
 
@@ -12,7 +13,6 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     const callbackRoute = '';
     const token = '';
 
-    const { account } = useGetAccountInfo();
     const [nbMiners, setNbMiners] = useState("");
 
     const [qrCodeSvg, setQrCodeSvg] = useState('');
@@ -53,11 +53,11 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     };
 
     const { isLoggedIn } = useGetLoginInfo();
+    const { account } = useGetAccountInfo();
+
 
     React.useEffect(() => {
         if (isLoggedIn) {
-            console.log("connected with : " + account.address);
-            callApiMyMiners(account.address);
             document.getElementById("btn-connect-wallet").innerHTML =
                 "<span className='af-class-text-span-2'>" +
                 "&#9889;" +
@@ -71,6 +71,16 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                 "</span><span className='af-class-textspantext'> Connect Wallet</span>";
         }
     }, [isLoggedIn]);
+
+    React.useEffect(() => {
+        callApiMyMiners(account.address);
+        //call to save value in cookie
+        console.log("connected with : " + account.address);
+        if (account.address !== '') {
+            Cookies.set('walletAddress', account.address);
+        }
+    }, [account]);
+
 
     React.useEffect(() => {
         generateQRCode();
@@ -89,19 +99,21 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     }
 
     function callApiMyMiners(address) {
-        const apiUrl = "https://api.elrond.com/accounts/" + address + "/nfts/count?collections=EMINERS-5b421f";
-        fetch(apiUrl).then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error("Cannot success to refresh minted NFTs");
-        })
-            .then((responseJson) => {
-                setNbMiners(responseJson);
+        if (address !== '') {
+            const apiUrl = "https://api.elrond.com/accounts/" + address + "/nfts/count?collections=EMINERS-5b421f";
+            fetch(apiUrl).then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Cannot success to refresh minted NFTs");
             })
-            .catch((error) => {
-                console.log(error);
-            })
+                .then((responseJson) => {
+                    setNbMiners(responseJson);
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        }
     }
 
     return (
