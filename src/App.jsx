@@ -39,7 +39,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<IndexView setWindowMint={setWindowStateMint} />} />
             <Route exact path="/explore" element={<MineExplorerView setWindowConnect={setWindowStateConnect} />} />
-            <Route exact path="/game" element={<Game />} />
+            <Route exact path="/game" element={<Game setWindowMint={setWindowStateMint} />} />
           </Routes>
           <Footer />
         </DappProvider>

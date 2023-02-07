@@ -77,7 +77,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
         //call to save value in cookie
         console.log("connected with : " + account.address);
         if (account.address !== '') {
-            Cookies.set('walletAddress', account.address);
+            Cookies.set('walletAddress', account.address, { secure: true, sameSite: 'none' });
         }
     }, [account]);
 

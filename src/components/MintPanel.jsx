@@ -67,8 +67,9 @@ export default function MintPanel({ windowState, setWindowState }) {
     const mintButton = async () => {
         if (getIsLoggedIn()) {
             var mintTxt = numberMint > 9 ? "mint@" : "mint@0";
+            var val = numberMint > 9 ? numberMint * '100000000000000000' : numberMint * '1000000000000000000';
             const mintTransaction = {
-                value: numberMint * '1000000000000000000',
+                value: val,
                 data: mintTxt + numberMint,
                 receiver: contractAddress,
                 gasLimit: 60000000
@@ -184,9 +185,6 @@ export default function MintPanel({ windowState, setWindowState }) {
                     <div>{minted}</div>
                     <div className="text-block-10">/</div>
                     <div>1000</div>
-                </div>
-                <div className="div-block-49">
-                    <div>10 minted = 1 gold bar</div>
                 </div>
                 <div className="text-block-14">10 minted = <button onClick={goldbarOpener} className="hiring-goldbar-link">1 gold bar <span className={`d-${goldbarHandler ? "block" : "none"}`}><img src="images/img-boldbar-tooltip.jpg" alt="goldbar" /> <button onClick={goldbarOpener} className="hiring-goldbar-link-close"><FontAwesomeIcon icon={faTimes} /></button></span></button></div>
                 <div className="div-block-51">
