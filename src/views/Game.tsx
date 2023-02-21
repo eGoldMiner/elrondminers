@@ -37,6 +37,9 @@ export default function Game({ setWindowMint }: any) {
         const response = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=EMINERS-5b421f');
         const nbMiners = await response.json();
         setNbMiners(Number(nbMiners))
+        if (Number(nbMiners) > 0) {
+          setIsWhitelisted(true);
+        }
         setCalledNbMiners(true)
       } catch (error) {
         // Handle error
