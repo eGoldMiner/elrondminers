@@ -1,15 +1,11 @@
 import { Button, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { refreshAccount, getAddress } from '@elrondnetwork/dapp-core/utils/account';
-import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
+
 import All from "../data/All";
 import Assets from "../data/Assets.json";
 import Filters from "../data/Filters";
 import React from "react";
 import { isMobile } from "react-device-detect";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useAccordionButton } from "react-bootstrap";
 
 const Clip = ({ url, id }) => {
   const videoRef = useRef();
@@ -40,70 +36,14 @@ const Clip = ({ url, id }) => {
   );
 };
 
-export default function MineExplorerView({ setWindowConnect }) {
+export default function MineExplorerView() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({});
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const [order, setOrder] = useState("highest");
   const [current, setCurrent] = useState(null); ///////REMETTRE A NULL
   const itemList = useRef();
   const modal = useRef();
-  const [selectedID, setSelectedID] = useState(null);
-  const clearField = useRef();
-  const [myMiners, setMyMiners] = useState(false);
-  const [listMyMiners, setListMyMiners] = useState(null);
-
-  // const [mobileScreen, setMobileScreen] = useState(false);
-
-  // const handleMobileScreen =()=> {
-  //   if(window.innerWidth < 768){
-  //     setMobileScreen = true;
-  //   }
-  // }
-
-  async function getMyMinersApiCall() {
-    let address = await getAddress();
-    const apiUrl = "https://api.multiversx.com/accounts/" + address + "/nfts?search=EMINERS-5b421f";
-    fetch(apiUrl).then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error("Cannot success to refresh minted NFTs");
-    })
-      .then((responseJson) => {
-        let lstMyMiners = "";
-        responseJson.forEach(value => {
-          lstMyMiners += value["metadata"][0]["id"] + ",";
-        });
-        lstMyMiners = lstMyMiners.slice(0, -1);
-        setListMyMiners(lstMyMiners);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-  }
-
-  const getMyMiners = () => {
-    if (!getIsLoggedIn()) {
-      document.getElementById("infoConnect").setAttribute("style", "display: block");
-      setWindowConnect(true);
-    }
-    else {
-      if (!myMiners) {
-        document.getElementsByClassName("div-text-my-miners")[0].style.color = "#33495a";
-        document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#eaba20";
-        setSelectedID(listMyMiners);
-        console.log(listMyMiners);
-        setMyMiners(true);
-      }
-      else {
-        document.getElementsByClassName("div-text-my-miners")[0].style.color = "#eaba20";
-        document.getElementsByClassName("div-text-my-miners")[0].style.backgroundColor = "#33495a";
-        setSelectedID("");
-        setMyMiners(false);
-      }
-    }
-  }
 
   const loadMore = () => {
     if (itemList.current.offsetTop != null) {
@@ -126,10 +66,6 @@ export default function MineExplorerView({ setWindowConnect }) {
   }, []);
 
   useEffect(() => {
-    getMyMinersApiCall();
-  }, []);
-
-  useEffect(() => {
     if (current) {
       modal.current.classList.add("open");
     } else {
@@ -139,7 +75,7 @@ export default function MineExplorerView({ setWindowConnect }) {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [filters, selectedID]);
+  }, [filters]);
 
   useEffect(() => {
     if (isMobile) {
@@ -147,26 +83,8 @@ export default function MineExplorerView({ setWindowConnect }) {
     }
   }, [setShowFilters]);
 
-  let items = All
-  console.log(items[0]);
-  if (selectedID) {
-    if (selectedID.includes(",")) {
-      console.log(selectedID)
-      let ids = selectedID.split(",").map(id => parseInt(id));
-
-      console.log(ids)
-      items = items.filter((item) => {
-        return ids.includes(item.id)
-      });
-    } else {
-      items = items.filter((item) => {
-        return (item.id == selectedID)
-      });
-
-    }
-    // console.log(selectedID)
-    // console.log(items);
-  } else if (Object.keys(filters).length) {
+  let items = All;
+  if (Object.keys(filters).length) {
     Object.keys(filters).map((filter) => {
       if (filters[filter]) {
         if (filter === "Accessory" && filters[filter] === "Unique") {
@@ -199,19 +117,11 @@ export default function MineExplorerView({ setWindowConnect }) {
             filterValue = beards[filterValue];
           }
           items = items.filter((item) => {
-
             return item.assets[Filters[filter].index] === filterValue;
-
           });
         }
       }
     });
-  }
-
-  const clearFilters = () => {
-    setFilters({});
-    setSelectedID(null);
-    clearField.current.value = "";
   }
 
   let totalItems = items.length;
@@ -226,124 +136,124 @@ export default function MineExplorerView({ setWindowConnect }) {
   return (
     <>
       <div id="explorer">
-        <div className={`filter-holder ${showFilters ? "filter-expended" : ""}`}>
+        <div className="col-12 text-center">
           <Button
             variant="outlined"
             color="secondary"
-            className="filter-toggle-btn"
+            className="mb-3 d-sm-none"
             onClick={() => {
               setShowFilters(!showFilters);
             }}
           >
-            <FontAwesomeIcon icon={faFilter} />
+            Filters
           </Button>
-          <div className="div-block-65">
-            <button className="filter-close-btn" onClick={() => { setShowFilters(!showFilters); }}><FontAwesomeIcon icon={faXmark} /></button>
-            <a onClick={clearFilters} className="button-7 w-button">
-              CLEAR
-            </a>
-            <div className="text-block-17">FILTERS</div>
-            <div className="div-filter-id">
-              <div className="div-text-filter-id">Miner ID :</div>
-              <input
-                ref={clearField}
-                className="div-text-filter-id-num"
-                onInput={(e) => {
-                  setSelectedID(e.target.value)
-                  // console.log(selectedID)
-                }}
-              ></input>
-            </div>
-            <div className="div-block-66">
-              {Object.keys(Filters).map((filter) => {
-                if (filter === "Pickaxe")
-                  return (
-                    <>
-                      {/* <div className="form-block-3 w-form">
-                    <input type="text" className="text-field-2 w-input" maxLength="256" name="Search-ID" data-name="Search ID" placeholder="Search ID" id="Search-ID" />
-                  </div> */}
-                      <div>
-                        <div className="div-block-61">
-                          {Filters[filter]["values"].map((item, index) => {
-                            return (
-                              <div
-                                key={item}
-                                className={
-                                  filters[filter] === item
-                                    ? "selected div-block-64"
-                                    : "div-block-64"
-                                }
-                                onClick={() => {
-                                  setFilters({
-                                    ...filters,
-                                    [filter]:
-                                      filters[filter] === item ? null : item,
-                                  });
-                                }}
-                              >
-                                <img
-                                  src={"images/pickaxe-" + (index + 1) + ".png"}
-                                  loading="lazy"
-                                  alt={"pickaxe" + 1}
-                                  className="image-22"
-                                />
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </>
-                  );
+        </div>
+
+        <div className={showFilters ? "div-block-65" : "d-none"}>
+          <a onClick={() => setFilters({})} className="button-7 w-button">
+            CLEAR
+          </a>
+          <div className="text-block-17">FILTERS</div>
+          <div className="div-filter-id">
+            <div className="div-text-filter-id">Miner ID :</div>
+            <input
+              className="div-text-filter-id-num"
+              onInput={(e) =>
+                Object.keys(Filters).map((filter) => {
+                  setFilters({ ...filters, [filter]: e.target.value });
+                  console.log(e.target.value);
+                })
+              }
+            ></input>
+          </div>
+          <div className="div-block-66">
+            {Object.keys(Filters).map((filter) => {
+              if (filter === "Pickaxe")
                 return (
                   <>
-                    <div className="form-block-2 w-form">
-                      <div className="div-block-69">
-                        <div className="text-block-17-copy-copy">{filter}</div>
-                        <select
-                          id="field-2"
-                          name="field-2"
-                          data-name="Field 2"
-                          className="select-field w-select"
-                          onChange={(e) => {
-                            setFilters({ ...filters, [filter]: e.target.value });
-                          }}
-                          value={filters[filter] || null}
-                        >
-                          <option value="" selected>
-                            All
-                          </option>
-                          {Filters[filter]["values"].map((item) => {
-                            return (
-                              <option key={item} value={item}>
-                                {item}
-                              </option>
-                            );
-                          })}
-                        </select>
+                    {/* <div className="form-block-3 w-form">
+                    <input type="text" className="text-field-2 w-input" maxLength="256" name="Search-ID" data-name="Search ID" placeholder="Search ID" id="Search-ID" />
+                  </div> */}
+                    <div>
+                      <div className="div-block-61">
+                        {Filters[filter]["values"].map((item, index) => {
+                          return (
+                            <div
+                              key={item}
+                              className={
+                                filters[filter] === item
+                                  ? "selected div-block-64"
+                                  : "div-block-64"
+                              }
+                              onClick={() => {
+                                setFilters({
+                                  ...filters,
+                                  [filter]:
+                                    filters[filter] === item ? null : item,
+                                });
+                              }}
+                            >
+                              <img
+                                src={"images/pickaxe-" + (index + 1) + ".png"}
+                                loading="lazy"
+                                alt={"pickaxe" + 1}
+                                className="image-22"
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </>
                 );
-              })}
-            </div>
+              return (
+                <>
+                  <div className="form-block-2 w-form">
+                    <div className="div-block-69">
+                      <div className="text-block-17-copy-copy">{filter}</div>
+                      <select
+                        id="field-2"
+                        name="field-2"
+                        data-name="Field 2"
+                        className="select-field w-select"
+                        onChange={(e) => {
+                          setFilters({ ...filters, [filter]: e.target.value });
+                        }}
+                        value={filters[filter] || null}
+                      >
+                        <option value="" selected>
+                          All
+                        </option>
+                        {Filters[filter]["values"].map((item) => {
+                          return (
+                            <option key={item} value={item}>
+                              {item}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
           </div>
         </div>
 
         <div className="row mt-3">
           <div
-            className="col-lg-3 px-5 mb-3"
+            className="col-lg-3 col-md-4 col-sm-5 px-5 mb-3"
             id="filters"
           ></div>
-          <div className="col-lg-9 px-0">
+          <div className="col-lg-9 col-md-8 col-sm-7 px-0">
             <div id="results-container" className="row w-100">
               <div id="header">
-                <div className="row p-3 div-block-header-filter-my-miners">
+                <div className="row p-3">
                   <div className="col-auto p-0">
                     <div id="count">{totalItems}</div>
                     <div id="miners">Miners</div>
                   </div>
-                  <Button className="div-text-my-miners" onClick={() => { getMyMiners() }}>MY MINERS</Button>
-                  <div className="col p-0 d-flex align-items-center justify-content-end div-block-filter-container">
+                  <div className="col p-0 d-flex align-items-center justify-content-end">
                     <div className="div-block-69">
                       <select
                         id="field-2"
@@ -368,12 +278,11 @@ export default function MineExplorerView({ setWindowConnect }) {
                 <div className="af-class-divseparatorright" />
               </div>
               <div
-                className="col-12 ps-sm-5 pe-sm-5 mt-4 pt-1"
+                className="col-12 ps-sm-3 pe-sm-5 mt-4 pt-1"
                 id="miner-list-container"
               >
                 <div className="row w-100" ref={itemList} id="miner-list">
                   {items.map((item, index) => {
-                    // {items.filter(el => el.id == selectedID && selectedID !== "").map((item, index) => {
                     return (
                       <div
                         className="col-6 col-lg-4 col-xl-3 p-3"
@@ -402,7 +311,7 @@ export default function MineExplorerView({ setWindowConnect }) {
             </div>
           </div>
         </div>
-        <div ref={modal} className="minor-item-modal">
+        <div ref={modal}>
           {current ? (
             <>
               <div className="divcardcontainer-wrapper">

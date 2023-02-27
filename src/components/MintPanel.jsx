@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useGetLoginInfo, useGetAccountInfo } from "@elrondnetwork/dapp-core/hooks/account";
 import * as transactionServices from "@elrondnetwork/dapp-core/hooks/"
 import { sendTransactions } from '@elrondnetwork/dapp-core/services';
 import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
-import { refreshAccount, getAddress } from '@elrondnetwork/dapp-core/utils/account';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils/account';
 import { getTransactions } from '../apiRequests/'
 import { contractAddress } from 'config';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
 //import { StateType } from "./StateType";
 
 
@@ -18,8 +15,15 @@ export default function MintPanel({ windowState, setWindowState }) {
     const [numberMint, setNumberMint] = useState(1);
     const [priceTotal, setPriceTotal] = useState(0.700);
     const [transactionSessionId, setTransactionSessionId] = React.useState(null);
-    const account = useGetAccountInfo();
-    const [goldbarHandler, setGoldbarHandler] = useState(false);
+    const account = transactionServices.useGetAccountInfo();
+    const { pendingTransactions, hasPendingTransactions } = transactionServices.useGetPendingTransactions();
+
+    useEffect(() => {
+      if (hasPendingTransactions) {
+        console.log("pendingTransac");
+        setTransactionSessionId(pendingTransactions[0][0]);
+      }
+    }, [hasPendingTransactions]);
 
     useEffect(() => {
         const price = Math.round(priceOneNft * numberMint * 100) / 100;
@@ -45,11 +49,11 @@ export default function MintPanel({ windowState, setWindowState }) {
         callApiMinted();
         setInterval(() => {
             callApiMinted();
-        }, 80000);
+        }, 8000);
     }, []);
 
     function addMint() {
-        if (numberMint < 10) {
+        if (numberMint < 5) {
             setNumberMint(numberMint + 1);
         }
     }
@@ -60,17 +64,11 @@ export default function MintPanel({ windowState, setWindowState }) {
         }
     }
 
-    const goldbarOpener = () => {
-        setGoldbarHandler(!goldbarHandler);
-    }
-
     const mintButton = async () => {
         if (getIsLoggedIn()) {
-            var mintTxt = numberMint > 9 ? "mint@" : "mint@0";
-            var val = numberMint > 9 ? numberMint * '100000000000000000' : numberMint * '1000000000000000000';
             const mintTransaction = {
-                value: val,
-                data: mintTxt + numberMint,
+                value: numberMint * '1000000000000000000',
+                data: 'mint@0' + numberMint,
                 receiver: contractAddress,
                 gasLimit: 60000000
             };
@@ -98,7 +96,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const {
         network: { apiAddress }
     } = transactionServices.useGetNetworkConfig();
-    const { pending, timedOut, fail, success, hasActiveTransactions } =
+    const { success, fail, hasActiveTransactions } =
         transactionServices.useGetActiveTransactionsStatus();
 
     const [state, setState] = React.useState({
@@ -130,6 +128,7 @@ export default function MintPanel({ windowState, setWindowState }) {
     const transactionStatus = transactionServices.useTrackTransactionStatus({
         transactionId: transactionSessionId,
         onSuccess: () => {
+            console.log('success');
             getTransactions({
                 apiAddress,
                 address: account.address,
@@ -157,7 +156,7 @@ export default function MintPanel({ windowState, setWindowState }) {
 
 
     return <>
-        <div className="divmintcontainer additional"
+        <div className="divmintcontainer"
             style={{
                 opacity: windowState ? '1' : '0',
                 visibility: windowState ? 'visible' : 'hidden',
@@ -186,7 +185,6 @@ export default function MintPanel({ windowState, setWindowState }) {
                     <div className="text-block-10">/</div>
                     <div>1000</div>
                 </div>
-                <div className="text-block-14">10 minted = <button onClick={goldbarOpener} className="hiring-goldbar-link">1 gold bar <span className={`d-${goldbarHandler ? "block" : "none"}`}><img src="images/img-boldbar-tooltip.jpg" alt="goldbar" /> <button onClick={goldbarOpener} className="hiring-goldbar-link-close"><FontAwesomeIcon icon={faTimes} /></button></span></button></div>
                 <div className="div-block-51">
                     <div className="div-block-50">
                         <a className="button-nbMint w-button" onClick={removeMint}>-</a>

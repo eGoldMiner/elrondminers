@@ -86,9 +86,9 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
         generateQRCode();
     }, [openMaiarApp]);
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         setOpenMaiarApp(false);
-    }, [windowState])
+    }, [windowState])*/
 
     function clickWebWallet() {
         onInitiateLogin();
