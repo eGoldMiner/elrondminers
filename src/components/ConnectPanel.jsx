@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
-import * as loginServices from '@elrondnetwork/dapp-core/hooks/login';
-import { logout } from "@elrondnetwork/dapp-core/utils/"
+import { useGetAccountInfo, useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account";
+import * as loginServices from '@multiversx/sdk-dapp/hooks/login';
+import { logout } from "@multiversx/sdk-dapp/utils/"
 import QRCode from 'qrcode';
 import Cookies from 'js-cookie';
 
@@ -20,12 +20,17 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     const onLoginRedirect = false;
 
     const [
-        initLoginWithWalletConnect,
+        initLoginWithWalletConnectV2,
         { error },
-        { uriDeepLink, walletConnectUri }
-    ] = loginServices.useWalletConnectLogin({
+        {   connectExisting,
+            removeExistingPairing,
+            cancelLogin: cancelLoginV2,
+            uriDeepLink: walletConnectDeepLinkV2,
+            walletConnectUri: walletConnectUriV2,
+            wcPairings
+        }
+    ] = loginServices.useWalletConnectV2Login({
         logoutRoute,
-        callbackRoute,
         token
     });
 
@@ -41,14 +46,12 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     });
 
     const generateQRCode = async () => {
-
-        if (!walletConnectUri) {
+        if (!walletConnectUriV2) {
             return;
         }
-        const svg = await QRCode.toString(walletConnectUri, {
+        const svg = await QRCode.toString(walletConnectUriV2, {
             type: 'svg'
         });
-
         setQrCodeSvg(svg);
     };
 
@@ -64,7 +67,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                 "</span><span className='af-class-textspantext'> My Wallet</span>";
         } else {
             setOpenMaiarApp(false);
-            initLoginWithWalletConnect(true);
+            initLoginWithWalletConnectV2(true);
             document.getElementById("btn-connect-wallet").innerHTML =
                 "<span className='af-class-text-span-2' style='font-family: Noto Emoji; font-size: 15px; font-weight: 700;'>" +
                 "&#9889;" +
@@ -141,7 +144,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                 </div>
                 <div className="divbuttonsconnect">
                     <div className="divmaiarappconnect" onClick={() => setOpenMaiarApp(true)}>
-                        <a className="button-connect-elrond w-button">Maiar App</a>
+                        <a className="button-connect-elrond w-button">Xportal App </a>
                         <img src="images/smartphone-1.png" loading="lazy" srcSet="images/smartphone-1-p-500.png 500w, images/smartphone-1.png 512w" sizes="35px" alt="" className="imagemaiarapp" />
                     </div>
                     <div className="divmaiarextensionconnect"
@@ -149,7 +152,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                         style={{
                             display: openMaiarApp ? 'none' : 'flex'
                         }}>
-                        <a className="button-connect-elrond w-button">Maiar Extension</a>
+                        <a className="button-connect-elrond w-button">DeFi Wallet</a>
                         <img src="images/puzzle-1.png" loading="lazy" srcSet="images/puzzle-1-p-500.png 500w, images/puzzle-1.png 512w" sizes="28px" alt="" className="imagemaiarextension" />
                     </div>
                     <div className="divwebwalletconnect"
@@ -173,7 +176,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                     {isMobileDevice ?
                         (
                             <>
-                                <a className="divmaiarappconnect divmaiarmobileconnect" href={uriDeepLink} rel='noopener noreferrer nofollow' target='_blank'>
+                                <a className="divmaiarappconnect divmaiarmobileconnect" href={walletConnectDeepLinkV2} rel='noopener noreferrer nofollow' target='_blank'>
                                     <a className="button-connect-elrond w-button">Open Maiar Login</a>
                                 </a>
                             </>
@@ -195,7 +198,7 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
                     </div>
                     <div className="divcreatewallet">
                         <a href="https://wallet.elrond.com/create" target="_blank" rel="noreferrer noopener" className="link-block-5 w-inline-block">
-                            <div className="text-block-9">Create an Elrond Wallet</div>
+                            <div className="text-block-9">Create an MultiversX Wallet</div>
                         </a>
                     </div>
                     <div className="div-block-48">

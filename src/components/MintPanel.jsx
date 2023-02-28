@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import * as transactionServices from "@elrondnetwork/dapp-core/hooks/"
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
-import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
-import { refreshAccount } from '@elrondnetwork/dapp-core/utils/account';
+import * as transactionServices from "@multiversx/sdk-dapp/hooks/"
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
+import { getIsLoggedIn } from "@multiversx/sdk-dapp/utils";
+import { refreshAccount } from '@multiversx/sdk-dapp/utils/account';
 import { getTransactions } from '../apiRequests/'
 import { contractAddress } from 'config';
 //import { StateType } from "./StateType";

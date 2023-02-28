@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React, { useEffect, useRef, useState, createRef } from 'react';
 import Background from './Background';
-import { getIsLoggedIn } from "@elrondnetwork/dapp-core/utils";
-import { useGetAccountInfo, useGetLoginInfo } from "@elrondnetwork/dapp-core/hooks/account";
+import { getIsLoggedIn } from "@multiversx/sdk-dapp/utils";
+import { useGetAccountInfo, useGetLoginInfo } from "@multiversx/sdk-dapp/hooks/account";
 
 
 export default function Game({ setWindowMint }: any) {

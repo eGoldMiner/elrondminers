@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 
-import * as DappUI from "@elrondnetwork/dapp-core/UI";
-import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
+import * as DappUI from "@multiversx/sdk-dapp/UI";
+import { DappProvider } from '@multiversx/sdk-dapp/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
@@ -27,7 +27,7 @@ const App = () => {
       <Router>
         <DappProvider
           environment={environment}
-          customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000 }}
+          customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000, walletConnectV2ProjectId: 'f815f7412ec3a7c0d7acd07affb9f4a1' }}
         >
           <TransactionsToastList />
           <NotificationModal />
