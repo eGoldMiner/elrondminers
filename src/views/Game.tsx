@@ -14,6 +14,7 @@ export default function Game({ setWindowMint }: any) {
   const [nbSeals, setNbSeals] = useState(0);
   const [calledNbMiners, setCalledNbMiners] = useState(false);
 
+  const { isLoggedIn } = useGetLoginInfo();
 
   useEffect(() => {
     async function fetchWhitelist() {
@@ -35,36 +36,37 @@ export default function Game({ setWindowMint }: any) {
   useEffect(() => {
     async function checkNbMiners() {
       try {
-        const responseMiners = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=EMINERS-5b421f');
-        const responseSeals = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=SEALS-8e56a4');
-        const responseSealsOG = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=SEALS-fe5f2e');
-        const nbMiners = await responseMiners.json();
-        const nbSeals = await responseSeals.json();
-        const nbSealsOG = await responseSealsOG.json();
-        setNbMiners(Number(nbMiners))
-        setNbSeals(Number(nbSeals + nbSealsOG))
-        setCalledNbMiners(true)
+        if(getIsLoggedIn() && !calledNbMiners){
+          const responseMiners = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=EMINERS-5b421f');
+          const responseSeals = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=SEALS-8e56a4');
+          const responseSealsOG = await fetch('https://api.elrond.com/accounts/' + account.address + '/nfts/count?collections=SEALS-fe5f2e');
+          const numbMiners = await responseMiners.json();
+          const numbSeals = await responseSeals.json();
+          const numbSealsOG = await responseSealsOG.json();
+          setNbMiners(Number(numbMiners))
+          setNbSeals(Number(numbSeals + numbSealsOG))
+          setCalledNbMiners(true)
+          console.log("("+Number(numbMiners) + ", "+ Number(numbSeals)+")");
+        }
       } catch (error) {
         // Handle error
         console.error(error);
-      }
+      } 
     }
-
     checkNbMiners();
-  }, []);
+  }, [account.address]);
 
 
 
   return (
     <>
-      {calledWL && calledNbMiners ?
         <div id='div-game-container'>
           <div id='div-game'>
             {!getIsLoggedIn()
               ?
               <h1 style={{ color: "#fff" }}>Please log in</h1>
               : <>
-                {isWhitelisted || nbMiners > 0 || nbSeals > 0
+                {(calledWL && calledNbMiners) && (isWhitelisted || nbMiners > 0 || nbSeals > 0)
                   ? <iframe src="https://elrondminers.com/WebGL"></iframe>
                   : <>
                     <h1 style={{ color: "#fff" }}>You do not have the early access !</h1>
@@ -80,7 +82,6 @@ export default function Game({ setWindowMint }: any) {
             }
           </div>
         </div>
-        : null}
     </>
   )
 

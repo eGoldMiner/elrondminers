@@ -76,11 +76,13 @@ const ConnectPanel = ({ windowState, setWindowState, setWindowMint }) => {
     }, [isLoggedIn]);
 
     React.useEffect(() => {
-        callApiMyMiners(account.address);
-        //call to save value in cookie
-        console.log("connected with : " + account.address);
-        if (account.address !== '') {
-            Cookies.set('walletAddress', account.address, { secure: true, sameSite: 'none' });
+        if(isLoggedIn){
+            callApiMyMiners(account.address);
+            //call to save value in cookie
+            console.log("connected with : " + account.address);
+            if (account.address !== '') {
+                Cookies.set('walletAddress', account.address, { secure: true, sameSite: 'none' });
+            }
         }
     }, [account]);
 
